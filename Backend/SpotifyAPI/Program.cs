@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using SpotifyAPI.Services;
 using Microsoft.Data.SqlClient;
+using SpotifyAPI.EndPoints;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,8 @@ string connectionString = builder.Configuration.GetConnectionString("SpotifyDBCo
 SpotifyDBConnection dbConn = new SpotifyDBConnection(connectionString);
 
 var app = builder.Build();
+
+app.MapUserEndpoints(dbConn);
 
 app.MapGet("/", () =>
 {
