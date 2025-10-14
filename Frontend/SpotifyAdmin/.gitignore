@@ -1,0 +1,43 @@
+## Build results
+[Bb]in/
+[Oo]bj/
+
+## User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Visual Studio auto-generated folders/files
+.vs/
+Generated_Code/
+
+## NuGet packages
+*.nupkg
+*.snupkg
+packages/
+# Uncomment if using package restore
+# !packages/build/
+
+## Roslyn cache
+*.ide
+
+## Others
+_ReSharper*/
+*.resharper
+*.DotSettings.user
+
+## WPF-specific
+*.g.*
+*.i.*
+
+## Local test results
+TestResults/
+
+## Backup & log files
+*.log
+*.bak
+
+# Temporary files
+*.tmp
+~$*
