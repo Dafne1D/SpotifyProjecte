@@ -9,7 +9,7 @@ Començarem fent el disseny de la base de dades creant un model Entitat/Relació
 **Taules:**
 - *Users* 
 - *Songs*
-- *Files* (arxius mp3 de les cançons en diferents formats)
+- *SongFiles* (arxius mp3 de les cançons en diferents formats)
 - *Playlists*
 - *PlaylistSongs* (relacions entre *Playlists* i *Songs*)
 
@@ -33,7 +33,7 @@ Tot el sql utilitzat per la creació de la base de dades estarà a *db/db.sql*
 ## Disseny de l'API
 Crearem les carpetes:
 - **Services:** De moment només hi haurà la classe per fer la connexió amb la *base de dades*.
-- **Model:** Les classes per fer els objectes *(Users, Songs, Files...)*
+- **Model:** Les classes per fer els objectes *(Users, Songs, SongFiles...)*
 - **Repository:** Les classes ADO per fer operacions *CRUD* sobre la base de dades
 - **EndPoints:** Les definicions dels EndPoints de l'API  
   
