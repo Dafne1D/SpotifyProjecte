@@ -25,10 +25,12 @@ Tot el sql utilitzat per la creació de la base de dades estarà a *db/db.sql*
 - Al **Gitignore**:
   - bin
   - obj
-- Per totes les classes, utilitzarem **Namespaces** (El root serà Spotify)
+- Per totes les classes, utilitzarem **Namespaces** (El root serà SpotifyAPI)
 - Per les contrasenyes dels usuaris, utilitzarem **encriptació** utilitzant *HASH* i *SALT*
-- Quan s'hagin de fer operacions sobre la base de dades, es podrán fer processos en paral·lel    
-
+- A l'hora de pujar els fitxers de les cançons, s'haurá de fer en **paral·lel**:
+  - S'haurán de pujar **múltiples arxius**
+  - Extreure les **metadades** de l'arxiu
+  - Escriure les metadades per **consola** 
 
 ## Disseny de l'API
 Crearem les carpetes:
