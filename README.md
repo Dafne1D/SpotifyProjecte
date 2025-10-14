@@ -1,4 +1,5 @@
-> En aquest projecte seguirem la [Guideline Oficial de Microsoft](https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/)
+> En aquest projecte seguirem la [Guideline Oficial de Microsoft](https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/)  
+> En aquest projecte ens organitzarem utilitzant un [Trello](https://trello.com/invite/b/68ee51862d9c12a780825534/ATTI2c0da822107eb575e16da5b6206bd493BC62F6E8/spotify)
 
 # BASE DE DADES
 ## Disseny de la base de dades
