@@ -21,11 +21,11 @@ Tot el sql utilitzat per la creació de la base de dades estarà a *db/db.sql*
 <br>
 
 # API
-## Detalls de l'api
+## Detalls de l'API
 - Al **Gitignore**:
   - bin
   - obj
-- Per totes les classes, utilitzarem **Namespaces**
+- Per totes les classes, utilitzarem **Namespaces** (El root serà Spotify)
 - Per les contrasenyes dels usuaris, utilitzarem **encriptació** utilitzant *HASH* i *SALT*
 - Quan s'hagin de fer operacions sobre la base de dades, es podrán fer processos en paral·lel    
 
