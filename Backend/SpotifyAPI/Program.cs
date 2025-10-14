@@ -3,7 +3,7 @@ using SpotifyAPI.Services;
 using Microsoft.Data.SqlClient;
 using SpotifyAPI.EndPoints;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration
     .SetBasePath(AppContext.BaseDirectory)
@@ -12,7 +12,7 @@ builder.Configuration
 string connectionString = builder.Configuration.GetConnectionString("SpotifyDBConnection") ?? "";
 SpotifyDBConnection dbConn = new SpotifyDBConnection(connectionString);
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 app.MapUserEndpoints(dbConn);
 
@@ -20,7 +20,7 @@ app.MapGet("/", () =>
 {
     try
     {
-        using var conn = dbConn.Create();
+        using SqlConnection conn = dbConn.Create();
         conn.Open();
         return $"Database connection: {conn.State}";
     }
