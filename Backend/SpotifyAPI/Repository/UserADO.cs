@@ -50,4 +50,29 @@ static class UserADO
         dbConn.Close();
         return users;
     }
+
+    public static User? GetById(SpotifyDBConnection dbConn, Guid id)
+    {
+        dbConn.Open();
+        string sql = "SELECT Id, Username, Email FROM Users WHERE Id = @Id";
+
+        using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+        cmd.Parameters.AddWithValue("@Id", id);
+
+        using SqlDataReader reader = cmd.ExecuteReader();
+        User? user = null;
+
+        if (reader.Read())
+        {
+            user = new User
+            {
+                Id = reader.GetGuid(0),
+                Username = reader.GetString(1),
+                Email = reader.GetString(2)
+            };
+        }
+
+        dbConn.Close();
+        return user;
+    }
 }
