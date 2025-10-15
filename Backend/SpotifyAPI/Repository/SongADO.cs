@@ -111,6 +111,22 @@ static class SongADO
 
         dbConn.Close();
     }
+
+    public static bool Delete(SpotifyDBConnection dbConn, Guid id)
+    {
+        dbConn.Open();
+
+        string sql = @"DELETE FROM Songs WHERE Id = @Id";
+
+        using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+        cmd.Parameters.AddWithValue("@Id", id);
+
+        int rows = cmd.ExecuteNonQuery();
+
+        dbConn.Close();
+
+        return rows > 0;
+    }
 }
 
 /*CREATE TABLE Songs (
