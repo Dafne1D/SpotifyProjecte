@@ -19,8 +19,7 @@ public static class UserEndpoints
                 Username = req.Username,
                 Email = req.Email,
                 Password = req.Password,
-                Salt = req.Salt,
-                Hash = req.Hash
+                Salt = req.Salt
             };
             UserADO.Insert(dbConn, user);
             return Results.Created($"/users/{user.Id}", user);
@@ -36,11 +35,35 @@ public static class UserEndpoints
         // GET /users User by id
         app.MapGet("/users/{id}", (Guid id) =>
         {
-            User user = UserADO.GetById(dbConn, id);
+            User? user = UserADO.GetById(dbConn, id);
 
             return user is not null
                 ? Results.Ok(user)
                 : Results.NotFound(new { message = $"User with Id {id} not found." });
+        });
+
+        // PUT /users by id
+        app.MapPut("/users/{id}", (Guid id, UserRequest req) =>
+        {
+            User? existing = UserADO.GetById(dbConn, id);
+
+            if (existing == null)
+            {
+                return Results.NotFound();
+            }
+
+            User updated = new User
+            {
+                Id = id, 
+                Username = req.Username,
+                Email = req.Email,
+                Password = req.Password,
+                Salt = req.Salt
+            };
+
+            UserADO.Update(dbConn, updated);
+
+            return Results.Ok(updated); 
         });
     }
 }
