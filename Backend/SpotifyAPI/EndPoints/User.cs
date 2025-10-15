@@ -32,6 +32,16 @@ public static class UserEndpoints
             List<User> users = UserADO.GetAll(dbConn);
             return Results.Ok(users);
         });
+
+        // GET /users User by id
+        app.MapGet("/users/{id}", (Guid id) =>
+        {
+            User user = UserADO.GetById(dbConn, id);
+
+            return user is not null
+                ? Results.Ok(user)
+                : Results.NotFound(new { message = $"User with Id {id} not found." });
+        });
     }
 }
 
