@@ -1,0 +1,21 @@
+# User
+
+# Song
+``` JSON
+// POST http://localhost:5000/songs
+
+{
+  "title" : "Never Gonna Give You Up",
+  "artist" : "Rick Astley",
+  "album" : "idk",
+  "duration" : 120,
+  "genre" : "peak",
+  "imageurl" : "a"
+}
+```
+
+# Playlist
+
+# PlaylistSong
+
+# SongFile
