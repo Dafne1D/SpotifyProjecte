@@ -19,6 +19,19 @@
 // GET http://localhost:5000/songs/id
 ```
 
+``` JSON
+// PUT http://localhost:5000/songs/id
+
+{
+  "title" : "Hopes and Dreams",
+  "artist" : "Toby Fox",
+  "album" : "Undertale OST",
+  "duration" : 120,
+  "genre" : "ultrapeak",
+  "imageurl" : "c"
+}
+```
+
 # Playlist
 
 # PlaylistSong

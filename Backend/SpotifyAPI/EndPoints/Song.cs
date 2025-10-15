@@ -43,6 +43,32 @@ public static class SongEndpoints
                 ? Results.Ok(song)
                 : Results.NotFound(new { message = $"Song with Id {id} not found." });
         });
+
+        // PUT /songs by id
+        app.MapPut("/songs/{id}", (Guid id, SongRequest req) =>
+        {
+            Song? existing = SongADO.GetById(dbConn, id);
+
+            if (existing == null)
+            {
+                return Results.NotFound();
+            }
+
+            Song updated = new Song
+            {
+                Id = id,
+                Title = req.Title,
+                Artist = req.Artist,
+                Album = req.Album,
+                Duration = req.Duration,
+                Genre = req.Genre,
+                ImageUrl = req.ImageUrl
+            };
+
+            SongADO.Update(dbConn, updated);
+
+            return Results.Ok(updated);
+        });
     }
 }
 
