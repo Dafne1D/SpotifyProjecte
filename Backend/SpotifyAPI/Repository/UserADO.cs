@@ -10,7 +10,7 @@ static class UserADO
     public static void Insert(SpotifyDBConnection dbConn, User user)
     {
         
-        user.Password = HashService.ComputeHash(user.Password);
+        user.Password = Hash.ComputeHash(user.Password);
 
         dbConn.Open();
 

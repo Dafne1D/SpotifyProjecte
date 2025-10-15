@@ -1,9 +1,9 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace SpotifyAPI.Services;
+namespace SpotifyAPI.Utils;
 
-public static class HashService
+public static class Hash
 {
     public static string ComputeHash(string text)
     {
