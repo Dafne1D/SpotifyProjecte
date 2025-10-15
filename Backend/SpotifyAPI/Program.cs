@@ -2,6 +2,7 @@
 using SpotifyAPI.Services;
 using Microsoft.Data.SqlClient;
 using SpotifyAPI.EndPoints;
+using SpotifyAPI.Utils;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -29,11 +30,5 @@ SpotifyApp.MapGet("/", () =>
         return $"Database connection failed: {ex.Message}";
     }
 });
-
-SpotifyApp.MapGet("/testhash/{text}", (string text) =>
-{
-    return HashService.ComputeHash(text);
-});
-
 
 SpotifyApp.Run();
