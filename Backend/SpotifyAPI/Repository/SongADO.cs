@@ -46,12 +46,41 @@ static class SongADO
                 Album = reader.GetString(3),
                 Duration = reader.GetInt32(4),
                 Genre = reader.GetString(5),
-                ImageUrl = reader.GetString(6),
+                ImageUrl = reader.GetString(6)
             });
         }
 
         dbConn.Close();
         return songs;
+    }
+
+    public static Song? GetById(SpotifyDBConnection dbConn, Guid id)
+    {
+        dbConn.Open();
+        string sql = "SELECT Id, Title, Artist, Album, Duration, Genre, ImageUrl FROM Songs WHERE Id = @Id";
+
+        using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+        cmd.Parameters.AddWithValue("@Id", id);
+
+        using SqlDataReader reader = cmd.ExecuteReader();
+        Song? song = null;
+
+        if (reader.Read())
+        {
+            song = new Song
+            {
+                Id = reader.GetGuid(0),
+                Title = reader.GetString(1),
+                Artist = reader.GetString(2),
+                Album = reader.GetString(3),
+                Duration = reader.GetInt32(4),
+                Genre = reader.GetString(5),
+                ImageUrl = reader.GetString(6)
+            };
+        }
+
+        dbConn.Close();
+        return song;
     }
 }
 
