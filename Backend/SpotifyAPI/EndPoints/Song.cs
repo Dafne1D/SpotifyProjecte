@@ -1,0 +1,32 @@
+using SpotifyAPI.Repository;
+using SpotifyAPI.Services;
+using SpotifyAPI.Model;
+
+namespace SpotifyAPI.EndPoints;
+
+public static class SongEndpoints
+{
+    public static void MapSongEndpoints(this WebApplication app, SpotifyDBConnection dbConn)
+    {
+        // POST /songs
+        app.MapPost("/songs", (SongRequest req) =>
+        {
+            Song song = new Song
+            {
+                Id = Guid.NewGuid(),
+                Title = req.Title,
+                Artist = req.Artist,
+                Album = req.Album,
+                Duration = req.Duration,
+                Genre = req.Genre,
+                ImageUrl = req.ImageUrl
+            };
+
+            SongADO.Insert(dbConn, song);
+
+            return Results.Created($"/songs/{song.Id}", song);
+        });
+    }
+}
+
+public record SongRequest(string Title, string Artist, string Album, int Duration, string Genre, string ImageUrl);
