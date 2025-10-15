@@ -72,7 +72,51 @@ public static class SongEndpoints
 
         // DELETE /songs by id
         app.MapDelete("/songs/{id}", (Guid id) => SongADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
+
+        // POST Upload File by id
+        app.MapPost("/song/{id}/upload", async (Guid id, IFormFile file) =>
+        {
+            if (file == null || file.Length == 0)
+                return Results.BadRequest(new { message = "No file recieved" });
+
+            Song? song = SongADO.GetById(dbConn, id);
+            if (song is null)
+                return Results.NotFound(new { message = $"Song with Id {id} not found." });
+
+            string filePath = await SaveFile(id, file);
+
+            SongFile songFile = new SongFile
+            {
+                Id = Guid.NewGuid(),
+                SongId = id,
+                Url = filePath
+            };
+
+            SongFileADO.Insert(dbConn, songFile);
+
+            return Results.Ok(new { message = "File successfully uploaded", songFile });
+        }).DisableAntiforgery();
+    }
+
+    public static async Task<string> SaveFile(Guid id, IFormFile file)
+    {
+        string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
+
+        if (!Directory.Exists(uploadsFolder))
+            Directory.CreateDirectory(uploadsFolder);
+
+        string fileName = $"{id}_{Path.GetFileName(file.FileName)}";
+        string filePath = Path.Combine(uploadsFolder, fileName);
+
+        using (FileStream stream = new FileStream(filePath, FileMode.Create))
+        {
+            await file.CopyToAsync(stream);
+        }
+
+        return filePath;
     }
 }
+
+
 
 public record SongRequest(string Title, string Artist, string Album, int Duration, string Genre, string ImageUrl);
