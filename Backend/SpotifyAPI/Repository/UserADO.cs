@@ -75,4 +75,27 @@ static class UserADO
         dbConn.Close();
         return user;
     }
+
+    public static void Update(SpotifyDBConnection dbConn, User user)
+    {
+        dbConn.Open();
+
+        string sql = @"UPDATE Users
+                    SET Username = @Username,
+                        Email = @Email,
+                        Password = @Password
+                    WHERE Id = @Id";
+
+        using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+        cmd.Parameters.AddWithValue("@Id", user.Id);
+        cmd.Parameters.AddWithValue("@Username", user.Username);
+        cmd.Parameters.AddWithValue("@Email", user.Email);
+        cmd.Parameters.AddWithValue("@Password", user.Password);
+
+        int rows = cmd.ExecuteNonQuery();
+
+        Console.WriteLine($"{rows} fila actualitzada.");
+        
+        dbConn.Close();
+    }
 }
