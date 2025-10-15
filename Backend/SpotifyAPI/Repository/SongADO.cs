@@ -128,13 +128,3 @@ static class SongADO
         return rows > 0;
     }
 }
-
-/*CREATE TABLE Songs (
-    Id UNIQUEIDENTIFIER NOT NULL PRIMARY KEY,
-    Title NVARCHAR(100) NOT NULL,
-    Artist NVARCHAR(100) NOT NULL,
-    Album NVARCHAR(100),
-    Duration INT,
-    Genre NVARCHAR(50),
-    ImageUrl NVARCHAR(255)
-);*/
