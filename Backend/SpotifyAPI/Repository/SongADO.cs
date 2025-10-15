@@ -2,6 +2,8 @@ using Microsoft.Data.SqlClient;
 using SpotifyAPI.Model;
 using SpotifyAPI.Services;
 
+namespace SpotifyAPI.Repository;
+
 static class SongADO
 {
     public static void Insert(SpotifyDBConnection dbConn, Song song)
