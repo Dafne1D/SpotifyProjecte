@@ -69,6 +69,9 @@ public static class SongEndpoints
 
             return Results.Ok(updated);
         });
+
+        // DELETE /songs by id
+        app.MapDelete("/songs/{id}", (Guid id) => SongADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
     }
 }
 

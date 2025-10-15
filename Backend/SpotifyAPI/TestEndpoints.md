@@ -31,6 +31,9 @@
   "imageurl" : "c"
 }
 ```
+``` JSON
+// DELETE http://localhost:5000/songs/id
+```
 
 # Playlist
 
