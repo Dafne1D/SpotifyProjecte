@@ -30,4 +30,10 @@ SpotifyApp.MapGet("/", () =>
     }
 });
 
+SpotifyApp.MapGet("/testhash/{text}", (string text) =>
+{
+    return HashService.ComputeHash(text);
+});
+
+
 SpotifyApp.Run();
