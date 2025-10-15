@@ -7,7 +7,7 @@ public static class Hash
 {
     public static string GenerateSalt(int length = 1)
     {
-        using var rng = RandomNumberGenerator.Create();
+        using RandomNumberGenerator rng = RandomNumberGenerator.Create();
         byte[] saltBytes = new byte[length];
         rng.GetBytes(saltBytes);
         return Convert.ToHexString(saltBytes)[..1];
