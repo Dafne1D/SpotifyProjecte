@@ -15,6 +15,7 @@ SpotifyDBConnection dbConn = new SpotifyDBConnection(connectionString);
 WebApplication SpotifyApp = builder.Build();
 
 SpotifyApp.MapUserEndpoints(dbConn);
+SpotifyApp.MapSongEndpoints(dbConn);
 
 SpotifyApp.MapGet("/", () =>
 {
