@@ -25,6 +25,34 @@ static class SongADO
 
         dbConn.Close();
     }
+
+    public static List<Song> GetAll(SpotifyDBConnection dbConn)
+    {
+        List<Song> songs = new();
+
+        dbConn.Open();
+        string sql = "SELECT Id, Title, Artist, Album, Duration, Genre, ImageUrl FROM Songs";
+
+        using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+        using SqlDataReader reader = cmd.ExecuteReader();
+
+        while (reader.Read())
+        {
+            songs.Add(new Song
+            {
+                Id = reader.GetGuid(0),
+                Title = reader.GetString(1),
+                Artist = reader.GetString(2),
+                Album = reader.GetString(3),
+                Duration = reader.GetInt32(4),
+                Genre = reader.GetString(5),
+                ImageUrl = reader.GetString(6),
+            });
+        }
+
+        dbConn.Close();
+        return songs;
+    }
 }
 
 /*CREATE TABLE Songs (
