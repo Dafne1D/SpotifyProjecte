@@ -33,6 +33,16 @@ public static class SongEndpoints
             List<Song> songs = SongADO.GetAll(dbConn);
             return Results.Ok(songs);
         });
+
+        // GET /songs Song by id
+        app.MapGet("/songs/{id}", (Guid id) =>
+        {
+            Song? song = SongADO.GetById(dbConn, id);
+
+            return song is not null
+                ? Results.Ok(song)
+                : Results.NotFound(new { message = $"Song with Id {id} not found." });
+        });
     }
 }
 

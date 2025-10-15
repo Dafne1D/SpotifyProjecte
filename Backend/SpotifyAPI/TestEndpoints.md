@@ -16,6 +16,7 @@
 
 ``` JSON
 // GET http://localhost:5000/songs
+// GET http://localhost:5000/songs/id
 ```
 
 # Playlist
