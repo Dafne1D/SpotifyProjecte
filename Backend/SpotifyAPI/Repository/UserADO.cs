@@ -97,7 +97,24 @@ static class UserADO
         int rows = cmd.ExecuteNonQuery();
 
         Console.WriteLine($"{rows} fila actualitzada.");
-        
+
         dbConn.Close();
     }
+    
+    public static bool Delete(SpotifyDBConnection dbConn, Guid id)
+    {
+        dbConn.Open();
+
+        string sql = @"DELETE FROM Users WHERE Id = @Id";
+
+        using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+        cmd.Parameters.AddWithValue("@Id", id);
+
+        int rows = cmd.ExecuteNonQuery();
+
+        dbConn.Close();
+
+        return rows > 0;
+    }
+
 }
