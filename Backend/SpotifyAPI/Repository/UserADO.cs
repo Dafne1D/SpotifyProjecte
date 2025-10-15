@@ -26,4 +26,28 @@ static class UserADO
 
         dbConn.Close();
     }
+
+    public static List<User> GetAll(SpotifyDBConnection dbConn)
+    {
+        List<User> users = new();
+
+        dbConn.Open();
+        string sql = "SELECT Id, Username, Email FROM Users";
+
+        using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+        using SqlDataReader reader = cmd.ExecuteReader();
+
+        while (reader.Read())
+        {
+            users.Add(new User
+            {
+                Id = reader.GetGuid(0),
+                Username = reader.GetString(1),
+                Email = reader.GetString(2)
+            });
+        }
+
+        dbConn.Close();
+        return users;
+    }
 }
