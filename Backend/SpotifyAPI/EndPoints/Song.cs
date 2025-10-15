@@ -26,6 +26,13 @@ public static class SongEndpoints
 
             return Results.Created($"/songs/{song.Id}", song);
         });
+
+        // GET /songs
+        app.MapGet("/songs", () =>
+        {
+            List<Song> songs = SongADO.GetAll(dbConn);
+            return Results.Ok(songs);
+        });
     }
 }
 
