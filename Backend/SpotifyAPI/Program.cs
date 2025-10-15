@@ -12,17 +12,16 @@ builder.Configuration
 string connectionString = builder.Configuration.GetConnectionString("SpotifyDBConnection") ?? "";
 SpotifyDBConnection dbConn = new SpotifyDBConnection(connectionString);
 
-WebApplication app = builder.Build();
+WebApplication SpotifyApp = builder.Build();
 
-app.MapUserEndpoints(dbConn);
+SpotifyApp.MapUserEndpoints(dbConn);
 
-app.MapGet("/", () =>
+SpotifyApp.MapGet("/", () =>
 {
     try
     {
-        using SqlConnection conn = dbConn.Create();
-        conn.Open();
-        return $"Database connection: {conn.State}";
+        bool connState = dbConn.Open();
+        return $"Database connection: {connState}";
     }
     catch (SqlException ex)
     {
@@ -30,4 +29,4 @@ app.MapGet("/", () =>
     }
 });
 
-app.Run();
+SpotifyApp.Run();
