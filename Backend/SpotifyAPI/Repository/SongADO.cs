@@ -82,6 +82,35 @@ static class SongADO
         dbConn.Close();
         return song;
     }
+
+    public static void Update(SpotifyDBConnection dbConn, Song song)
+    {
+        dbConn.Open();
+
+        string sql = @"UPDATE Songs SET
+                    Title = @Title,
+                    Artist = @Artist,
+                    Album = @Album,
+                    Duration = @Duration,
+                    Genre = @Genre,
+                    ImageUrl = @ImageUrl
+                    WHERE Id = @Id";
+
+        using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+        cmd.Parameters.AddWithValue("@Id", song.Id);
+        cmd.Parameters.AddWithValue("@Title", song.Title);
+        cmd.Parameters.AddWithValue("@Artist", song.Artist);
+        cmd.Parameters.AddWithValue("@Album", song.Album);
+        cmd.Parameters.AddWithValue("@Duration", song.Duration);
+        cmd.Parameters.AddWithValue("@Genre", song.Genre);
+        cmd.Parameters.AddWithValue("@ImageUrl", song.ImageUrl);
+
+        int rows = cmd.ExecuteNonQuery();
+
+        Console.WriteLine($"{rows} files actualitzades");
+
+        dbConn.Close();
+    }
 }
 
 /*CREATE TABLE Songs (
