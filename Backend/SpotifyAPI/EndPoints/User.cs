@@ -54,7 +54,7 @@ public static class UserEndpoints
 
             User updated = new User
             {
-                Id = id, 
+                Id = id,
                 Username = req.Username,
                 Email = req.Email,
                 Password = req.Password,
@@ -63,9 +63,13 @@ public static class UserEndpoints
 
             UserADO.Update(dbConn, updated);
 
-            return Results.Ok(updated); 
+            return Results.Ok(updated);
         });
+
+        // DELETE /users/{id}
+        app.MapDelete("/users/{id}", (Guid id) => UserADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
     }
+    
 }
 
-public record UserRequest(string Username, string Email, string Password, string Salt, string Hash);
+public record UserRequest(string Username, string Email, string Password, string Salt);
