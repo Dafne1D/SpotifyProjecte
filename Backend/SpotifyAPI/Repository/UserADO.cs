@@ -10,8 +10,8 @@ static class UserADO
     {
         dbConn.Open();
 
-        string sql = @"INSERT INTO Users (Id, Username, Email, Password, Salt, Hash)
-                      VALUES (@Id, @Username, @Email, @Password, @Salt, @Hash)";
+        string sql = @"INSERT INTO Users (Id, Username, Email, Password, Salt)
+                      VALUES (@Id, @Username, @Email, @Password, @Salt)";
 
         using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
         cmd.Parameters.AddWithValue("@Id", user.Id);
@@ -19,7 +19,6 @@ static class UserADO
         cmd.Parameters.AddWithValue("@Email", user.Email);
         cmd.Parameters.AddWithValue("@Password", user.Password);
         cmd.Parameters.AddWithValue("@Salt", user.Salt);
-        cmd.Parameters.AddWithValue("@Hash", user.Hash);
 
         int rows = cmd.ExecuteNonQuery();
         Console.WriteLine($"{rows} fila inserida.");
@@ -83,7 +82,8 @@ static class UserADO
         string sql = @"UPDATE Users
                     SET Username = @Username,
                         Email = @Email,
-                        Password = @Password
+                        Password = @Password,
+                        Salt = @Salt
                     WHERE Id = @Id";
 
         using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
@@ -91,6 +91,8 @@ static class UserADO
         cmd.Parameters.AddWithValue("@Username", user.Username);
         cmd.Parameters.AddWithValue("@Email", user.Email);
         cmd.Parameters.AddWithValue("@Password", user.Password);
+        cmd.Parameters.AddWithValue("@Salt", user.Salt);
+
 
         int rows = cmd.ExecuteNonQuery();
 
