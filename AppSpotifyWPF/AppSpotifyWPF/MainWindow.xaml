@@ -1,0 +1,146 @@
+﻿<Window x:Class="AppSpotifyWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Admin Dashboard" Height="800" Width="1000"
+        Background="#F5F6FA">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="40">
+
+            <!-- Título principal -->
+            <TextBlock Text="Pàgina Principal"
+                       FontSize="28"
+                       FontWeight="Bold"
+                       Foreground="Black"
+                       Margin="0,0,0,20"/>
+
+            <!-- USERS MANAGEMENT -->
+            <Border Background="White" CornerRadius="10" Padding="20" Margin="0,0,0,25" >
+                <StackPanel>
+                    <TextBlock Text="Manteniment d'usuaris" FontWeight="Bold" FontSize="16" Margin="0,0,0,10" />
+
+                    <UniformGrid Columns="4" Rows="1" Margin="0,10,0,0" HorizontalAlignment="Center" Width="700">
+                        <!-- Create User -->
+                        <Button Margin="10" Padding="20" Background="White" BorderBrush="#E0E0E0" BorderThickness="1">
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE710;" FontSize="36" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Crear" FontWeight="Bold" HorizontalAlignment="Center" />
+                                <TextBlock Text="Afegeix usuari" FontSize="12" Foreground="Gray" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <!-- Read User -->
+                        <Button Margin="10" Padding="20" Background="White" BorderBrush="#E0E0E0" BorderThickness="1">
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE716;" FontSize="36" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Llegir" FontWeight="Bold" HorizontalAlignment="Center" />
+                                <TextBlock Text="Mirar detalls" FontSize="12" Foreground="Gray" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <!-- Update User -->
+                        <Button Margin="10" Padding="20" Background="White" BorderBrush="#E0E0E0" BorderThickness="1">
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE70F;" FontSize="36" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Actualitzar" FontWeight="Bold" HorizontalAlignment="Center" />
+                                <TextBlock Text="Modifica informació" FontSize="12" Foreground="Gray" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <!-- Delete User -->
+                        <Button Margin="10" Padding="20" Background="White" BorderBrush="#E0E0E0" BorderThickness="1">
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE74D;" FontSize="36" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Elimina" FontWeight="Bold" HorizontalAlignment="Center" />
+                                <TextBlock Text="Elimina usuari" FontSize="12" Foreground="Gray" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                    </UniformGrid>
+                </StackPanel>
+            </Border>
+
+            <!-- SONGS MANAGEMENT -->
+            <Border Background="White" CornerRadius="10" Padding="20" Margin="0,0,0,25">
+                <StackPanel>
+                    <TextBlock Text="Manteniment de cançons" FontWeight="Bold" FontSize="16" Margin="0,0,0,10" />
+
+                    <UniformGrid Columns="4" Rows="1" Margin="0,10,0,0" HorizontalAlignment="Center" Width="700">
+                        <Button Margin="10" Padding="20" Background="White" BorderBrush="#E0E0E0" BorderThickness="1">
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE189;" FontSize="36" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Crear" FontWeight="Bold" HorizontalAlignment="Center" />
+                                <TextBlock Text="Afageix una cançó" FontSize="12" Foreground="Gray" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Margin="10" Padding="20" Background="White" BorderBrush="#E0E0E0" BorderThickness="1">
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE179;" FontSize="36" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Llegeix" FontWeight="Bold" HorizontalAlignment="Center" />
+                                <TextBlock Text="Mira detalls" FontSize="12" Foreground="Gray" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Margin="10" Padding="20" Background="White" BorderBrush="#E0E0E0" BorderThickness="1">
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE70F;" FontSize="36" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Actualitza" FontWeight="Bold" HorizontalAlignment="Center" />
+                                <TextBlock Text="Modifica informació" FontSize="12" Foreground="Gray" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Margin="10" Padding="20" Background="White" BorderBrush="#E0E0E0" BorderThickness="1">
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE74D;" FontSize="36" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Elimina" FontWeight="Bold" HorizontalAlignment="Center" />
+                                <TextBlock Text="Elimina una cançó" FontSize="12" Foreground="Gray" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                    </UniformGrid>
+                </StackPanel>
+            </Border>
+
+            <!-- PLAYLISTS MANAGEMENT -->
+            <Border Background="White" CornerRadius="10" Padding="20">
+                <StackPanel>
+                    <TextBlock Text="Manteniment de Playlists" FontWeight="Bold" FontSize="16" Margin="0,0,0,10" />
+
+                    <UniformGrid Columns="4" Rows="1" Margin="0,10,0,0" HorizontalAlignment="Center" Width="700">
+
+                        <Button Margin="10" Padding="20" Background="White" BorderBrush="#E0E0E0" BorderThickness="1">
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE710;" FontSize="36" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Crea" FontWeight="Bold" HorizontalAlignment="Center" />
+                                <TextBlock Text="Afageix una playlist" FontSize="12" Foreground="Gray" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Margin="10" Padding="20" Background="White" BorderBrush="#E0E0E0" BorderThickness="1">
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE179;" FontSize="36" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Llegeix" FontWeight="Bold" HorizontalAlignment="Center" />
+                                <TextBlock Text="Mira detalls" FontSize="12" Foreground="Gray" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Margin="10" Padding="20" Background="White" BorderBrush="#E0E0E0" BorderThickness="1">
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE70F;" FontSize="36" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Actualitza" FontWeight="Bold" HorizontalAlignment="Center" />
+                                <TextBlock Text="Modifica la playlist" FontSize="12" Foreground="Gray" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Margin="10" Padding="20" Background="White" BorderBrush="#E0E0E0" BorderThickness="1">
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE74D;" FontSize="36" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Elimina" FontWeight="Bold" HorizontalAlignment="Center" />
+                                <TextBlock Text="Elimina la playlist" FontSize="12" Foreground="Gray" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                    </UniformGrid>
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
+    </ScrollViewer>
+</Window>
