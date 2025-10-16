@@ -6,7 +6,7 @@ namespace SpotifyAPI.Utils;
 
 public static class FileHandler
 {
-    public static void InsertFiles(SpotifyDBConnection dbConn, Guid id, List<IFormFile> files)
+    public static void InsertFiles(SpotifyDBConnection dbConn, Guid id, IFormFile[] files)
     {
         List<Task> tasks = new List<Task>();
         foreach (IFormFile file in files)
