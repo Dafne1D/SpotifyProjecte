@@ -1,6 +1,7 @@
 using SpotifyAPI.Repository;
 using SpotifyAPI.Services;
 using SpotifyAPI.Model;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SpotifyAPI.EndPoints;
 
@@ -74,15 +75,28 @@ public static class SongEndpoints
         app.MapDelete("/songs/{id}", (Guid id) => SongADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
 
         // POST Upload File by id
-        app.MapPost("/song/{id}/upload", async (Guid id, IFormFile file) =>
+        app.MapPost("/songs/{id}/upload", async (Guid id, [FromForm] List<IFormFile> files) =>
         {
-            if (file == null || file.Length == 0)
-                return Results.BadRequest(new { message = "No file recieved" });
+            if (files == null || files.Count == 0)
+                return Results.BadRequest(new { message = "No files recieved", files });
 
             Song? song = SongADO.GetById(dbConn, id);
             if (song is null)
                 return Results.NotFound(new { message = $"Song with Id {id} not found." });
 
+            InsertFiles(dbConn, id, files);
+
+            return Results.Ok(new { message = "Files successfully uploaded", files });
+        })
+        .Accepts<IFormFile[]>("multipart/form-data")
+        .DisableAntiforgery();
+    }
+
+    public static async void InsertFiles(SpotifyDBConnection dbConn, Guid id, List<IFormFile> files)
+    {
+        foreach (IFormFile file in files)
+        {
+            Console.WriteLine($"PROCESSING FILE {file.Name}");
             string filePath = await SaveFile(id, file);
 
             SongFile songFile = new SongFile
@@ -94,8 +108,8 @@ public static class SongEndpoints
 
             SongFileADO.Insert(dbConn, songFile);
 
-            return Results.Ok(new { message = "File successfully uploaded", songFile });
-        }).DisableAntiforgery();
+            Console.WriteLine($"FILE {file.Name} FINISHED PROCESSING");
+        }
     }
 
     public static async Task<string> SaveFile(Guid id, IFormFile file)
@@ -116,7 +130,5 @@ public static class SongEndpoints
         return filePath;
     }
 }
-
-
 
 public record SongRequest(string Title, string Artist, string Album, int Duration, string Genre, string ImageUrl);

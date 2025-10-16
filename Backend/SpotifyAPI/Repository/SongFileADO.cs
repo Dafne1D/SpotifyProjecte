@@ -10,7 +10,7 @@ static class SongFileADO
     {
         dbConn.Open();
 
-        string sql = @"INSERT INTO Songs (Id, SongId, Url)
+        string sql = @"INSERT INTO SongFiles (Id, SongId, Url)
                     VALUES (@Id, @SongId, @Url)";
 
         using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
