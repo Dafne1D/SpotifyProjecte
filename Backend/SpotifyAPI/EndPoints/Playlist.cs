@@ -22,6 +22,14 @@ public static class PlaylistEndpoints
             PlaylistADO.Insert(dbConn, playlist);
             return Results.Created($"/playlists/{playlist.Id}", playlist);
         });
+
+        // GET /playlists
+        app.MapGet("/playlists", () =>
+        {
+            List<Playlist> playlists = PlaylistADO.GetAll(dbConn);
+            return Results.Ok(playlists);
+        });
+
     }
 }
 
