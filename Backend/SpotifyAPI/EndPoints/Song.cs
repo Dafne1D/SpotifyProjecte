@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http.Abstractions;
 
 using SpotifyAPI.Repository;
 using SpotifyAPI.Model;
@@ -78,21 +79,38 @@ public static class SongEndpoints
         app.MapDelete("/songs/{id}", (Guid id) => SongADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
 
         // POST Upload File by id
-        app.MapPost("/songs/{id}/upload", (Guid id, [FromForm] IFormFile[] files) =>
+        app.MapPost("/songs/{id}/upload", (Guid id, [FromForm] IFormFileCollection files) =>
         {
-            if (files == null || files.Length == 0)
+            IFormFile[] filesArray = files.ToArray();
+            if (filesArray == null)
                 return Results.BadRequest(new { message = "No files recieved", files });
 
             Song? song = SongADO.GetById(dbConn, id);
             if (song is null)
                 return Results.NotFound(new { message = $"Song with Id {id} not found." });
 
-            FileHandler.InsertFiles(dbConn, id, files);
+            FileHandler.InsertFiles(dbConn, id, filesArray);
 
             return Results.Ok(new { message = "Files successfully uploaded", files });
         })
         .Accepts<IFormFile[]>("multipart/form-data")
         .DisableAntiforgery();
+
+        // DELETE File from Song
+        app.MapDelete("/songs/{id}/delete/{fileId}", (Guid id, Guid fileId) =>
+        {
+            Song? song = SongADO.GetById(dbConn, id);
+            if (song is null)
+                return Results.NotFound(new { message = $"Song with Id {id} not found." });
+
+            SongFile? songFile = SongFileADO.GetById(dbConn, fileId);
+            if (songFile is null)
+                return Results.NotFound(new { message = $"Song file with Id {songFile} not found." });
+
+            SongFileADO.Delete(dbConn, fileId);
+
+            return Results.Ok(new { message = "File successfully deleted", songFile });
+        });
     }
 }
 
