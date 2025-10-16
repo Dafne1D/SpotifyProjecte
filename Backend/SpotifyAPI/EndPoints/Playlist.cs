@@ -30,6 +30,7 @@ public static class PlaylistEndpoints
             return Results.Ok(playlists);
         });
 
+        // GET /playlists by id
         app.MapGet("/playlists/{id}", (Guid id) =>
         {
             Playlist? playlist = PlaylistADO.GetById(dbConn, id);
@@ -39,6 +40,28 @@ public static class PlaylistEndpoints
                 : Results.NotFound(new { message = $"Playlist with Id {id} not found." });
         });
 
+        // PUT /playlists by id
+        app.MapPut("/playlists/{id}", (Guid id, PlaylistRequest req) =>
+        {
+            Playlist? existing = PlaylistADO.GetById(dbConn, id);
+
+            if (existing == null)
+            {
+                return Results.NotFound();
+            }
+
+            Playlist updated = new Playlist
+            {
+                Id = id,
+                UserId = req.UserId,
+                Name = req.Name,
+                Description = req.Description
+            };
+
+            PlaylistADO.Update(dbConn, updated);
+
+            return Results.Ok(updated);
+        });
     }
 }
 
