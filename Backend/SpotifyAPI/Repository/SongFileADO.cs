@@ -1,3 +1,4 @@
+using System.Net.Http.Headers;
 using Microsoft.Data.SqlClient;
 using SpotifyAPI.Model;
 using SpotifyAPI.Services;
@@ -22,6 +23,31 @@ static class SongFileADO
         Console.WriteLine($"{rows} fila inserida.");
 
         dbConn.Close();
+    }
+
+    public static SongFile? GetById(SpotifyDBConnection dbConn, Guid id)
+    {
+        dbConn.Open();
+        string sql = "SELECT Id, SongId, Url FROM SongFiles WHERE Id = @Id";
+
+        using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+        cmd.Parameters.AddWithValue("@Id", id);
+
+        using SqlDataReader reader = cmd.ExecuteReader();
+        SongFile? songFile = null;
+
+        if (reader.Read())
+        {
+            songFile = new SongFile
+            {
+                Id = reader.GetGuid(0),
+                SongId = reader.GetGuid(1),
+                Url = reader.GetString(2)
+            };
+        }
+
+        dbConn.Close();
+        return songFile;
     }
 }
 
