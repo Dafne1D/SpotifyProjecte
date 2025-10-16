@@ -82,6 +82,9 @@ static class UserADO
 
     public static void Update(SpotifyDBConnection dbConn, User user)
     {
+        user.Salt = Hash.GenerateSalt();
+        user.Password = Hash.ComputeHash(user.Password, user.Salt);
+
         dbConn.Open();
 
         string sql = @"UPDATE Users
