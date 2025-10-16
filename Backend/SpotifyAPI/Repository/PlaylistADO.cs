@@ -26,4 +26,29 @@ static class PlaylistADO
         dbConn.Close();
     }
 
+    public static List<Playlist> GetAll(SpotifyDBConnection dbConn)
+    {
+        List<Playlist> playlists = new();
+
+        dbConn.Open();
+        string sql = "SELECT Id, UserId, Name, Description FROM Playlists";
+
+        using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+        using SqlDataReader reader = cmd.ExecuteReader();
+
+        while (reader.Read())
+        {
+            playlists.Add(new Playlist
+            {
+                Id = reader.GetGuid(0),
+                UserId = reader.GetGuid(1),
+                Name = reader.GetString(2),
+                Description = reader.IsDBNull(3) ? null : reader.GetString(3)
+            });
+        }
+
+        dbConn.Close();
+        return playlists;
+    }
+
 }
