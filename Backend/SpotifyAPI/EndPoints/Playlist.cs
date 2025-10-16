@@ -62,6 +62,9 @@ public static class PlaylistEndpoints
 
             return Results.Ok(updated);
         });
+
+        // DELETE /playlists/{id}
+        app.MapDelete("/playlists/{id}", (Guid id) => PlaylistADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
     }
 }
 
