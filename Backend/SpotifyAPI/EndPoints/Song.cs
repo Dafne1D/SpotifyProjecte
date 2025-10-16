@@ -78,7 +78,7 @@ public static class SongEndpoints
         app.MapDelete("/songs/{id}", (Guid id) => SongADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
 
         // POST Upload File by id
-        app.MapPost("/songs/{id}/upload", async (Guid id, [FromForm] List<IFormFile> files) =>
+        app.MapPost("/songs/{id}/upload", (Guid id, [FromForm] List<IFormFile> files) =>
         {
             if (files == null || files.Count == 0)
                 return Results.BadRequest(new { message = "No files recieved", files });
