@@ -1,5 +1,28 @@
 # User
+``` JSON
+// POST http://localhost:5000/users
+{
+  "username": "marcsoler897",
+  "email": "marcsoler897@gmail.com",
+  "password": "patata"
+}
+```
+``` JSON
+// GET http://localhost:5000/users
+// GET http://localhost:5000/users/id
+```
+``` JSON
+// PUT http://localhost:5000/users/id
+{
+  "username": "marcsoler8977",
+  "email": "marcsoler897@gmail.com",
+  "password": "patata2"
+}
 
+```
+``` JSON
+// DELETE http://localhost:5000/users/id
+```
 # Song
 ``` JSON
 // POST http://localhost:5000/songs
