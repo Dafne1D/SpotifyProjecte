@@ -1,6 +1,7 @@
 using SpotifyAPI.Repository;
 using SpotifyAPI.Services;
 using SpotifyAPI.Model;
+using System.Data.Common;
 
 namespace SpotifyAPI.EndPoints;
 
@@ -65,7 +66,22 @@ public static class PlaylistEndpoints
 
         // DELETE /playlists/{id}
         app.MapDelete("/playlists/{id}", (Guid id) => PlaylistADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
+
+        // POST /playlists/{playlistId}/add/{songId}
+        app.MapPost("/playlists/{playlistId}/add/{songId}", (Guid playlistId, Guid songId) =>
+        {
+            PlaylistSong playlistsong = new PlaylistSong
+            {
+                Id = Guid.NewGuid(),
+                PlaylistId = playlistId,
+                SongId = songId
+            };
+            PlaylistSongADO.Insert(dbConn, playlistsong);
+            return Results.Created($"/playlists/{playlistsong.Id}", playlistsong);
+        });
+        // DELETE /playlists/{id}/remove
     }
 }
 
 public record PlaylistRequest(Guid UserId, string Name, string Description);
+public record PlaylistSongRequest(Guid PlaylistId, Guid SongId);
