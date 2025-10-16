@@ -1,0 +1,29 @@
+﻿using AppSpotifyWPF.Pantalles;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace AppSpotifyWPF
+{
+
+
+    public partial class HomeScreen : Window
+    {
+        public HomeScreen()
+        {
+            InitializeComponent();
+        }
+
+        private void butCrearUser_Click(object sender, RoutedEventArgs e)
+        {
+            frameCrearUser.NavigationService.Navigate(new PagCreate());
+        }
+    }
+}
