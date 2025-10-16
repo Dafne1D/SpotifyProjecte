@@ -33,7 +33,7 @@ public static class FileHandler
         Console.WriteLine($"FILE {file.Name} FINISHED PROCESSING");
     }
 
-    public static async Task<string> SaveFile(Guid id, IFormFile file)
+    private static async Task<string> SaveFile(Guid id, IFormFile file)
     {
         string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
 
