@@ -1,6 +1,10 @@
+using Microsoft.AspNetCore.Mvc;
+
 using SpotifyAPI.Repository;
-using SpotifyAPI.Services;
 using SpotifyAPI.Model;
+using SpotifyAPI.Services;
+using SpotifyAPI.Utils;
+
 
 namespace SpotifyAPI.EndPoints;
 
@@ -74,49 +78,22 @@ public static class SongEndpoints
         app.MapDelete("/songs/{id}", (Guid id) => SongADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
 
         // POST Upload File by id
-        app.MapPost("/song/{id}/upload", async (Guid id, IFormFile file) =>
+        app.MapPost("/songs/{id}/upload", (Guid id, [FromForm] IFormFile[] files) =>
         {
-            if (file == null || file.Length == 0)
-                return Results.BadRequest(new { message = "No file recieved" });
+            if (files == null || files.Length == 0)
+                return Results.BadRequest(new { message = "No files recieved", files });
 
             Song? song = SongADO.GetById(dbConn, id);
             if (song is null)
                 return Results.NotFound(new { message = $"Song with Id {id} not found." });
 
-            string filePath = await SaveFile(id, file);
+            FileHandler.InsertFiles(dbConn, id, files);
 
-            SongFile songFile = new SongFile
-            {
-                Id = Guid.NewGuid(),
-                SongId = id,
-                Url = filePath
-            };
-
-            SongFileADO.Insert(dbConn, songFile);
-
-            return Results.Ok(new { message = "File successfully uploaded", songFile });
-        }).DisableAntiforgery();
-    }
-
-    public static async Task<string> SaveFile(Guid id, IFormFile file)
-    {
-        string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
-
-        if (!Directory.Exists(uploadsFolder))
-            Directory.CreateDirectory(uploadsFolder);
-
-        string fileName = $"{id}_{Path.GetFileName(file.FileName)}";
-        string filePath = Path.Combine(uploadsFolder, fileName);
-
-        using (FileStream stream = new FileStream(filePath, FileMode.Create))
-        {
-            await file.CopyToAsync(stream);
-        }
-
-        return filePath;
+            return Results.Ok(new { message = "Files successfully uploaded", files });
+        })
+        .Accepts<IFormFile[]>("multipart/form-data")
+        .DisableAntiforgery();
     }
 }
-
-
 
 public record SongRequest(string Title, string Artist, string Album, int Duration, string Genre, string ImageUrl);

@@ -59,7 +59,29 @@
 ```
 
 # Playlist
-
+``` JSON
+// POST http://localhost:5000/playlists
+{
+  "userId": "",
+  "name": "Chill Vibes",
+  "description": "Relaxing songs for the weekend"
+}
+```
+``` JSON
+// GET http://localhost:5000/playlists
+// GET http://localhost:5000/playlists/id
+```
+``` JSON
+// PUT http://localhost:5000/playlists/id
+{
+  "userId": "82b83cfe-1376-4ed5-af34-7d12a102addd",
+  "name": "Workout Mix Updated",
+  "description": "Updated playlist description"
+}
+```
+``` JSON
+// DELETE http://localhost:5000/playlists/id
+```
 # PlaylistSong
 
 # SongFile
