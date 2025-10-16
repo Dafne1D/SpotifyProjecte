@@ -77,4 +77,28 @@ static class PlaylistADO
         return playlist;
     }
 
+    public static void Update(SpotifyDBConnection dbConn, Playlist playlist)
+    {
+
+        dbConn.Open();
+
+        string sql = @"UPDATE Playlists
+                    SET UserId = @UserId,
+                        Name = @Name,
+                        Description = @Description
+                    WHERE Id = @Id";
+
+        using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+        cmd.Parameters.AddWithValue("@Id", playlist.Id);
+        cmd.Parameters.AddWithValue("@UserId", playlist.UserId);
+        cmd.Parameters.AddWithValue("@Name", playlist.Name);
+        cmd.Parameters.AddWithValue("@Description", playlist.Description ?? (object)DBNull.Value);
+
+        int rows = cmd.ExecuteNonQuery();
+
+        Console.WriteLine($"{rows} fila actualitzada.");
+
+        dbConn.Close();
+    }
+
 }
