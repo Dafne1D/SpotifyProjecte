@@ -30,6 +30,15 @@ public static class PlaylistEndpoints
             return Results.Ok(playlists);
         });
 
+        app.MapGet("/playlists/{id}", (Guid id) =>
+        {
+            Playlist? playlist = PlaylistADO.GetById(dbConn, id);
+
+            return playlist is not null
+                ? Results.Ok(playlist)
+                : Results.NotFound(new { message = $"Playlist with Id {id} not found." });
+        });
+
     }
 }
 
