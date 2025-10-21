@@ -12,6 +12,7 @@ public static class FileHandler
         foreach (IFormFile file in files)
         {
             InsertFile(dbConn, id, file);
+            tasques.Add(Task.Run(() => ExtractMetadata(file)));
         }
         Task.WaitAll(tasks.ToArray());
     }
@@ -19,7 +20,6 @@ public static class FileHandler
     private static async void InsertFile(SpotifyDBConnection dbConn, Guid id, IFormFile file)
     {
         Console.WriteLine($"PROCESSING FILE {file.Name}");
-        /* ExtractMetadata(file); */
         string filePath = await SaveFile(id, file);
 
         SongFile songFile = new SongFile
@@ -52,14 +52,14 @@ public static class FileHandler
         return filePath;
     }
 
-    /*     public static void ExtractMetadata(IFormFile file)
-        {
-            Console.WriteLine($"Extracting Metadata from file {file.FileName}");
-            Console.WriteLine($"Song Title: {file.Title}");
-            Console.WriteLine($"Artist: {file.Artist}");
-            Console.WriteLine($"Album: {file.Album}");
-            Console.WriteLine($"Duration: {file.Duration}");
-            Console.WriteLine($"Genre: {file.Genre}");
-            Console.WriteLine($"Cover art: {file.ImageUrl}");
-        } */
+    public static void ExtractMetadata(IFormFile file)
+    {
+        Console.WriteLine($"Extracting Metadata from file {file.FileName}");
+        Console.WriteLine($"Song Title: {file.Title}");
+        Console.WriteLine($"Artist: {file.Artist}");
+        Console.WriteLine($"Album: {file.Album}");
+        Console.WriteLine($"Duration: {file.Duration}");
+        Console.WriteLine($"Genre: {file.Genre}");
+        Console.WriteLine($"Cover art: {file.ImageUrl}");
+    }
 }
