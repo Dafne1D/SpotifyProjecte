@@ -12,7 +12,7 @@ public static class FileHandler
         foreach (IFormFile file in files)
         {
             InsertFile(dbConn, id, file);
-            tasques.Add(Task.Run(() => ExtractMetadata(file)));
+            tasks.Add(Task.Run(() => ExtractMetadata(file)));
         }
         Task.WaitAll(tasks.ToArray());
     }
