@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5298E4A5-AC44-4000-A97A-97DAB1F32E75}|AppSpotifyWPF\\AppSpotifyWPF.csproj|c:\\users\\dafne\\desktop\\spotifyprojecte\\appspotifywpf\\appspotifywpf\\homescreen.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5298E4A5-AC44-4000-A97A-97DAB1F32E75}|AppSpotifyWPF\\AppSpotifyWPF.csproj|solutionrelative:appspotifywpf\\homescreen.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5298E4A5-AC44-4000-A97A-97DAB1F32E75}|AppSpotifyWPF\\AppSpotifyWPF.csproj|c:\\users\\dafne\\desktop\\spotifyprojecte\\appspotifywpf\\appspotifywpf\\homescreen.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{5298E4A5-AC44-4000-A97A-97DAB1F32E75}|AppSpotifyWPF\\AppSpotifyWPF.csproj|solutionrelative:appspotifywpf\\homescreen.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5298E4A5-AC44-4000-A97A-97DAB1F32E75}|AppSpotifyWPF\\AppSpotifyWPF.csproj|c:\\users\\dafne\\desktop\\spotifyprojecte\\appspotifywpf\\appspotifywpf\\pantalles\\pagcreateuser.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5298E4A5-AC44-4000-A97A-97DAB1F32E75}|AppSpotifyWPF\\AppSpotifyWPF.csproj|solutionrelative:appspotifywpf\\pantalles\\pagcreateuser.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5298E4A5-AC44-4000-A97A-97DAB1F32E75}|AppSpotifyWPF\\AppSpotifyWPF.csproj|c:\\users\\dafne\\desktop\\spotifyprojecte\\appspotifywpf\\appspotifywpf\\pantalles\\pagcreateuser.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{5298E4A5-AC44-4000-A97A-97DAB1F32E75}|AppSpotifyWPF\\AppSpotifyWPF.csproj|solutionrelative:appspotifywpf\\pantalles\\pagcreateuser.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{5298E4A5-AC44-4000-A97A-97DAB1F32E75}|AppSpotifyWPF\\AppSpotifyWPF.csproj|c:\\users\\dafne\\desktop\\spotifyprojecte\\appspotifywpf\\appspotifywpf\\pantalles\\pagupdateuser.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5298E4A5-AC44-4000-A97A-97DAB1F32E75}|AppSpotifyWPF\\AppSpotifyWPF.csproj|solutionrelative:appspotifywpf\\pantalles\\pagupdateuser.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5298E4A5-AC44-4000-A97A-97DAB1F32E75}|AppSpotifyWPF\\AppSpotifyWPF.csproj|c:\\users\\dafne\\desktop\\spotifyprojecte\\appspotifywpf\\appspotifywpf\\pantalles\\pagreaduser.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5298E4A5-AC44-4000-A97A-97DAB1F32E75}|AppSpotifyWPF\\AppSpotifyWPF.csproj|solutionrelative:appspotifywpf\\pantalles\\pagreaduser.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5298E4A5-AC44-4000-A97A-97DAB1F32E75}|AppSpotifyWPF\\AppSpotifyWPF.csproj|c:\\users\\dafne\\desktop\\spotifyprojecte\\appspotifywpf\\appspotifywpf\\pantalles\\pagdeleteuser.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5298E4A5-AC44-4000-A97A-97DAB1F32E75}|AppSpotifyWPF\\AppSpotifyWPF.csproj|solutionrelative:appspotifywpf\\pantalles\\pagdeleteuser.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,57 +26,58 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "PagCreateUser.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\AppSpotifyWPF\\Pantalles\\PagCreateUser.xaml.cs",
-              "RelativeDocumentMoniker": "AppSpotifyWPF\\Pantalles\\PagCreateUser.xaml.cs",
-              "ToolTip": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\AppSpotifyWPF\\Pantalles\\PagCreateUser.xaml.cs",
-              "RelativeToolTip": "AppSpotifyWPF\\Pantalles\\PagCreateUser.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-16T15:38:11.69Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "HomeScreen.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\AppSpotifyWPF\\HomeScreen.xaml.cs",
-              "RelativeDocumentMoniker": "AppSpotifyWPF\\HomeScreen.xaml.cs",
-              "ToolTip": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\AppSpotifyWPF\\HomeScreen.xaml.cs",
-              "RelativeToolTip": "AppSpotifyWPF\\HomeScreen.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-16T13:52:08.693Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "HomeScreen.xaml",
-              "DocumentMoniker": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\AppSpotifyWPF\\HomeScreen.xaml",
-              "RelativeDocumentMoniker": "AppSpotifyWPF\\HomeScreen.xaml",
-              "ToolTip": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\AppSpotifyWPF\\HomeScreen.xaml",
-              "RelativeToolTip": "AppSpotifyWPF\\HomeScreen.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-10-16T15:30:00.077Z",
+              "Title": "PagUpdateUser.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\AppSpotifyWPF\\Pantalles\\PagUpdateUser.xaml.cs",
+              "RelativeDocumentMoniker": "AppSpotifyWPF\\Pantalles\\PagUpdateUser.xaml.cs",
+              "ToolTip": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\AppSpotifyWPF\\Pantalles\\PagUpdateUser.xaml.cs",
+              "RelativeToolTip": "AppSpotifyWPF\\Pantalles\\PagUpdateUser.xaml.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAACQAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T14:53:44.145Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PagReadUser.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\AppSpotifyWPF\\Pantalles\\PagReadUser.xaml.cs",
+              "RelativeDocumentMoniker": "AppSpotifyWPF\\Pantalles\\PagReadUser.xaml.cs",
+              "ToolTip": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\AppSpotifyWPF\\Pantalles\\PagReadUser.xaml.cs*",
+              "RelativeToolTip": "AppSpotifyWPF\\Pantalles\\PagReadUser.xaml.cs*",
+              "ViewState": "AgIAABQAAAAAAAAAAAAQwCIAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T14:53:39.37Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "PagCreateUser.xaml",
-              "DocumentMoniker": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\AppSpotifyWPF\\Pantalles\\PagCreateUser.xaml",
-              "RelativeDocumentMoniker": "AppSpotifyWPF\\Pantalles\\PagCreateUser.xaml",
-              "ToolTip": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\AppSpotifyWPF\\Pantalles\\PagCreateUser.xaml",
-              "RelativeToolTip": "AppSpotifyWPF\\Pantalles\\PagCreateUser.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-10-16T15:15:46.466Z",
+              "Title": "PagDeleteUser.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\AppSpotifyWPF\\Pantalles\\PagDeleteUser.xaml.cs",
+              "RelativeDocumentMoniker": "AppSpotifyWPF\\Pantalles\\PagDeleteUser.xaml.cs",
+              "ToolTip": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\AppSpotifyWPF\\Pantalles\\PagDeleteUser.xaml.cs*",
+              "RelativeToolTip": "AppSpotifyWPF\\Pantalles\\PagDeleteUser.xaml.cs*",
+              "ViewState": "AgIAABEAAAAAAAAAAAAxwCIAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T14:53:34.383Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PagCreateUser.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\AppSpotifyWPF\\Pantalles\\PagCreateUser.xaml.cs",
+              "RelativeDocumentMoniker": "AppSpotifyWPF\\Pantalles\\PagCreateUser.xaml.cs",
+              "ToolTip": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\AppSpotifyWPF\\Pantalles\\PagCreateUser.xaml.cs",
+              "RelativeToolTip": "AppSpotifyWPF\\Pantalles\\PagCreateUser.xaml.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAqwBoAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T14:45:02.314Z",
               "EditorCaption": ""
             }
           ]

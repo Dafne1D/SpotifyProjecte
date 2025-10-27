@@ -35,14 +35,13 @@ C:\Users\dafne\Desktop\SpotifyProjecte\AppSpotifyWPF\AppSpotifyWPF\obj\Debug\net
 C:\Users\dafne\Desktop\SpotifyProjecte\AppSpotifyWPF\AppSpotifyWPF\obj\Debug\net9.0-windows\AppSpotifyWPF.pdb
 C:\Users\dafne\Desktop\SpotifyProjecte\AppSpotifyWPF\AppSpotifyWPF\obj\Debug\net9.0-windows\AppSpotifyWPF.genruntimeconfig.cache
 C:\Users\dafne\Desktop\SpotifyProjecte\AppSpotifyWPF\AppSpotifyWPF\obj\Debug\net9.0-windows\ref\AppSpotifyWPF.dll
+C:\Users\dafne\Desktop\SpotifyProjecte\AppSpotifyWPF\AppSpotifyWPF\obj\Debug\net9.0-windows\HomeScreen.baml
+C:\Users\dafne\Desktop\SpotifyProjecte\AppSpotifyWPF\AppSpotifyWPF\obj\Debug\net9.0-windows\HomeScreen.g.cs
 C:\Users\dafne\Desktop\SpotifyProjecte\AppSpotifyWPF\AppSpotifyWPF\obj\Debug\net9.0-windows\Pantalles\PagCreateUser.g.cs
 C:\Users\dafne\Desktop\SpotifyProjecte\AppSpotifyWPF\AppSpotifyWPF\obj\Debug\net9.0-windows\Pantalles\PagDeleteUser.g.cs
 C:\Users\dafne\Desktop\SpotifyProjecte\AppSpotifyWPF\AppSpotifyWPF\obj\Debug\net9.0-windows\Pantalles\PagReadUser.g.cs
 C:\Users\dafne\Desktop\SpotifyProjecte\AppSpotifyWPF\AppSpotifyWPF\obj\Debug\net9.0-windows\Pantalles\PagUpdateUser.g.cs
-C:\Users\dafne\Desktop\SpotifyProjecte\AppSpotifyWPF\AppSpotifyWPF\obj\Debug\net9.0-windows\AppSpotifyWPF_MarkupCompile.lref
 C:\Users\dafne\Desktop\SpotifyProjecte\AppSpotifyWPF\AppSpotifyWPF\obj\Debug\net9.0-windows\Pantalles\PagCreateUser.baml
 C:\Users\dafne\Desktop\SpotifyProjecte\AppSpotifyWPF\AppSpotifyWPF\obj\Debug\net9.0-windows\Pantalles\PagDeleteUser.baml
 C:\Users\dafne\Desktop\SpotifyProjecte\AppSpotifyWPF\AppSpotifyWPF\obj\Debug\net9.0-windows\Pantalles\PagReadUser.baml
 C:\Users\dafne\Desktop\SpotifyProjecte\AppSpotifyWPF\AppSpotifyWPF\obj\Debug\net9.0-windows\Pantalles\PagUpdateUser.baml
-C:\Users\dafne\Desktop\SpotifyProjecte\AppSpotifyWPF\AppSpotifyWPF\obj\Debug\net9.0-windows\HomeScreen.baml
-C:\Users\dafne\Desktop\SpotifyProjecte\AppSpotifyWPF\AppSpotifyWPF\obj\Debug\net9.0-windows\HomeScreen.g.cs
