@@ -5,6 +5,7 @@ using SpotifyAPI.Repository;
 using SpotifyAPI.Model;
 using SpotifyAPI.Services;
 using SpotifyAPI.Utils;
+using SpotifyAPI.DTO;
 
 
 namespace SpotifyAPI.EndPoints;
@@ -113,5 +114,3 @@ public static class SongEndpoints
         });
     }
 }
-
-public record SongRequest(string Title, string Artist, string Album, int Duration, string Genre, string ImageUrl);
