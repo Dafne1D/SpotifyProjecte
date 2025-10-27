@@ -5,7 +5,8 @@ using SpotifyAPI.Repository;
 using SpotifyAPI.Model;
 using SpotifyAPI.Services;
 using SpotifyAPI.Utils;
-
+using SpotifyAPI.DTO;
+using System.Collections.Generic;
 
 namespace SpotifyAPI.EndPoints;
 
@@ -29,14 +30,19 @@ public static class SongEndpoints
 
             SongADO.Insert(dbConn, song);
 
-            return Results.Created($"/songs/{song.Id}", song);
+            return Results.Created($"/songs/{song.Id}", SongResponse.FromSong(song));
         });
 
         // GET /songs
         app.MapGet("/songs", () =>
         {
             List<Song> songs = SongADO.GetAll(dbConn);
-            return Results.Ok(songs);
+            List<SongResponse> songResponses = new List<SongResponse>();
+            foreach (Song song in songs)
+            {
+                songResponses.Add(SongResponse.FromSong(song));
+            }
+            return Results.Ok(songResponses);
         });
 
         // GET /songs Song by id
@@ -45,7 +51,7 @@ public static class SongEndpoints
             Song? song = SongADO.GetById(dbConn, id);
 
             return song is not null
-                ? Results.Ok(song)
+                ? Results.Ok(SongResponse.FromSong(song))
                 : Results.NotFound(new { message = $"Song with Id {id} not found." });
         });
 
@@ -72,7 +78,7 @@ public static class SongEndpoints
 
             SongADO.Update(dbConn, updated);
 
-            return Results.Ok(updated);
+            return Results.Ok(SongResponse.FromSong(updated));
         });
 
         // DELETE /songs by id
@@ -113,5 +119,3 @@ public static class SongEndpoints
         });
     }
 }
-
-public record SongRequest(string Title, string Artist, string Album, int Duration, string Genre, string ImageUrl);

@@ -18,11 +18,22 @@ namespace AppSpotifyWPF.Pantalles
     /// <summary>
     /// Lógica de interacción para PagUpdate.xaml
     /// </summary>
-    public partial class PagUpdate : Page
+    public partial class PagUpdateUser : Page
     {
-        public PagUpdate()
+        public PagUpdateUser()
         {
             InitializeComponent();
+        }
+        private void BackToHome_Click(object sender, RoutedEventArgs e)
+        {
+            // Obtener la ventana principal (HomeScreen)
+            Window parentWindow = Window.GetWindow(this);
+            if (parentWindow is HomeScreen home)
+            {
+                // Oculta el Frame y vuelve a mostrar el contenido principal
+                home.MainFrame.Visibility = Visibility.Collapsed;
+                home.HomeContent.Visibility = Visibility.Visible;
+            }
         }
     }
 }
