@@ -11,8 +11,7 @@ public static class FileHandler
         List<Task> tasks = new List<Task>();
         foreach (IFormFile file in files)
         {
-            InsertFile(dbConn, id, file);
-            tasks.Add(Task.Run(() => ExtractMetadata(file)));
+            tasks.Add(Task.Run(() => InsertFile(dbConn, id, file)));
         }
         Task.WaitAll(tasks.ToArray());
     }
@@ -32,6 +31,8 @@ public static class FileHandler
         SongFileADO.Insert(dbConn, songFile);
 
         Console.WriteLine($"FILE {file.Name} FINISHED PROCESSING");
+
+        ExtractMetadata(filePath);
     }
 
     private static async Task<string> SaveFile(Guid id, IFormFile file)
@@ -52,14 +53,16 @@ public static class FileHandler
         return filePath;
     }
 
-    public static void ExtractMetadata(IFormFile file)
+    public static void ExtractMetadata(string filePath)
     {
-        Console.WriteLine($"Extracting Metadata from file {file.FileName}");
-        Console.WriteLine($"Song Title: {file.Title}");
-        Console.WriteLine($"Artist: {file.Artist}");
-        Console.WriteLine($"Album: {file.Album}");
-        Console.WriteLine($"Duration: {file.Duration}");
-        Console.WriteLine($"Genre: {file.Genre}");
-        Console.WriteLine($"Cover art: {file.ImageUrl}");
+        TagLib.File tagFile = TagLib.File.Create(filePath);
+
+        Console.WriteLine($"Extracting Metadata from file {filePath}");
+        Console.WriteLine($"Song Title: {tagFile.Tag.Title ?? ""}");
+        Console.WriteLine($"Artist: {tagFile.Tag.Performers}");
+        Console.WriteLine($"Album: {tagFile.Tag.Album ?? ""}");
+        Console.WriteLine($"Duration: {tagFile.Properties.Duration}");
+        Console.WriteLine($"Genre: {tagFile.Tag.Genres}");
+        Console.WriteLine($"Cover art: {tagFile.Tag.Pictures}");
     }
 }
