@@ -38,6 +38,7 @@ Crearem les carpetes:
 - **Model:** Les classes per fer els objectes *(Users, Songs, SongFiles...)*
 - **Repository:** Les classes ADO per fer operacions *CRUD* sobre la base de dades
 - **EndPoints:** Les definicions dels EndPoints de l'API  
+- **DTO:** Les definicions dels Request i els Response dels EndPoints, per poder tenir control sobre com es fa la conversió
 
 ## Rols
 - **Usuaris:**
