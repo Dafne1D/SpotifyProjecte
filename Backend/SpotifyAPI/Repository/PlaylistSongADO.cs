@@ -25,4 +25,20 @@ static class PlaylistSongADO
 
         dbConn.Close();
     }
+
+    public static bool Delete(SpotifyDBConnection dbConn, Guid id)
+    {
+        dbConn.Open();
+
+        string sql = @"DELETE FROM PlaylistSongs WHERE Id = @Id";
+
+        using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+        cmd.Parameters.AddWithValue("@Id", id);
+
+        int rows = cmd.ExecuteNonQuery();
+
+        dbConn.Close();
+
+        return rows > 0;
+    }
 }
