@@ -57,12 +57,17 @@ public static class FileHandler
     {
         TagLib.File tagFile = TagLib.File.Create(filePath);
 
+        string songTitle = tagFile.Tag.Title ?? "Unnamed song";
+        string songArtists = tagFile.Tag.Performers.Length > 0 ? string.Join(", ", tagFile.Tag.Performers) : "Unknown Artist";
+        string songAlbum = tagFile.Tag.Album ?? "Unknown album";
+        string songDuration = tagFile.Properties.Duration.ToString();
+        string songGenres = tagFile.Tag.Genres.Length > 0 ? string.Join(", ", tagFile.Tag.Genres) : "Unknown Genre";
+
         Console.WriteLine($"Extracting Metadata from file {filePath}");
-        Console.WriteLine($"Song Title: {tagFile.Tag.Title ?? ""}");
-        Console.WriteLine($"Artist: {tagFile.Tag.Performers}");
-        Console.WriteLine($"Album: {tagFile.Tag.Album ?? ""}");
-        Console.WriteLine($"Duration: {tagFile.Properties.Duration}");
-        Console.WriteLine($"Genre: {tagFile.Tag.Genres}");
-        Console.WriteLine($"Cover art: {tagFile.Tag.Pictures}");
+        Console.WriteLine($"Song Title: {songTitle}");
+        Console.WriteLine($"Artists: {songArtists}");
+        Console.WriteLine($"Album: {songAlbum}");
+        Console.WriteLine($"Duration: {songDuration}");
+        Console.WriteLine($"Genres: {songGenres}");
     }
 }
