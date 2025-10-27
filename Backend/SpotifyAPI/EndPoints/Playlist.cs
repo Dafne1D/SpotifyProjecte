@@ -79,7 +79,8 @@ public static class PlaylistEndpoints
             PlaylistSongADO.Insert(dbConn, playlistsong);
             return Results.Created($"/playlists/{playlistsong.Id}", playlistsong);
         });
-        // DELETE /playlists/{id}/remove
+        // DELETE /playlists/{playlistId}/remove/{songId}
+        app.MapDelete("/playlistSong/{id}", (Guid id) => PlaylistSongADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
     }
 }
 
