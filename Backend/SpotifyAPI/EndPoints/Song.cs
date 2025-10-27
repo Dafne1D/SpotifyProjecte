@@ -37,7 +37,7 @@ public static class SongEndpoints
         app.MapGet("/songs", () =>
         {
             List<Song> songs = SongADO.GetAll(dbConn);
-            List<SongResponse> songResponses = new List<ProductResponse>();
+            List<SongResponse> songResponses = new List<SongResponse>();
             foreach (Song song in songs)
             {
                 songResponses.Add(SongResponse.FromSong(song));
