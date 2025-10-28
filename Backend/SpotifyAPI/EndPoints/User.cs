@@ -82,6 +82,9 @@ public static class UserEndpoints
             UserRoleADO.Insert(dbConn, userRole);
             return Results.Created($"/users/{userRole.Id}", userRole);
         });
+
+        // DELETE /users/{userId}/roles/{roleId}
+        app.MapDelete("/users/{userId}/roles/{roleId}", (Guid userId, Guid roleId) => UserRoleADO.Delete(dbConn, userId, roleId) ? Results.NoContent() : Results.NotFound());
     }
 
 }
