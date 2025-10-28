@@ -68,7 +68,7 @@ public static class RoleEndpoints
             return Results.Ok(RoleResponse.FromRole(updated));
         });
 
-        // DELETE /role
+        // DELETE /roles
         app.MapDelete("/roles/{id}", (Guid id) => RoleADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
     }
 }

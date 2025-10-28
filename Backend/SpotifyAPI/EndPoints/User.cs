@@ -68,8 +68,22 @@ public static class UserEndpoints
 
         // DELETE /users/{id}
         app.MapDelete("/users/{id}", (Guid id) => UserADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
+
+
+        // POST /users/{userId}/roles/{roleId}
+        app.MapPost("/users/{userId}/role/{roleId}", (Guid userId, Guid roleId) =>
+        {
+            UserRole userRole = new UserRole
+            {
+                Id = Guid.NewGuid(),
+                UserId = userId,
+                RoleId = roleId
+            };
+            UserRoleADO.Insert(dbConn, userRole);
+            return Results.Created($"/users/{userRole.Id}", userRole);
+        });
     }
-    
+
 }
 
 public record UserRequest(string Username, string Email, string Password, string Salt);
