@@ -73,4 +73,25 @@ static class RoleADO
         dbConn.Close();
         return role;
     }
+
+    public static void Update(SpotifyDBConnection dbConn, Role role)
+    {
+        dbConn.Open();
+
+        string sql = @"UPDATE Roles SET
+                    Name = @Name,
+                    Description = @Description
+                    WHERE Id = @Id";
+
+        using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+        cmd.Parameters.AddWithValue("@Id", role.Id);
+        cmd.Parameters.AddWithValue("@Name", role.Name);
+        cmd.Parameters.AddWithValue("@Description", role.Description);
+
+        int rows = cmd.ExecuteNonQuery();
+
+        Console.WriteLine($"{rows} files actualitzades");
+
+        dbConn.Close();
+    }
 }
