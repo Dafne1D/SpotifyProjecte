@@ -7,6 +7,24 @@ namespace SpotifyAPI.Repository;
 
 static class RoleADO
 {
+    public static void Insert(SpotifyDBConnection dbConn, Role role)
+    {
+        dbConn.Open();
+
+        string sql = @"INSERT INTO Roles (Id, Name, Description)
+                    VALUES (@Id, @Name, @Description)";
+
+        using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+        cmd.Parameters.AddWithValue("@Id", role.Id);
+        cmd.Parameters.AddWithValue("@Name", role.Name);
+        cmd.Parameters.AddWithValue("@Description", role.Description);
+
+        int rows = cmd.ExecuteNonQuery();
+        Console.WriteLine($"{rows} fila inserida.");
+
+        dbConn.Close();
+    }
+
     public static List<Role> GetAll(SpotifyDBConnection dbConn)
     {
         List<Role> roles = new();
