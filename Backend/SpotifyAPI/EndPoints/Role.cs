@@ -45,5 +45,27 @@ public static class RoleEndpoints
                 ? Results.Ok(RoleResponse.FromRole(role))
                 : Results.NotFound(new { message = $"Role with Id {id} not found." });
         });
+
+        // PUT /roles
+        app.MapPut("/roles/{id}", (Guid id, RoleRequest req) =>
+        {
+            Role? existing = RoleADO.GetById(dbConn, id);
+
+            if (existing == null)
+            {
+                return Results.NotFound();
+            }
+
+            Role updated = new Role
+            {
+                Id = id,
+                Name = req.Name,
+                Description = req.Description
+            };
+
+            RoleADO.Update(dbConn, updated);
+
+            return Results.Ok(RoleResponse.FromRole(updated));
+        });
     }
 }
