@@ -38,6 +38,7 @@ Crearem les carpetes:
 - **Model:** Les classes per fer els objectes *(Users, Songs, SongFiles...)*
 - **Repository:** Les classes ADO per fer operacions *CRUD* sobre la base de dades
 - **EndPoints:** Les definicions dels EndPoints de l'API  
+- **DTO:** Les definicions dels Request i els Response dels EndPoints, per poder tenir control sobre com es fa la conversió
 
 ## Rols
 - **Usuaris:**
@@ -49,7 +50,9 @@ Crearem les carpetes:
   - Podrá estar en *N* Rols
 
 **Coses a tenir en compte:**  
-- Es podrá afegir i treure rols, i afegir-li i treura-li permisos, però no es podrán crear ni borrar permisos.
+- Es podrá editar rols, pero no afegir ni treure.
+- Als rols s'els hi podrá assignar permisos
+- No es podrán crear ni borrar permisos.
 - Es fará servir el sistema de: Tot prohibit, excepte el que es permeti.
 
 | Rols | Veure Cançons | Gestionar Cançons | Veure Playlists | Gestionar Playlists | Veure Usuaris | Gestionar Usuaris |

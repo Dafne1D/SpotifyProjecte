@@ -79,10 +79,10 @@ public static class PlaylistEndpoints
             PlaylistSongADO.Insert(dbConn, playlistsong);
             return Results.Created($"/playlists/{playlistsong.Id}", playlistsong);
         });
-        // DELETE /playlists/{playlistId}/remove/{songId}
-        app.MapDelete("/playlistSong/{id}", (Guid id) => PlaylistSongADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
+
+        // DELETE /playlists/{playlistId}/song/{songId}
+        app.MapDelete("/playlists/{playlistId}/song/{songId}", (Guid playlistId, Guid songId) => PlaylistSongADO.Delete(dbConn, playlistId, songId) ? Results.NoContent() : Results.NotFound());
     }
 }
 
 public record PlaylistRequest(Guid UserId, string Name, string Description);
-public record PlaylistSongRequest(Guid PlaylistId, Guid SongId);
