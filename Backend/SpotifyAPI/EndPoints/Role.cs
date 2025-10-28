@@ -9,6 +9,21 @@ public static class RoleEndpoints
 {
     public static void MapRoleEndpoints(this WebApplication app, SpotifyDBConnection dbConn)
     {
+        // POST /roles
+        app.MapPost("/roles", (RoleRequest req) =>
+        {
+            Role role = new Role
+            {
+                Id = Guid.NewGuid(),
+                Name = req.Name,
+                Description = req.Description
+            };
+
+            RoleADO.Insert(dbConn, role);
+
+            return Results.Created($"/roles/{role.Id}", RoleResponse.FromRole(role));
+        });
+
         // GET /roles
         app.MapGet("/roles", () =>
         {
