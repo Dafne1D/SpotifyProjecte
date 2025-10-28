@@ -129,7 +129,7 @@ namespace AppSpotifyWPF.Screens.Users
 
             try
             {
-                var updatedUser = await _apiService.PostAsync<User>("/users/{id}", _selectedUser);
+                var updatedUser = await _apiService.PostAsync<User>("/users", _selectedUser);
                 MessageBox.Show($"User updated! ID: {updatedUser.Id}");
                 await LoadUsers();
                 _selectedUser = null;
