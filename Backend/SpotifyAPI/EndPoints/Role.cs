@@ -35,5 +35,15 @@ public static class RoleEndpoints
             }
             return Results.Ok(roleResponses);
         });
+
+        // GET /roles by id
+        app.MapGet("/roles/{id}", (Guid id) =>
+        {
+            Role? role = RoleADO.GetById(dbConn, id);
+
+            return role is not null
+                ? Results.Ok(RoleResponse.FromRole(role))
+                : Results.NotFound(new { message = $"Role with Id {id} not found." });
+        });
     }
 }
