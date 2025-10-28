@@ -70,7 +70,7 @@ public static class UserEndpoints
         app.MapDelete("/users/{id}", (Guid id) => UserADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
 
 
-        // POST /users/{userId}/roles/{roleId}
+        // POST /users/{userId}/role/{roleId}
         app.MapPost("/users/{userId}/role/{roleId}", (Guid userId, Guid roleId) =>
         {
             UserRole userRole = new UserRole
@@ -83,8 +83,8 @@ public static class UserEndpoints
             return Results.Created($"/users/{userRole.Id}", userRole);
         });
 
-        // DELETE /users/{userId}/roles/{roleId}
-        app.MapDelete("/users/{userId}/roles/{roleId}", (Guid userId, Guid roleId) => UserRoleADO.Delete(dbConn, userId, roleId) ? Results.NoContent() : Results.NotFound());
+        // DELETE /users/{userId}/role/{roleId}
+        app.MapDelete("/users/{userId}/role/{roleId}", (Guid userId, Guid roleId) => UserRoleADO.Delete(dbConn, userId, roleId) ? Results.NoContent() : Results.NotFound());
     }
 
 }
