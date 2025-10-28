@@ -24,4 +24,23 @@ static class UserRoleADO
 
         dbConn.Close();
     }
+
+    public static bool Delete(SpotifyDBConnection dbConn, Guid userId, Guid roleId)
+    {
+        dbConn.Open();
+
+        string sql = @"DELETE FROM UserRoles
+                            WHERE UserId = @UserId
+                            AND RoleId = @RoleId";
+
+        using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+        cmd.Parameters.AddWithValue("@UserId", userId);
+        cmd.Parameters.AddWithValue("@RoleId", roleId);
+
+        int rows = cmd.ExecuteNonQuery();
+
+        dbConn.Close();
+
+        return rows > 0;
+    }
 }
