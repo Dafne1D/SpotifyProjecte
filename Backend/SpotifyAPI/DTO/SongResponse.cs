@@ -1,7 +1,5 @@
 using SpotifyAPI.Model;
 
-using System;
-
 namespace SpotifyAPI.DTO;
 
 public record SongResponse(Guid Id, string Title, string Artist, string Album, int Duration, string Genre, string ImageUrl)
