@@ -4,7 +4,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace AppSpotifyWPF.Pantalles
+namespace AppSpotifyWPF.Screens.Users
 {
     public partial class PagCreateUser : Page
     {
@@ -24,7 +24,7 @@ namespace AppSpotifyWPF.Pantalles
 
             if (password != repeatPassword)
             {
-                MessageBox.Show("Les contrasenyes no coincideixen!");
+                MessageBox.Show("The passwords do not match!");
                 return;
             }
 
@@ -38,11 +38,11 @@ namespace AppSpotifyWPF.Pantalles
             try
             {
                 var createdUser = await _apiService.PostAsync<User>("/users", newUser);
-                MessageBox.Show($"Usuari creat correctament! ID: {createdUser.Id}");
+                MessageBox.Show($"User created! ID: {createdUser.Id}");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al crear usuari: {ex.Message}");
+                MessageBox.Show($"Error creating user: {ex.Message}");
             }
         }
 

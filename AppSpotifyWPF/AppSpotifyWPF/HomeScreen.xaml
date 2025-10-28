@@ -13,7 +13,7 @@
                 <StackPanel Margin="40">
 
                     <!-- Título principal -->
-                    <TextBlock Text="Pàgina Principal"
+                    <TextBlock Text="Home Screen"
                                FontSize="28"
                                FontWeight="Bold"
                                Foreground="Black"
@@ -22,7 +22,7 @@
                     <!-- USERS MANAGEMENT -->
                     <Border Background="White" CornerRadius="10" Padding="20" Margin="0,0,0,25">
                         <StackPanel>
-                            <TextBlock Text="Manteniment d'usuaris"
+                            <TextBlock Text="Users Managment"
                                        FontWeight="Bold"
                                        FontSize="16"
                                        Margin="0,0,0,10" />
@@ -38,16 +38,16 @@
                                         Background="White"
                                         BorderBrush="#E0E0E0"
                                         BorderThickness="1"
-                                        Click="butCrearUser_Click">
+                                        Click="butCrearUser_Click" HorizontalAlignment="Left" Width="155">
                                     <StackPanel HorizontalAlignment="Center">
                                         <TextBlock FontFamily="Segoe MDL2 Assets"
                                                    Text="&#xE710;"
                                                    FontSize="36"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Crear"
+                                        <TextBlock Text="Create"
                                                    FontWeight="Bold"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Afegeix usuari"
+                                        <TextBlock Text="Add user"
                                                    FontSize="12"
                                                    Foreground="Gray"
                                                    HorizontalAlignment="Center"/>
@@ -66,10 +66,10 @@
                                                    Text="&#xE716;"
                                                    FontSize="36"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Llegir"
+                                        <TextBlock Text="Read"
                                                    FontWeight="Bold"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Mirar detalls"
+                                        <TextBlock Text="See details"
                                                    FontSize="12"
                                                    Foreground="Gray"
                                                    HorizontalAlignment="Center"/>
@@ -88,10 +88,10 @@
                                                    Text="&#xE70F;"
                                                    FontSize="36"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Actualitzar"
+                                        <TextBlock Text="Update"
                                                    FontWeight="Bold"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Modifica informació"
+                                        <TextBlock Text="Modify information"
                                                    FontSize="12"
                                                    Foreground="Gray"
                                                    HorizontalAlignment="Center"/>
@@ -110,10 +110,10 @@
                                                    Text="&#xE74D;"
                                                    FontSize="36"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Elimina"
+                                        <TextBlock Text="Delete"
                                                    FontWeight="Bold"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Elimina usuari"
+                                        <TextBlock Text="Delete user"
                                                    FontSize="12"
                                                    Foreground="Gray"
                                                    HorizontalAlignment="Center"/>
@@ -128,7 +128,7 @@
                     <!-- SONGS MANAGEMENT -->
                     <Border Background="White" CornerRadius="10" Padding="20" Margin="0,0,0,25">
                         <StackPanel>
-                            <TextBlock Text="Manteniment de cançons"
+                            <TextBlock Text="Songs Managemnt"
                                        FontWeight="Bold"
                                        FontSize="16"
                                        Margin="0,0,0,10" />
@@ -137,16 +137,22 @@
                                          Margin="0,10,0,0"
                                          HorizontalAlignment="Center"
                                          Width="700">
-                                <Button Margin="10" Padding="20" Background="White" BorderBrush="#E0E0E0" BorderThickness="1">
+                                <Button x:Name="butCrearSong"
+                                        Margin="10" 
+                                        Padding="20" 
+                                        Background="White" 
+                                        BorderBrush="#E0E0E0" 
+                                        BorderThickness="1"
+                                        Click="butCrearSong_Click">
                                     <StackPanel HorizontalAlignment="Center">
                                         <TextBlock FontFamily="Segoe MDL2 Assets"
                                                    Text="&#xE189;"
                                                    FontSize="36"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Crear"
+                                        <TextBlock Text="Create"
                                                    FontWeight="Bold"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Afageix una cançó"
+                                        <TextBlock Text="Add a song"
                                                    FontSize="12"
                                                    Foreground="Gray"
                                                    HorizontalAlignment="Center"/>
@@ -159,10 +165,10 @@
                                                    Text="&#xE179;"
                                                    FontSize="36"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Llegeix"
+                                        <TextBlock Text="Read"
                                                    FontWeight="Bold"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Mira detalls"
+                                        <TextBlock Text="See details"
                                                    FontSize="12"
                                                    Foreground="Gray"
                                                    HorizontalAlignment="Center"/>
@@ -175,10 +181,10 @@
                                                    Text="&#xE70F;"
                                                    FontSize="36"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Actualitza"
+                                        <TextBlock Text="Update"
                                                    FontWeight="Bold"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Modifica informació"
+                                        <TextBlock Text="Update information"
                                                    FontSize="12"
                                                    Foreground="Gray"
                                                    HorizontalAlignment="Center"/>
@@ -191,10 +197,10 @@
                                                    Text="&#xE74D;"
                                                    FontSize="36"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Elimina"
+                                        <TextBlock Text="Delete"
                                                    FontWeight="Bold"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Elimina una cançó"
+                                        <TextBlock Text="Delete song"
                                                    FontSize="12"
                                                    Foreground="Gray"
                                                    HorizontalAlignment="Center"/>
@@ -208,7 +214,7 @@
                     <!-- PLAYLISTS MANAGEMENT -->
                     <Border Background="White" CornerRadius="10" Padding="20">
                         <StackPanel>
-                            <TextBlock Text="Manteniment de Playlists"
+                            <TextBlock Text="Playlists Managment"
                                        FontWeight="Bold"
                                        FontSize="16"
                                        Margin="0,0,0,10"/>
@@ -224,10 +230,10 @@
                                                    Text="&#xE710;"
                                                    FontSize="36"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Crear"
+                                        <TextBlock Text="Create"
                                                    FontWeight="Bold"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Afageix una playlist"
+                                        <TextBlock Text="Add playlist"
                                                    FontSize="12"
                                                    Foreground="Gray"
                                                    HorizontalAlignment="Center"/>
@@ -240,10 +246,10 @@
                                                    Text="&#xE179;"
                                                    FontSize="36"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Llegeix"
+                                        <TextBlock Text="Read"
                                                    FontWeight="Bold"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Mira detalls"
+                                        <TextBlock Text="See deatils"
                                                    FontSize="12"
                                                    Foreground="Gray"
                                                    HorizontalAlignment="Center"/>
@@ -256,10 +262,10 @@
                                                    Text="&#xE70F;"
                                                    FontSize="36"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Actualitza"
+                                        <TextBlock Text="Update"
                                                    FontWeight="Bold"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Modifica la playlist"
+                                        <TextBlock Text="Update playlist"
                                                    FontSize="12"
                                                    Foreground="Gray"
                                                    HorizontalAlignment="Center"/>
@@ -272,10 +278,10 @@
                                                    Text="&#xE74D;"
                                                    FontSize="36"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Elimina"
+                                        <TextBlock Text="Delete"
                                                    FontWeight="Bold"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Elimina la playlist"
+                                        <TextBlock Text="Deletes playlist"
                                                    FontSize="12"
                                                    Foreground="Gray"
                                                    HorizontalAlignment="Center"/>

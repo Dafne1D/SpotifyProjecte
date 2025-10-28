@@ -1,13 +1,6 @@
-﻿using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using AppSpotifyWPF.Screens.Users;
+using AppSpotifyWPF.Screens.Songs;
 
 namespace AppSpotifyWPF
 {
@@ -22,29 +15,35 @@ namespace AppSpotifyWPF
         {
             HomeContent.Visibility = Visibility.Collapsed;
             MainFrame.Visibility = Visibility.Visible;
-            MainFrame.Navigate(new Pantalles.PagCreateUser());
+            MainFrame.Navigate(new PagCreateUser());
         }
 
         private void butReadUser_Click(object sender, RoutedEventArgs e)
         {
             HomeContent.Visibility = Visibility.Collapsed;
             MainFrame.Visibility = Visibility.Visible;
-            MainFrame.Navigate(new Pantalles.PagReadUser());
+            MainFrame.Navigate(new PagReadUser());
         }
 
         private void butUpdateUser_Click(object sender, RoutedEventArgs e)
         {
             HomeContent.Visibility = Visibility.Collapsed;
             MainFrame.Visibility = Visibility.Visible;
-            MainFrame.Navigate(new Pantalles.PagUpdateUser());
+            MainFrame.Navigate(new PagUpdateUser());
         }
 
         private void butDeleteUser_Click(object sender, RoutedEventArgs e)
         {
             HomeContent.Visibility = Visibility.Collapsed;
             MainFrame.Visibility = Visibility.Visible;
-            MainFrame.Navigate(new Pantalles.PagDeleteUser());
+            MainFrame.Navigate(new PagDeleteUser());
         }
 
+        private void butCrearSong_Click(object sender, RoutedEventArgs e)
+        {
+            HomeContent.Visibility = Visibility.Collapsed;
+            MainFrame.Visibility = Visibility.Visible;
+            MainFrame.Navigate(new PagCreateSong());
+        }
     }
 }
