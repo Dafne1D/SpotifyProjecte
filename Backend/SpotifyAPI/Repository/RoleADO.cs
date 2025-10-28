@@ -1,4 +1,7 @@
+using Microsoft.Data.SqlClient;
+
 using SpotifyAPI.Model;
+using SpotifyAPI.Services;
 
 namespace SpotifyAPI.Repository;
 
