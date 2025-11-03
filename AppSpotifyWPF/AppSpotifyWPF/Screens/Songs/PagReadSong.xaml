@@ -1,12 +1,12 @@
-﻿<Page x:Class="AppSpotifyWPF.Screens.Songs.PagDeleteSong"
+﻿<Page x:Class="AppSpotifyWPF.Screens.Songs.PagReadSong"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      Title="PagReadUser"
+      Title="PagReadSong"
       Background="#F5F6FA">
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Margin="40">
-            <TextBlock Text="Delete song" FontSize="22" FontWeight="Bold" Margin="0,0,0,20"/>
+            <TextBlock Text="Song Searcher" FontSize="22" FontWeight="Bold" Margin="0,0,0,20"/>
 
             <!-- Search bar -->
             <DockPanel Margin="0,0,0,30">
@@ -16,32 +16,19 @@
                          VerticalContentAlignment="Center"/>
             </DockPanel>
 
-            <WrapPanel x:Name="SongsWrap"
-                       HorizontalAlignment="Left"
-                       Margin="0,0,0,20"/>
-
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Center"
-                        Margin="0,0,0,20">
-
-                <Button Content="SEARCH"
-                    Background="ForestGreen"
+            <!-- Load users -->
+            <Button Content="Load"
+                    Background="#4CAF50"
                     Foreground="White"
                     Width="150"
                     Height="35"
                     Click="LoadSongs_Click"
-                    Margin="0,0,100,0"
-                />
+                    Margin="0,0,0,20"/>
 
-                <Button Content="DELETE"
-                    Background="Red"
-                    Foreground="White"
-                    Width="150"
-                    Height="35"
-                    Click="DeleteSong_Click"
-                />
-            </StackPanel>
-
+            <!-- Songs grid -->
+            <WrapPanel x:Name="SongsWrap"
+                       HorizontalAlignment="Left"
+                       Margin="0,0,0,20"/>
 
             <Button Content="Back to Home"
                     Click="BackToHome_Click"

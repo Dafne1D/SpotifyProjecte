@@ -159,7 +159,7 @@
                                     </StackPanel>
                                 </Button>
 
-                                <Button Margin="10" Padding="20" Background="White" BorderBrush="#E0E0E0" BorderThickness="1">
+                                <Button Margin="10,0,0,0" Padding="20" Background="White" BorderBrush="#E0E0E0" BorderThickness="1" HorizontalAlignment="Left" Width="155" Click="Button_Click">
                                     <StackPanel HorizontalAlignment="Center">
                                         <TextBlock FontFamily="Segoe MDL2 Assets"
                                                    Text="&#xE179;"
@@ -191,7 +191,7 @@
                                     </StackPanel>
                                 </Button>
 
-                                <Button Margin="10" Padding="20" Background="White" BorderBrush="#E0E0E0" BorderThickness="1">
+                                <Button Margin="10" Padding="20" Background="White" BorderBrush="#E0E0E0" BorderThickness="1" Click="Button_Click_1">
                                     <StackPanel HorizontalAlignment="Center">
                                         <TextBlock FontFamily="Segoe MDL2 Assets"
                                                    Text="&#xE74D;"

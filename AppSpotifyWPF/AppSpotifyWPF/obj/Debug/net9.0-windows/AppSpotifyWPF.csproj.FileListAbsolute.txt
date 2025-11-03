@@ -49,3 +49,5 @@ C:\Users\dafne\Desktop\SpotifyProjecte\AppSpotifyWPF\AppSpotifyWPF\obj\Debug\net
 C:\Users\dafne\Desktop\SpotifyProjecte\AppSpotifyWPF\AppSpotifyWPF\obj\Debug\net9.0-windows\Screens\Users\PagDeleteUser.g.cs
 C:\Users\dafne\Desktop\SpotifyProjecte\AppSpotifyWPF\AppSpotifyWPF\obj\Debug\net9.0-windows\Screens\Users\PagReadUser.g.cs
 C:\Users\dafne\Desktop\SpotifyProjecte\AppSpotifyWPF\AppSpotifyWPF\obj\Debug\net9.0-windows\Screens\Users\PagUpdateUser.g.cs
+C:\Users\dafne\Desktop\SpotifyProjecte\AppSpotifyWPF\AppSpotifyWPF\obj\Debug\net9.0-windows\Screens\Songs\PagReadSong.baml
+C:\Users\dafne\Desktop\SpotifyProjecte\AppSpotifyWPF\AppSpotifyWPF\obj\Debug\net9.0-windows\Screens\Songs\PagReadSong.g.cs

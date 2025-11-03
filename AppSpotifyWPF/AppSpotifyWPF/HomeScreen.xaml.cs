@@ -45,5 +45,19 @@ namespace AppSpotifyWPF
             MainFrame.Visibility = Visibility.Visible;
             MainFrame.Navigate(new PagCreateSong());
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            HomeContent.Visibility = Visibility.Collapsed;
+            MainFrame.Visibility = Visibility.Visible;
+            MainFrame.Navigate(new PagReadSong());
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            HomeContent.Visibility = Visibility.Collapsed;
+            MainFrame.Visibility = Visibility.Visible;
+            MainFrame.Navigate(new PagDeleteSong());
+        }
     }
 }
