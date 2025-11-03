@@ -54,8 +54,17 @@ namespace AppSpotifyWPF.Screens.Songs
             {
                 MessageBox.Show($"Error creating song: {ex.Message}");
             }
+            ClearBoxes();
         }
 
+        private void ClearBoxes()
+        {
+            txtName.Clear();
+            txtArtist.Clear();
+            txtAlbum.Clear();
+            txtDuration.Clear();
+            txtGenre.Clear();
+        }
         private void BackToHome_Click(object sender, RoutedEventArgs e)
         {
             Window parentWindow = Window.GetWindow(this);

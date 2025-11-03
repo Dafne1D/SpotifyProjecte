@@ -44,8 +44,16 @@ namespace AppSpotifyWPF.Screens.Users
             {
                 MessageBox.Show($"Error creating user: {ex.Message}");
             }
+            ClearBoxes();
         }
 
+        private void ClearBoxes()
+        {
+            txtName.Clear();
+            txtEmail.Clear();
+            txtPassword.Clear();
+            txtRepeatPassword.Clear();
+        }
         private void BackToHome_Click(object sender, RoutedEventArgs e)
         {
             Window parentWindow = Window.GetWindow(this);

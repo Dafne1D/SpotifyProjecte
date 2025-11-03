@@ -138,6 +138,8 @@ namespace AppSpotifyWPF.Screens.Users
             {
                 MessageBox.Show($"Error updating user: {ex.Message}");
             }
+
+            CleanBoxes();
         }
 
         private void BackToHome_Click(object sender, RoutedEventArgs e)
@@ -148,6 +150,14 @@ namespace AppSpotifyWPF.Screens.Users
                 home.MainFrame.Visibility = Visibility.Collapsed;
                 home.HomeContent.Visibility = Visibility.Visible;
             }
+        }
+
+        private void CleanBoxes()
+        {
+            txtName.Clear();
+            txtUpGmail.Clear();
+            txtNewPass.Clear();
+            txtRepNewPass.Clear();
         }
     }
 }

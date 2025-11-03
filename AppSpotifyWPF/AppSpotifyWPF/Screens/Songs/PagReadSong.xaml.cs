@@ -37,7 +37,9 @@ namespace AppSpotifyWPF.Screens.Songs
         {
             SongsWrap.Children.Clear();
 
-            foreach (var song in songs)
+            var sortedSongs = songs.OrderBy(s => s.Title); 
+
+            foreach (var song in sortedSongs)
             {
                 // Círculo gris pa imagen
                 Ellipse avatar = new Ellipse

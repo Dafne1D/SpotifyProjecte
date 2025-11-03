@@ -25,6 +25,7 @@ namespace AppSpotifyWPF.Screens.Users
             try
             {
                 _users = await _apiService.GetAsync<List<User>>("/users");
+               
                 RenderUsers(_users);
             }
             catch (Exception ex)
@@ -37,9 +38,10 @@ namespace AppSpotifyWPF.Screens.Users
         {
             UsersWrap.Children.Clear();
 
-            foreach (var user in users)
+            var sortedUsers = users.OrderBy(u => u.Username);
+
+            foreach (var user in sortedUsers)
             {
-                // Círculo gris pa imagen
                 Ellipse avatar = new Ellipse
                 {
                     Width = 80,
@@ -48,7 +50,6 @@ namespace AppSpotifyWPF.Screens.Users
                     Margin = new Thickness(0, 0, 0, 5)
                 };
 
-                // Nombre del usuario
                 TextBlock name = new TextBlock
                 {
                     Text = user.Username,
@@ -56,7 +57,6 @@ namespace AppSpotifyWPF.Screens.Users
                     FontWeight = FontWeights.Bold
                 };
 
-                // StackPanel que contiene el avatar + nombre
                 StackPanel card = new StackPanel
                 {
                     Margin = new Thickness(10),

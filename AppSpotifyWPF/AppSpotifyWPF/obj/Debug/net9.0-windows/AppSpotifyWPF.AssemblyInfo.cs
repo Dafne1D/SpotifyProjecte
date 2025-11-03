@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AppSpotifyWPF")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dd276ee3e708ecd3c76f49e14a591c724cb629a8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7429a64e9c5f9ef29b5db173fc3c4ee64825b227")]
 [assembly: System.Reflection.AssemblyProductAttribute("AppSpotifyWPF")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AppSpotifyWPF")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

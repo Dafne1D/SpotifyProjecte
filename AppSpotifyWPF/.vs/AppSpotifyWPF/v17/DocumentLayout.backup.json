@@ -3,16 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5298E4A5-AC44-4000-A97A-97DAB1F32E75}|AppSpotifyWPF\\AppSpotifyWPF.csproj|c:\\users\\dafne\\desktop\\spotifyprojecte\\appspotifywpf\\appspotifywpf\\screens\\songs\\pagdeletesong.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5298E4A5-AC44-4000-A97A-97DAB1F32E75}|AppSpotifyWPF\\AppSpotifyWPF.csproj|solutionrelative:appspotifywpf\\screens\\songs\\pagdeletesong.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5298E4A5-AC44-4000-A97A-97DAB1F32E75}|AppSpotifyWPF\\AppSpotifyWPF.csproj|c:\\users\\dafne\\desktop\\spotifyprojecte\\appspotifywpf\\appspotifywpf\\screens\\songs\\pagreadsong.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5298E4A5-AC44-4000-A97A-97DAB1F32E75}|AppSpotifyWPF\\AppSpotifyWPF.csproj|solutionrelative:appspotifywpf\\screens\\songs\\pagreadsong.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5298E4A5-AC44-4000-A97A-97DAB1F32E75}|AppSpotifyWPF\\AppSpotifyWPF.csproj|c:\\users\\dafne\\desktop\\spotifyprojecte\\appspotifywpf\\appspotifywpf\\homescreen.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5298E4A5-AC44-4000-A97A-97DAB1F32E75}|AppSpotifyWPF\\AppSpotifyWPF.csproj|solutionrelative:appspotifywpf\\homescreen.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5298E4A5-AC44-4000-A97A-97DAB1F32E75}|AppSpotifyWPF\\AppSpotifyWPF.csproj|c:\\users\\dafne\\desktop\\spotifyprojecte\\appspotifywpf\\appspotifywpf\\homescreen.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{5298E4A5-AC44-4000-A97A-97DAB1F32E75}|AppSpotifyWPF\\AppSpotifyWPF.csproj|solutionrelative:appspotifywpf\\homescreen.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{5298E4A5-AC44-4000-A97A-97DAB1F32E75}|AppSpotifyWPF\\AppSpotifyWPF.csproj|c:\\users\\dafne\\desktop\\spotifyprojecte\\appspotifywpf\\appspotifywpf\\screens\\users\\pagreaduser.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5298E4A5-AC44-4000-A97A-97DAB1F32E75}|AppSpotifyWPF\\AppSpotifyWPF.csproj|solutionrelative:appspotifywpf\\screens\\users\\pagreaduser.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,44 +18,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "PagDeleteSong.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\AppSpotifyWPF\\Screens\\Songs\\PagDeleteSong.xaml.cs",
-              "RelativeDocumentMoniker": "AppSpotifyWPF\\Screens\\Songs\\PagDeleteSong.xaml.cs",
-              "ToolTip": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\AppSpotifyWPF\\Screens\\Songs\\PagDeleteSong.xaml.cs",
-              "RelativeToolTip": "AppSpotifyWPF\\Screens\\Songs\\PagDeleteSong.xaml.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-03T11:02:45.487Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "HomeScreen.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\AppSpotifyWPF\\HomeScreen.xaml.cs",
-              "RelativeDocumentMoniker": "AppSpotifyWPF\\HomeScreen.xaml.cs",
-              "ToolTip": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\AppSpotifyWPF\\HomeScreen.xaml.cs",
-              "RelativeToolTip": "AppSpotifyWPF\\HomeScreen.xaml.cs",
-              "ViewState": "AgIAACcAAAAAAAAAAAAuwDsAAAAsAAAAAAAAAA==",
+              "Title": "PagReadUser.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\AppSpotifyWPF\\Screens\\Users\\PagReadUser.xaml.cs",
+              "RelativeDocumentMoniker": "AppSpotifyWPF\\Screens\\Users\\PagReadUser.xaml.cs",
+              "ToolTip": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\AppSpotifyWPF\\Screens\\Users\\PagReadUser.xaml.cs",
+              "RelativeToolTip": "AppSpotifyWPF\\Screens\\Users\\PagReadUser.xaml.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAgwCgAAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-03T11:02:21.418Z",
+              "WhenOpened": "2025-11-03T16:30:46.087Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "HomeScreen.xaml",
-              "DocumentMoniker": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\AppSpotifyWPF\\HomeScreen.xaml",
-              "RelativeDocumentMoniker": "AppSpotifyWPF\\HomeScreen.xaml",
-              "ToolTip": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\AppSpotifyWPF\\HomeScreen.xaml*",
-              "RelativeToolTip": "AppSpotifyWPF\\HomeScreen.xaml*",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-11-03T10:59:39.717Z",
+              "DocumentIndex": 0,
+              "Title": "PagReadSong.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\AppSpotifyWPF\\Screens\\Songs\\PagReadSong.xaml.cs",
+              "RelativeDocumentMoniker": "AppSpotifyWPF\\Screens\\Songs\\PagReadSong.xaml.cs",
+              "ToolTip": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\AppSpotifyWPF\\Screens\\Songs\\PagReadSong.xaml.cs",
+              "RelativeToolTip": "AppSpotifyWPF\\Screens\\Songs\\PagReadSong.xaml.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAgwCkAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-03T16:30:40.734Z",
               "EditorCaption": ""
             }
           ]

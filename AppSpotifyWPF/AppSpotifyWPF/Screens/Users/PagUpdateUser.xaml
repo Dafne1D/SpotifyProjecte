@@ -14,13 +14,6 @@
                          Text=""
                          HorizontalContentAlignment="Left"
                          VerticalContentAlignment="Center"/>
-                <Button Content="🔍 Search"         
-                        Click="Search_Click"
-                        Background="Black" 
-                        Foreground="White" 
-                        Width="100" 
-                        Height="35" 
-                        Margin="10,0,0,0"/>
             </DockPanel>
 
             <WrapPanel x:Name="UsersWrap"
@@ -39,7 +32,27 @@
             <TextBlock  Text="Repeat password" FontWeight="Bold" Margin="0,0,0,5"/>
             <PasswordBox x:Name="txtRepNewPass" Margin="0,0,0,30" Height="35"/>
 
-            <Button Content="UPDATE" Click="UpdateUser_Click" Background="#4CAF50" Foreground="White" Height="35" Margin="0,0,0,20"/>
+            <StackPanel Orientation="Horizontal"
+                HorizontalAlignment="Center"
+                Margin="0,0,0,20">
+
+                <Button Content="SEARCH"
+                    Background="Black"
+                    Foreground="White"
+                    Width="150"
+                    Height="35"
+                    Click="Search_Click"
+                    Margin="0,0,100,0"
+                />  
+
+                <Button Content="DELETE"
+                    Background="ForestGreen"
+                    Foreground="White"
+                    Width="150"
+                    Height="35"
+                    Click="UpdateUser_Click"
+                />
+            </StackPanel>
 
             <Button Content="Back to Home" Click="BackToHome_Click" Background="White" BorderBrush="Gray" Width="150"/>
        
