@@ -18,6 +18,8 @@ WebApplication SpotifyApp = builder.Build();
 SpotifyApp.MapUserEndpoints(dbConn);
 SpotifyApp.MapSongEndpoints(dbConn);
 SpotifyApp.MapPlaylistEndpoints(dbConn);
+SpotifyApp.MapPermissionEndpoints(dbConn);
+
 
 SpotifyApp.MapGet("/", () =>
 {

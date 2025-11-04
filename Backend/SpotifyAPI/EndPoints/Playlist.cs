@@ -67,8 +67,8 @@ public static class PlaylistEndpoints
         // DELETE /playlists/{id}
         app.MapDelete("/playlists/{id}", (Guid id) => PlaylistADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
 
-        // POST /playlists/{playlistId}/add/{songId}
-        app.MapPost("/playlists/{playlistId}/add/{songId}", (Guid playlistId, Guid songId) =>
+        // POST /playlists/{playlistId}/song/{songId}
+        app.MapPost("/playlists/{playlistId}/song/{songId}", (Guid playlistId, Guid songId) =>
         {
             PlaylistSong playlistsong = new PlaylistSong
             {
@@ -79,8 +79,20 @@ public static class PlaylistEndpoints
             PlaylistSongADO.Insert(dbConn, playlistsong);
             return Results.Created($"/playlists/{playlistsong.Id}", playlistsong);
         });
-        // DELETE /playlists/{playlistId}/remove/{songId}
-        app.MapDelete("/playlistSong/{id}", (Guid id) => PlaylistSongADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
+
+        // GET /playlists/{playlistId}/songs
+        app.MapGet("/playlists/{playlistId}/songs", (Guid playlistId) =>
+        {
+        List<Song>? songs = PlaylistSongADO.GetByPlaylistId(dbConn, playlistId);
+
+        return songs is not null
+        ? Results.Ok(songs)
+        : Results.NotFound(new { message = $"No songs found for playlist with Id {playlistId}." });
+        });
+
+
+        // DELETE /playlistss/{playlistId}/song/{songId}
+        app.MapDelete("/playlists/{playlistId}/song/{songId}", (Guid id) => PlaylistSongADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
     }
 }
 
