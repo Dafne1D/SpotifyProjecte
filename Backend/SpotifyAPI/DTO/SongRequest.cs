@@ -1,4 +1,3 @@
-using System;
 using SpotifyAPI.Model;
 
 namespace SpotifyAPI.DTO;

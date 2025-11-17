@@ -1,7 +1,7 @@
 using Microsoft.Data.SqlClient;
+
 using SpotifyAPI.Services;
 using SpotifyAPI.Model;
-using SpotifyAPI.Utils;
 
 namespace SpotifyAPI.Repository;
 
@@ -59,14 +59,17 @@ static class PlaylistSongADO
 }
 
 
-    public static bool Delete(SpotifyDBConnection dbConn, Guid id)
+    public static bool Delete(SpotifyDBConnection dbConn, Guid playlistId, Guid songId)
     {
         dbConn.Open();
 
-        string sql = @"DELETE FROM PlaylistSongs WHERE Id = @Id";
+        string sql = @"DELETE FROM PlaylistSongs
+                            WHERE PlaylistId = @PlaylistId
+                            AND SongId = @SongId";
 
         using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
-        cmd.Parameters.AddWithValue("@Id", id);
+        cmd.Parameters.AddWithValue("@PlaylistId", playlistId);
+        cmd.Parameters.AddWithValue("@SongId", songId);
 
         int rows = cmd.ExecuteNonQuery();
 

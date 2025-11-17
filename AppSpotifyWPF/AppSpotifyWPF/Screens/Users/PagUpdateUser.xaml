@@ -1,0 +1,62 @@
+﻿<Page x:Class="AppSpotifyWPF.Screens.Users.PagUpdateUser"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="PagUpdateUser">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Background="#F5F6FA">
+        <StackPanel Margin="40">
+
+            <TextBlock Text="Users Management" FontSize="22" FontWeight="Bold" Margin="0,0,0,30"/>
+
+            <!-- Search -->
+            <DockPanel Margin="0,0,0,30">
+                <TextBox x:Name="txtSearch" Width="400" Height="35"
+                         Text=""
+                         HorizontalContentAlignment="Left"
+                         VerticalContentAlignment="Center"/>
+            </DockPanel>
+
+            <WrapPanel x:Name="UsersWrap"
+             HorizontalAlignment="Left"
+             Margin="0,0,0,20"/>
+            
+            <TextBlock  Text="Update Name" FontWeight="Bold" Margin="0,0,0,5"/>
+            <TextBox x:Name="txtName" Margin="0,0,0,20" Height="35" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+
+            <TextBlock Text="Update Gmail" FontWeight="Bold" Margin="0,0,0,5"/>
+            <TextBox  x:Name="txtUpGmail" Margin="0,0,0,20" Height="35" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+
+            <TextBlock  Text="New Password" FontWeight="Bold" Margin="0,0,0,5"/>
+            <PasswordBox x:Name="txtNewPass" Margin="0,0,0,20" Height="35"/>
+
+            <TextBlock  Text="Repeat password" FontWeight="Bold" Margin="0,0,0,5"/>
+            <PasswordBox x:Name="txtRepNewPass" Margin="0,0,0,30" Height="35"/>
+
+            <StackPanel Orientation="Horizontal"
+                HorizontalAlignment="Center"
+                Margin="0,0,0,20">
+
+                <Button Content="SEARCH"
+                    Background="Black"
+                    Foreground="White"
+                    Width="150"
+                    Height="35"
+                    Click="Search_Click"
+                    Margin="0,0,100,0"
+                />  
+
+                <Button Content="DELETE"
+                    Background="ForestGreen"
+                    Foreground="White"
+                    Width="150"
+                    Height="35"
+                    Click="UpdateUser_Click"
+                />
+            </StackPanel>
+
+            <Button Content="Back to Home" Click="BackToHome_Click" Background="White" BorderBrush="Gray" Width="150"/>
+       
+        </StackPanel>
+        
+    </ScrollViewer>
+</Page>

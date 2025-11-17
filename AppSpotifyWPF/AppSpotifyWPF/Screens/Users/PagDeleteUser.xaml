@@ -1,0 +1,53 @@
+﻿<Page x:Class="AppSpotifyWPF.Screens.Users.PagDeleteUser"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="PagReadUser"
+      Background="#F5F6FA">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="40">
+            <TextBlock Text="Delete user" FontSize="22" FontWeight="Bold" Margin="0,0,0,20"/>
+
+            <!-- Search bar -->
+            <DockPanel Margin="0,0,0,30">
+                <TextBox x:Name="txtSearch" Width="400" Height="35"
+                         Text=""
+                         HorizontalContentAlignment="Left"
+                         VerticalContentAlignment="Center"/>
+            </DockPanel>
+
+            <WrapPanel x:Name="UsersWrap"
+                       HorizontalAlignment="Left"
+                       Margin="0,0,0,20"/>
+            
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="0,0,0,20">
+
+                <Button Content="SEARCH"
+                    Background="ForestGreen"
+                    Foreground="White"
+                    Width="150"
+                    Height="35"
+                    Click="LoadUsers_Click"
+                    Margin="0,0,100,0"
+                />
+
+                <Button Content="DELETE"
+                    Background="Red"
+                    Foreground="White"
+                    Width="150"
+                    Height="35"
+                    Click="DeleteUser_Click"
+                />
+            </StackPanel>
+
+            
+            <Button Content="Back to Home"
+                    Click="BackToHome_Click"
+                    Background="White"
+                    BorderBrush="Gray"
+                    Width="150"/>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

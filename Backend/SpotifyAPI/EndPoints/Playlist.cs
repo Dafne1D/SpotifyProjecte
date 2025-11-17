@@ -79,22 +79,9 @@ public static class PlaylistEndpoints
             PlaylistSongADO.Insert(dbConn, playlistsong);
             return Results.Created($"/playlists/{playlistsong.Id}", playlistsong);
         });
-
-        // GET /playlists/{playlistId}/songs
-        app.MapGet("/playlists/{playlistId}/songs", (Guid playlistId) =>
-        {
-        List<Song>? songs = PlaylistSongADO.GetByPlaylistId(dbConn, playlistId);
-
-        return songs is not null
-        ? Results.Ok(songs)
-        : Results.NotFound(new { message = $"No songs found for playlist with Id {playlistId}." });
-        });
-
-
-        // DELETE /playlistss/{playlistId}/song/{songId}
-        app.MapDelete("/playlists/{playlistId}/song/{songId}", (Guid id) => PlaylistSongADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
+        // DELETE /playlists/{playlistId}/remove/{songId}
+        // app.MapDelete("/playlistSong/{id}", (Guid id) => PlaylistSongADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
     }
 }
 
 public record PlaylistRequest(Guid UserId, string Name, string Description);
-public record PlaylistSongRequest(Guid PlaylistId, Guid SongId);
