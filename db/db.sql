@@ -1,6 +1,17 @@
 CREATE DATABASE SpotifyDB;
 Use SpotifyDB;
 
+SELECT PlaylistSongs.Id AS psid, Songs.Title, Playlists.Name FROM Songs  
+	INNER JOIN PlaylistSongs on Songs.Id =  PlaylistSongs.SongId
+	INNER JOIN Playlists  on Playlists.Id = PlaylistSongs.PlaylistId
+
+
+
+
+	Songs.Id, Playlists.Id
+	 WHERE s.Id = ps.SongId AND p.Id = ps.PlaylistId
+	
+	
 CREATE TABLE Roles (
 	Id UNIQUEIDENTIFIER NOT NULL PRIMARY KEY,
 	Name NVARCHAR(50) NOT NULL,

@@ -83,5 +83,10 @@
 // DELETE http://localhost:5000/playlists/id
 ```
 # PlaylistSong
-
+``` JSON
+// POST http://localhost:5000/playlists/{id}/add/{id}
+```
+``` JSON
+// DELETE http://localhost:5000/playlistSong/{id}
+```
 # SongFile
