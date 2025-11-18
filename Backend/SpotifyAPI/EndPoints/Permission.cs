@@ -5,12 +5,12 @@ using SpotifyAPI.DTO;
 
 namespace SpotifyAPI.EndPoints;
 
-public static class RoleEndpoints
+public static class PermissionEndpoints
 {
-    public static void MapRoleEndpoints(this WebApplication app, SpotifyDBConnection dbConn)
+    public static void MapPermissionEndpoints(this WebApplication app, SpotifyDBConnection dbConn)
     {
-        // POST /roles
-        app.MapPost("/roles", (RoleRequest req) =>
+        // POST /permissions
+        app.MapPost("/permissions", (PermissionRequest req) =>
         {
             Role role = new Role
             {
