@@ -5,6 +5,7 @@ using SpotifyAPI.Repository;
 using SpotifyAPI.Services;
 using Microsoft.Data.SqlClient;
 
+
 namespace SpotifyAPI.DTO;
 
 public static class UserValidator
