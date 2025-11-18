@@ -30,7 +30,7 @@ public static class UserEndpoints
             id = Guid.NewGuid();
             User user = new User
             {
-                Id = Guid.NewGuid(),
+                Id = id,
                 Username = req.Username,
                 Email = req.Email,
                 Password = req.Password,
@@ -104,5 +104,3 @@ public static class UserEndpoints
     }
 
 }
-
-public record UserRequest(string Username, string Email, string Password, string Salt);
