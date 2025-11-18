@@ -25,6 +25,23 @@ namespace AppSpotifyWPF.Screens.Users
             InitializeComponent();
         }
 
+        private void newUserButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void viewUserButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void editUserButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void deleteUserButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void LoadUsers_Click(object sender, RoutedEventArgs e)
         {
 
