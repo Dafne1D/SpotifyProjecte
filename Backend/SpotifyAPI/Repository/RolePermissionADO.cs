@@ -58,7 +58,7 @@ static class RolePermissionADO
         string sql = @"SELECT Id, RoleId, PermissionId 
                     FROM RolePermissions
                     WHERE RoleId = @RoleId";
-
+        
         using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
         cmd.Parameters.AddWithValue("@RoleId", roleId);
 

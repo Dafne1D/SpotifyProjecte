@@ -1,0 +1,52 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5298E4A5-AC44-4000-A97A-97DAB1F32E75}|AppSpotifyWPF\\AppSpotifyWPF.csproj|c:\\users\\dafne\\desktop\\spotifyprojecte\\appspotifywpf\\appspotifywpf\\screens\\users\\pagupdateuser.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{5298E4A5-AC44-4000-A97A-97DAB1F32E75}|AppSpotifyWPF\\AppSpotifyWPF.csproj|solutionrelative:appspotifywpf\\screens\\users\\pagupdateuser.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5298E4A5-AC44-4000-A97A-97DAB1F32E75}|AppSpotifyWPF\\AppSpotifyWPF.csproj|c:\\users\\dafne\\desktop\\spotifyprojecte\\appspotifywpf\\appspotifywpf\\homescreen.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{5298E4A5-AC44-4000-A97A-97DAB1F32E75}|AppSpotifyWPF\\AppSpotifyWPF.csproj|solutionrelative:appspotifywpf\\homescreen.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PagUpdateUser.xaml",
+              "DocumentMoniker": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\AppSpotifyWPF\\Screens\\Users\\PagUpdateUser.xaml",
+              "RelativeDocumentMoniker": "AppSpotifyWPF\\Screens\\Users\\PagUpdateUser.xaml",
+              "ToolTip": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\AppSpotifyWPF\\Screens\\Users\\PagUpdateUser.xaml",
+              "RelativeToolTip": "AppSpotifyWPF\\Screens\\Users\\PagUpdateUser.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-11-17T18:00:08.889Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "HomeScreen.xaml",
+              "DocumentMoniker": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\AppSpotifyWPF\\HomeScreen.xaml",
+              "RelativeDocumentMoniker": "AppSpotifyWPF\\HomeScreen.xaml",
+              "ToolTip": "C:\\Users\\dafne\\Desktop\\SpotifyProjecte\\AppSpotifyWPF\\AppSpotifyWPF\\HomeScreen.xaml",
+              "RelativeToolTip": "AppSpotifyWPF\\HomeScreen.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-11-17T17:58:35.781Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
