@@ -1,6 +1,8 @@
 using SpotifyAPI.Repository;
 using SpotifyAPI.Services;
 using SpotifyAPI.Model;
+using SpotifyAPI.DTO;
+using SpotifyAPI.Common;
 
 namespace SpotifyAPI.EndPoints;
 
@@ -10,9 +12,22 @@ public static class UserEndpoints
 
     public static void MapUserEndpoints(this WebApplication app, SpotifyDBConnection dbConn)
     {
+        
         // POST /users
         app.MapPost("/users", (UserRequest req) =>
         {
+            Guid id;
+            Result result = UserValidator.Validate(req);
+            if (!result.IsOk)
+            {
+            return Results.BadRequest(new
+            {
+            error = result.ErrorCode,
+            message = result.ErrorMessage
+            });
+            }
+
+            id = Guid.NewGuid();
             User user = new User
             {
                 Id = Guid.NewGuid(),
@@ -22,7 +37,8 @@ public static class UserEndpoints
                 Salt = req.Salt
             };
             UserADO.Insert(dbConn, user);
-            return Results.Created($"/users/{user.Id}", user);
+            return Results.Created($"/users/{user.Id}", UserResponse.FromUser(user));
+
         });
 
         // GET /users
