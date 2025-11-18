@@ -1,6 +1,8 @@
-﻿using System.Windows;
+﻿
+using System.Windows;
 using AppSpotifyWPF.Screens.Users;
 using AppSpotifyWPF.Screens.Songs;
+using System.Windows.Controls;
 
 namespace AppSpotifyWPF
 {
@@ -11,53 +13,26 @@ namespace AppSpotifyWPF
             InitializeComponent();
         }
 
-        private void butCrearUser_Click(object sender, RoutedEventArgs e)
+        private void changePage(Page newPage)
         {
             HomeContent.Visibility = Visibility.Collapsed;
             MainFrame.Visibility = Visibility.Visible;
-            MainFrame.Navigate(new PagCreateUser());
+            MainFrame.Navigate(newPage);
         }
 
-        private void butReadUser_Click(object sender, RoutedEventArgs e)
+        private void userManagementButton_Click(object sender, RoutedEventArgs e)
         {
-            HomeContent.Visibility = Visibility.Collapsed;
-            MainFrame.Visibility = Visibility.Visible;
-            MainFrame.Navigate(new PagReadUser());
+            changePage(new PagReadUser());
         }
 
-        private void butUpdateUser_Click(object sender, RoutedEventArgs e)
+        private void songManagementButton_Click(object sender, RoutedEventArgs e)
         {
-            HomeContent.Visibility = Visibility.Collapsed;
-            MainFrame.Visibility = Visibility.Visible;
-            MainFrame.Navigate(new PagUpdateUser());
+            changePage(new PagCreateUser());
         }
 
-        private void butDeleteUser_Click(object sender, RoutedEventArgs e)
+        private void playlistManagementButton_Click(object sender, RoutedEventArgs e)
         {
-            HomeContent.Visibility = Visibility.Collapsed;
-            MainFrame.Visibility = Visibility.Visible;
-            MainFrame.Navigate(new PagDeleteUser());
-        }
-
-        private void butCrearSong_Click(object sender, RoutedEventArgs e)
-        {
-            HomeContent.Visibility = Visibility.Collapsed;
-            MainFrame.Visibility = Visibility.Visible;
-            MainFrame.Navigate(new PagCreateSong());
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            HomeContent.Visibility = Visibility.Collapsed;
-            MainFrame.Visibility = Visibility.Visible;
-            MainFrame.Navigate(new PagReadSong());
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            HomeContent.Visibility = Visibility.Collapsed;
-            MainFrame.Visibility = Visibility.Visible;
-            MainFrame.Navigate(new PagDeleteSong());
+            changePage(new PagCreateUser());
         }
     }
 }

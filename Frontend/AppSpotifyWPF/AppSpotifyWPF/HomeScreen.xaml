@@ -19,269 +19,74 @@
                                Foreground="Black"
                                Margin="0,0,0,20"/>
 
-                    <!-- USERS MANAGEMENT -->
+                    <!-- MAIN -->
                     <Border Background="White" CornerRadius="10" Padding="20" Margin="0,0,0,25">
                         <StackPanel>
-                            <TextBlock Text="Users Managment"
-                                       FontWeight="Bold"
-                                       FontSize="16"
-                                       Margin="0,0,0,10" />
-
-                            <UniformGrid Columns="4" Rows="1"
+                            <UniformGrid Columns="3" Rows="1"
                                          Margin="0,10,0,0"
                                          HorizontalAlignment="Center"
                                          Width="700">
 
-                                <!-- Create User -->
-                                <Button x:Name="butCrearUser"
+                                <!-- User Management -->
+                                <Button x:Name="userManagementButton"
                                         Margin="10" Padding="20"
                                         Background="White"
                                         BorderBrush="#E0E0E0"
                                         BorderThickness="1"
-                                        Click="butCrearUser_Click" HorizontalAlignment="Left" Width="155">
-                                    <StackPanel HorizontalAlignment="Center">
-                                        <TextBlock FontFamily="Segoe MDL2 Assets"
-                                                   Text="&#xE710;"
-                                                   FontSize="36"
-                                                   HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Create"
-                                                   FontWeight="Bold"
-                                                   HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Add user"
-                                                   FontSize="12"
-                                                   Foreground="Gray"
-                                                   HorizontalAlignment="Center"/>
-                                    </StackPanel>
-                                </Button>
-
-                                <!-- Read User -->
-                                <Button x:Name="butReadUser"
-                                        Margin="10" Padding="20"
-                                        Background="White"
-                                        BorderBrush="#E0E0E0"
-                                        BorderThickness="1"
-                                        Click="butReadUser_Click">
+                                        Click="userManagementButton_Click" HorizontalAlignment="Left" Width="155">
                                     <StackPanel HorizontalAlignment="Center">
                                         <TextBlock FontFamily="Segoe MDL2 Assets"
                                                    Text="&#xE716;"
                                                    FontSize="36"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Read"
+                                        <TextBlock Text="Users"
                                                    FontWeight="Bold"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="See details"
+                                        <TextBlock Text="Users management"
                                                    FontSize="12"
                                                    Foreground="Gray"
                                                    HorizontalAlignment="Center"/>
                                     </StackPanel>
                                 </Button>
 
-                                <!-- Update User -->
-                                <Button x:Name="butUpdateUser"
+                                <!-- Song Management -->
+                                <Button x:Name="songManagementButton"
                                         Margin="10" Padding="20"
                                         Background="White"
                                         BorderBrush="#E0E0E0"
                                         BorderThickness="1"
-                                        Click="butUpdateUser_Click">
-                                    <StackPanel HorizontalAlignment="Center">
-                                        <TextBlock FontFamily="Segoe MDL2 Assets"
-                                                   Text="&#xE70F;"
-                                                   FontSize="36"
-                                                   HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Update"
-                                                   FontWeight="Bold"
-                                                   HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Modify information"
-                                                   FontSize="12"
-                                                   Foreground="Gray"
-                                                   HorizontalAlignment="Center"/>
-                                    </StackPanel>
-                                </Button>
-
-                                <!-- Delete User -->
-                                <Button x:Name="butDeleteUser"
-                                        Margin="10" Padding="20"
-                                        Background="White"
-                                        BorderBrush="#E0E0E0"
-                                        BorderThickness="1"
-                                        Click="butDeleteUser_Click">
-                                    <StackPanel HorizontalAlignment="Center">
-                                        <TextBlock FontFamily="Segoe MDL2 Assets"
-                                                   Text="&#xE74D;"
-                                                   FontSize="36"
-                                                   HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Delete"
-                                                   FontWeight="Bold"
-                                                   HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Delete user"
-                                                   FontSize="12"
-                                                   Foreground="Gray"
-                                                   HorizontalAlignment="Center"/>
-                                    </StackPanel>
-                                </Button>
-
-                            </UniformGrid>
-                        </StackPanel>
-                    </Border>
-
-
-                    <!-- SONGS MANAGEMENT -->
-                    <Border Background="White" CornerRadius="10" Padding="20" Margin="0,0,0,25">
-                        <StackPanel>
-                            <TextBlock Text="Songs Managemnt"
-                                       FontWeight="Bold"
-                                       FontSize="16"
-                                       Margin="0,0,0,10" />
-
-                            <UniformGrid Columns="4" Rows="1"
-                                         Margin="0,10,0,0"
-                                         HorizontalAlignment="Center"
-                                         Width="700">
-                                <Button x:Name="butCrearSong"
-                                        Margin="10" 
-                                        Padding="20" 
-                                        Background="White" 
-                                        BorderBrush="#E0E0E0" 
-                                        BorderThickness="1"
-                                        Click="butCrearSong_Click">
+                                        Click="songManagementButton_Click" HorizontalAlignment="Left" Width="155">
                                     <StackPanel HorizontalAlignment="Center">
                                         <TextBlock FontFamily="Segoe MDL2 Assets"
                                                    Text="&#xE189;"
                                                    FontSize="36"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Create"
+                                        <TextBlock Text="Songs"
                                                    FontWeight="Bold"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Add a song"
+                                        <TextBlock Text="Songs management"
                                                    FontSize="12"
                                                    Foreground="Gray"
                                                    HorizontalAlignment="Center"/>
                                     </StackPanel>
                                 </Button>
 
-                                <Button Margin="10,0,0,0" Padding="20" Background="White" BorderBrush="#E0E0E0" BorderThickness="1" HorizontalAlignment="Left" Width="155" Click="Button_Click">
+                                <!-- Playlist Management -->
+                                <Button x:Name="playlistManagementButton"
+                                        Margin="10" Padding="20"
+                                        Background="White"
+                                        BorderBrush="#E0E0E0"
+                                        BorderThickness="1"
+                                        Click="playlistManagementButton_Click" HorizontalAlignment="Left" Width="155">
                                     <StackPanel HorizontalAlignment="Center">
                                         <TextBlock FontFamily="Segoe MDL2 Assets"
                                                    Text="&#xE179;"
                                                    FontSize="36"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Read"
+                                        <TextBlock Text="Playlists"
                                                    FontWeight="Bold"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="See details"
-                                                   FontSize="12"
-                                                   Foreground="Gray"
-                                                   HorizontalAlignment="Center"/>
-                                    </StackPanel>
-                                </Button>
-
-                                <Button Margin="10" Padding="20" Background="White" BorderBrush="#E0E0E0" BorderThickness="1">
-                                    <StackPanel HorizontalAlignment="Center">
-                                        <TextBlock FontFamily="Segoe MDL2 Assets"
-                                                   Text="&#xE70F;"
-                                                   FontSize="36"
-                                                   HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Update"
-                                                   FontWeight="Bold"
-                                                   HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Update information"
-                                                   FontSize="12"
-                                                   Foreground="Gray"
-                                                   HorizontalAlignment="Center"/>
-                                    </StackPanel>
-                                </Button>
-
-                                <Button Margin="10" Padding="20" Background="White" BorderBrush="#E0E0E0" BorderThickness="1" Click="Button_Click_1">
-                                    <StackPanel HorizontalAlignment="Center">
-                                        <TextBlock FontFamily="Segoe MDL2 Assets"
-                                                   Text="&#xE74D;"
-                                                   FontSize="36"
-                                                   HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Delete"
-                                                   FontWeight="Bold"
-                                                   HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Delete song"
-                                                   FontSize="12"
-                                                   Foreground="Gray"
-                                                   HorizontalAlignment="Center"/>
-                                    </StackPanel>
-                                </Button>
-                            </UniformGrid>
-                        </StackPanel>
-                    </Border>
-
-
-                    <!-- PLAYLISTS MANAGEMENT -->
-                    <Border Background="White" CornerRadius="10" Padding="20">
-                        <StackPanel>
-                            <TextBlock Text="Playlists Managment"
-                                       FontWeight="Bold"
-                                       FontSize="16"
-                                       Margin="0,0,0,10"/>
-
-                            <UniformGrid Columns="4" Rows="1"
-                                         Margin="0,10,0,0"
-                                         HorizontalAlignment="Center"
-                                         Width="700">
-
-                                <Button Margin="10" Padding="20" Background="White" BorderBrush="#E0E0E0" BorderThickness="1">
-                                    <StackPanel HorizontalAlignment="Center">
-                                        <TextBlock FontFamily="Segoe MDL2 Assets"
-                                                   Text="&#xE710;"
-                                                   FontSize="36"
-                                                   HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Create"
-                                                   FontWeight="Bold"
-                                                   HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Add playlist"
-                                                   FontSize="12"
-                                                   Foreground="Gray"
-                                                   HorizontalAlignment="Center"/>
-                                    </StackPanel>
-                                </Button>
-
-                                <Button Margin="10" Padding="20" Background="White" BorderBrush="#E0E0E0" BorderThickness="1">
-                                    <StackPanel HorizontalAlignment="Center">
-                                        <TextBlock FontFamily="Segoe MDL2 Assets"
-                                                   Text="&#xE179;"
-                                                   FontSize="36"
-                                                   HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Read"
-                                                   FontWeight="Bold"
-                                                   HorizontalAlignment="Center"/>
-                                        <TextBlock Text="See deatils"
-                                                   FontSize="12"
-                                                   Foreground="Gray"
-                                                   HorizontalAlignment="Center"/>
-                                    </StackPanel>
-                                </Button>
-
-                                <Button Margin="10" Padding="20" Background="White" BorderBrush="#E0E0E0" BorderThickness="1">
-                                    <StackPanel HorizontalAlignment="Center">
-                                        <TextBlock FontFamily="Segoe MDL2 Assets"
-                                                   Text="&#xE70F;"
-                                                   FontSize="36"
-                                                   HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Update"
-                                                   FontWeight="Bold"
-                                                   HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Update playlist"
-                                                   FontSize="12"
-                                                   Foreground="Gray"
-                                                   HorizontalAlignment="Center"/>
-                                    </StackPanel>
-                                </Button>
-
-                                <Button Margin="10" Padding="20" Background="White" BorderBrush="#E0E0E0" BorderThickness="1">
-                                    <StackPanel HorizontalAlignment="Center">
-                                        <TextBlock FontFamily="Segoe MDL2 Assets"
-                                                   Text="&#xE74D;"
-                                                   FontSize="36"
-                                                   HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Delete"
-                                                   FontWeight="Bold"
-                                                   HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Deletes playlist"
+                                        <TextBlock Text="Playlists management"
                                                    FontSize="12"
                                                    Foreground="Gray"
                                                    HorizontalAlignment="Center"/>
