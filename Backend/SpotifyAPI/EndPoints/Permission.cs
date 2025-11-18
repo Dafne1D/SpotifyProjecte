@@ -12,60 +12,60 @@ public static class PermissionEndpoints
         // POST /permissions
         app.MapPost("/permissions", (PermissionRequest req) =>
         {
-            Role role = new Role
+            Permission permission = new Permission
             {
                 Id = Guid.NewGuid(),
                 Name = req.Name,
                 Description = req.Description
             };
 
-            RoleADO.Insert(dbConn, role);
+            PermissionADO.Insert(dbConn, permission);
 
-            return Results.Created($"/roles/{role.Id}", RoleResponse.FromRole(role));
+            return Results.Created($"/permissions/{permission.Id}", PremissionResponse.FromPermission(permission));
         });
 
-        // GET /roles
-        app.MapGet("/roles", () =>
+        // GET /permissions
+        app.MapGet("/permissions", () =>
         {
-            List<Role> roles = RoleADO.GetAll(dbConn);
-            List<RoleResponse> roleResponses = new List<RoleResponse>();
-            foreach (Role role in roles)
+            List<Permission> permissions = PermissionADO.GetAll(dbConn);
+            List<PermissionResponse> permissionResponses = new List<PermissionResponse>();
+            foreach (Permission permission in permissions)
             {
-                roleResponses.Add(RoleResponse.FromRole(role));
+                permissionResponses.Add(PermissionResponse.FromPermission(permission));
             }
-            return Results.Ok(roleResponses);
+            return Results.Ok(permissionResponses);
         });
 
-        // GET /roles by id
-        app.MapGet("/roles/{id}", (Guid id) =>
+        // GET /permissions by id
+        app.MapGet("/permissions/{id}", (Guid id) =>
         {
-            Role? role = RoleADO.GetById(dbConn, id);
+            Permission? permission = PermissionADO.GetById(dbConn, id);
 
-            return role is not null
-                ? Results.Ok(RoleResponse.FromRole(role))
-                : Results.NotFound(new { message = $"Role with Id {id} not found." });
+            return permission is not null
+                ? Results.Ok(PermissionResponse.FromPermission(permission))
+                : Results.NotFound(new { message = $"Permission with Id {id} not found." });
         });
 
-        // PUT /roles
-        app.MapPut("/roles/{id}", (Guid id, RoleRequest req) =>
+        // PUT /permissions
+        app.MapPut("/permissions/{id}", (Guid id, PermissionRequest req) =>
         {
-            Role? existing = RoleADO.GetById(dbConn, id);
+            Permission? existing = PermissionADO.GetById(dbConn, id);
 
             if (existing == null)
             {
                 return Results.NotFound();
             }
 
-            Role updated = new Role
+            Permission updated = new Permission
             {
                 Id = id,
                 Name = req.Name,
                 Description = req.Description
             };
 
-            RoleADO.Update(dbConn, updated);
+            PermissionADO.Update(dbConn, updated);
 
-            return Results.Ok(RoleResponse.FromRole(updated));
+            return Results.Ok(PermissionResponse.FromPermission(updated));
         });
 
         // DELETE /permissions
