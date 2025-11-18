@@ -42,6 +42,26 @@ public static class UserValidator
             return Result.Failure("Aquest correu ja està registrat", "EMAIL_DUPLICAT");
         }
 
+        if (string.IsNullOrEmpty(user.Password))
+        {
+            return Result.Failure("La contrasenya és obligatoria", "PASSWORD_OBLIGATORI");
+        }
+
+        if (user.Password.Length < 8)
+        {
+            return Result.Failure("La contrasenya ha de tenir almenys 8 caràcters", "PASSWORD_CURTA");
+        }
+
+        bool hasUpper = user.Password.Any(char.IsUpper);
+        bool hasLower = user.Password.Any(char.IsLower);
+        bool hasDigit = user.Password.Any(char.IsDigit);
+
+        if (!hasUpper || !hasLower || !hasDigit)
+        {
+            return Result.Failure("La contrasenya ha de contenir majúscules, minúscules i números", "PASSWORD_DÈBIL");
+        }
+
+
         return Result.Ok();
     }
 }
