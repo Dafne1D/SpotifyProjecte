@@ -37,6 +37,13 @@ public static class RolePermissionEndpoints
             return Results.Ok(rolPer);
         });
 
+        // GET /rolePermissions/permission/{permissionId}
+        app.MapGet("/rolePermissions/permission/{permissionId}", (Guid permissionId) =>
+        {
+            List<RolePermission> rolPer = RolePermissionADO.GetByPermission(dbConn, permissionId);
+            return Results.Ok(rolPer);
+        });
+
         // DELETE /rolePermissions
         app.MapDelete("/rolePermissions", (Guid roleId, Guid permissionId) =>
         {
