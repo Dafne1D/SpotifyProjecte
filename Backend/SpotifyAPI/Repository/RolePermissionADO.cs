@@ -88,7 +88,7 @@ static class RolePermissionADO
                     WHERE PermissionId = @PermissionId";
         
         using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
-        cmd.Parameters.AddWithValue("@PermissionId", roleId);
+        cmd.Parameters.AddWithValue("@PermissionId", permissionId);
 
         using SqlDataReader reader = cmd.ExecuteReader();
         while (reader.Read())
