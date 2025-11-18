@@ -58,7 +58,7 @@ static class RolePermissionADO
         string sql = @"SELECT Id, RoleId, PermissionId 
                     FROM RolePermissions
                     WHERE RoleId = @RoleId";
-        
+
         using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
         cmd.Parameters.AddWithValue("@RoleId", roleId);
 
@@ -76,6 +76,35 @@ static class RolePermissionADO
         dbConn.Close();
         return rolePermissions;
     }
+
+     public static List<RolePermission> GetByPermission(SpotifyDBConnection dbConn, Guid permissionId)
+    {
+        List<RolePermission> rolePermissions = new();
+
+        dbConn.Open();
+
+        string sql = @"SELECT Id, RoleId, PermissionId 
+                    FROM RolePermissions
+                    WHERE PermissionId = @PermissionId";
+        
+        using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+        cmd.Parameters.AddWithValue("@PermissionId", roleId);
+
+        using SqlDataReader reader = cmd.ExecuteReader();
+        while (reader.Read())
+        {
+            rolePermissions.Add(new RolePermission
+            {
+                Id = reader.GetGuid(0),
+                RoleId = reader.GetGuid(1),
+                PermissionId = reader.GetGuid(2)
+            });
+        }
+
+        dbConn.Close();
+        return rolePermissions;
+    }
+
 
     public static bool Delete(SpotifyDBConnection dbConn, Guid roleId, Guid permissionId)
     {
