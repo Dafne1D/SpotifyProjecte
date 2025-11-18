@@ -17,7 +17,7 @@ public static class UserEndpoints
         app.MapPost("/users", (UserRequest req) =>
         {
             Guid id;
-            Result result = UserValidator.Validate(req);
+            Result result = UserValidator.Validate(req, dbConn);
             if (!result.IsOk)
             {
             return Results.BadRequest(new

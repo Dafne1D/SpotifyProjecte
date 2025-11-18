@@ -141,4 +141,20 @@ static class UserADO
     return count > 0;
     }
 
+    public static bool EmailExists(SpotifyDBConnection dbConn, string email)
+    {
+    dbConn.Open();
+    string sql = "SELECT COUNT(*) FROM Users WHERE Email = @Email";
+
+    using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+    cmd.Parameters.AddWithValue("@Email", email);
+
+    int count = (int)cmd.ExecuteScalar();
+
+    dbConn.Close();
+
+    return count > 0;
+    }
+
+
 }
