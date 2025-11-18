@@ -125,4 +125,20 @@ static class UserADO
         return rows > 0;
     }
 
+
+    public static bool UsernameExists(SpotifyDBConnection dbConn, string username)
+    {
+    dbConn.Open();
+    string sql = "SELECT COUNT(*) FROM Users WHERE Username = @Username";
+
+    using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+    cmd.Parameters.AddWithValue("@Username", username);
+
+    int count = (int)cmd.ExecuteScalar();
+
+    dbConn.Close();
+
+    return count > 0;
+    }
+
 }
