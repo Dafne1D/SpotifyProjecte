@@ -21,7 +21,7 @@ public static class PermissionEndpoints
 
             PermissionADO.Insert(dbConn, permission);
 
-            return Results.Created($"/permissions/{permission.Id}", PremissionResponse.FromPermission(permission));
+            return Results.Created($"/permissions/{permission.Id}", PermissionResponse.FromPermission(permission));
         });
 
         // GET /permissions

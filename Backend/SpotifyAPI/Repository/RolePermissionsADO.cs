@@ -37,7 +37,7 @@ static class RolePermissionADO
 
         while (reader.Read())
         {
-            rolePermissions.Add(new Song
+            rolePermissions.Add(new RolePermission
             {
                 Id = reader.GetGuid(0),
                 RoleId = reader.GetGuid(1),
