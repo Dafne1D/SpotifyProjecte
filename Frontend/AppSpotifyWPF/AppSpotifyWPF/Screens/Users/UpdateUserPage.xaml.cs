@@ -68,6 +68,17 @@ namespace AppSpotifyWPF.Screens.Users
 
         private void returnButton_Click(object sender, RoutedEventArgs e)
         {
+            var parentWindow = Window.GetWindow(this);
+            if (parentWindow is HomeScreen home)
+            {
+                home.MainFrame.Visibility = Visibility.Collapsed;
+                home.HomeContent.Visibility = Visibility.Visible;
+            }
+        }
+
+
+        private void saveUserButton_Click(object sender, RoutedEventArgs e)
+        {
 
         }
 
@@ -80,5 +91,7 @@ namespace AppSpotifyWPF.Screens.Users
         {
 
         }
+
+
     }
 }

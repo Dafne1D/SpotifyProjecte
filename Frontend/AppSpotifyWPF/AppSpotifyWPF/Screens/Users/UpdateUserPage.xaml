@@ -4,43 +4,38 @@
       Title="Edit User" Height="800" Width="1000"
       Background="#F5F6FA">
 
-    <!-- ====== VISTA PRINCIPAL (HOME) ====== -->
     <Grid x:Name="HomeContent">
 
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="40">
 
-                <!-- Return button -->
                 <Button
                     Margin="0 0 0 5"
                     Background="Transparent"
                     Foreground="Gray"
                     BorderBrush="Transparent"
                     BorderThickness="1"
-                    Click="returnButton_Click" HorizontalAlignment="Left">
+                    Click="returnButton_Click"
+                    HorizontalAlignment="Left">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock FontFamily="Segoe MDL2 Assets"
-                                       Text="&#xE76B;"
-                                       FontSize="16"
-                                       HorizontalAlignment="Center"
-                                       Margin="0 0 10 0"/>
+                                   Text="&#xE76B;"
+                                   FontSize="16"
+                                   Margin="0 0 10 0"/>
                         <TextBlock Text="Back to Users"
-                                   FontWeight="Bold"
-                                   HorizontalAlignment="Center"/>
+                                   FontWeight="Bold"/>
                     </StackPanel>
                 </Button>
 
-                <!-- Título principal -->
                 <TextBlock Text="Edit User"
-                               FontSize="28"
-                               FontWeight="Bold"
-                               Foreground="Black"
-                               Margin="0,0,0,20"/>
+                           FontSize="28"
+                           FontWeight="Bold"
+                           Foreground="Black"
+                           Margin="0,0,0,20"/>
 
-                <!-- MAIN -->
                 <Border Background="White"
-                                CornerRadius="20"
-                                Padding="30">
+                        CornerRadius="20"
+                        Padding="30">
 
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -49,79 +44,102 @@
                         </Grid.ColumnDefinitions>
 
                         <StackPanel Grid.Column="0">
-
                             <TextBlock Text="Nom:" FontSize="18" FontWeight="Bold"/>
                             <TextBox x:Name="txtName"
-                                             FontSize="18"
-                                             Margin="0,5,80,20"
-                                             Height="35"/>
+                                     FontSize="18"
+                                     Margin="0,5,80,20"
+                                     Height="35"/>
 
                             <TextBlock Text="Role:" FontSize="18" FontWeight="Bold"/>
                             <TextBox x:Name="txtRole"
-                                             FontSize="18"
-                                             Margin="0,5,80,0"
-                                             Height="35"/>
-
+                                     FontSize="18"
+                                     Margin="0,5,80,0"
+                                     Height="35"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="1">
-
                             <TextBlock Text="Correu:" FontSize="18" FontWeight="Bold"/>
                             <TextBox x:Name="txtEmail"
-                                             FontSize="18"
-                                             Margin="0,5,60,20"
-                                             Height="35"/>
-
+                                     FontSize="18"
+                                     Margin="0,5,60,20"
+                                     Height="35"/>
                         </StackPanel>
-
                     </Grid>
                 </Border>
 
-                <StackPanel Grid.Row="1"
-                        Orientation="Horizontal"
-                        Margin="0,30,0,0"
-                        HorizontalAlignment="Left">
+                <Grid Margin="0,30,0,0" HorizontalAlignment="Left">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
 
-                    <!-- Read Button -->
+                    <Button x:Name="saveUserButton"
+                            Grid.Column="0"
+                            Margin="0"
+                            Padding="12 8"
+                            Background="#4CAF50"
+                            Foreground="Black"
+                            BorderBrush="#388E3C"
+                            BorderThickness="1"
+                            Click="saveUserButton_Click">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock FontFamily="Segoe MDL2 Assets"
+                                       Text="&#xE74E;"
+                                       FontSize="18"
+                                       Margin="0 0 8 0"
+                                       VerticalAlignment="Center"/>
+                            <TextBlock Text="Guardar"
+                                       FontWeight="Bold"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+
                     <Button x:Name="viewUserButton"
-                                        Margin="10 0"  Padding="10"
-                                        Background="White"
-                                        BorderBrush="#E0E0E0"
-                                        BorderThickness="1"
-                                        Click="viewUserButton_Click" HorizontalAlignment="Left">
-                        <StackPanel Orientation="Horizontal">
+                            Grid.Column="2"
+                            Margin="0"
+                            Padding="12 8"
+                            Background="White"
+                            Foreground="Black"
+                            BorderBrush="#E0E0E0"
+                            BorderThickness="1"
+                            Click="viewUserButton_Click">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <TextBlock FontFamily="Segoe MDL2 Assets"
                                        Text="&#xE7B3;"
                                        FontSize="18"
-                                       HorizontalAlignment="Center"
-                                       Margin="0 0 10 0"/>
+                                       Margin="0 0 8 0"
+                                       VerticalAlignment="Center"/>
                             <TextBlock Text="View User"
-                                                   FontWeight="Bold"
-                                                   HorizontalAlignment="Center"/>
+                                       FontWeight="Bold"
+                                       VerticalAlignment="Center"/>
                         </StackPanel>
                     </Button>
 
-                    <!-- Delete Button -->
                     <Button x:Name="deleteUserButton"
-                                        Margin="10 0"  Padding="10"
-                                        Background="Red"
-                                        Foreground="DarkRed"
-                                        BorderBrush="DarkRed"
-                                        BorderThickness="1"
-                                        Click="deleteUserButton_Click" HorizontalAlignment="Left">
-                        <StackPanel Orientation="Horizontal">
+                            Grid.Column="4"
+                            Margin="0"
+                            Padding="12 8"
+                            Background="Red"
+                            Foreground="Black"
+                            BorderBrush="DarkRed"
+                            BorderThickness="1"
+                            Click="deleteUserButton_Click">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <TextBlock FontFamily="Segoe MDL2 Assets"
                                        Text="&#xE74D;"
                                        FontSize="18"
-                                       HorizontalAlignment="Center"
-                                       Margin="0 0 10 0"
-                                       />
+                                       Margin="0 0 8 0"
+                                       VerticalAlignment="Center"/>
                             <TextBlock Text="Delete User"
-                                                   FontWeight="Bold"
-                                                   HorizontalAlignment="Center"/>
+                                       FontWeight="Bold"
+                                       VerticalAlignment="Center"/>
                         </StackPanel>
                     </Button>
-                </StackPanel>
+
+                </Grid>
 
             </StackPanel>
         </ScrollViewer>
