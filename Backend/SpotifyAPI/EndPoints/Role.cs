@@ -70,5 +70,14 @@ public static class RoleEndpoints
 
         // DELETE /roles
         app.MapDelete("/roles/{id}", (Guid id) => RoleADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
+
+
+
+        // GET /roles/{id}/Permissions
+        app.MapGet("/roles/{id}/Permissions", (Guid roleId) =>
+        {
+            List<RolePermission> rolPer = RolePermissionADO.GetAll(dbConn, roleId);
+            return Results.Ok(rolPer);
+        });
     }
 }
