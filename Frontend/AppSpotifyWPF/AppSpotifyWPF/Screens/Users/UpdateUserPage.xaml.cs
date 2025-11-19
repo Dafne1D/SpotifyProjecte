@@ -6,11 +6,11 @@ using System.Windows.Controls;
 
 namespace AppSpotifyWPF.Screens.Users
 {
-    public partial class NouCRUDUser : Page
+    public partial class UpdateUserPage : Page
     {
         private readonly ApiService _apiService = new ApiService();
 
-        public NouCRUDUser()
+        public UpdateUserPage()
         {
             InitializeComponent();
         }

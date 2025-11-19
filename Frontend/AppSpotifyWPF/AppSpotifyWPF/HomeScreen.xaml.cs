@@ -22,7 +22,7 @@ namespace AppSpotifyWPF
 
         private void userManagementButton_Click(object sender, RoutedEventArgs e)
         {
-            changePage(new NouCRUDUser());
+            changePage(new UpdateUserPage());
 
         }
 
