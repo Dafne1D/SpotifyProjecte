@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Xml.Linq;
-using AppSpotifyWPF.Models;
+using AppSpotifyWPF.Classes;
 using AppSpotifyWPF.Services;
 
 namespace AppSpotifyWPF.Screens.Users

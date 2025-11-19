@@ -33,7 +33,6 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <!-- LEFT COLUMN -->
                                 <StackPanel Grid.Column="0">
 
                                     <TextBlock Text="Nom:" FontSize="18" FontWeight="Bold"/>
@@ -49,7 +48,6 @@
                                              Height="35"/>
                                 </StackPanel>
 
-                                <!-- RIGHT COLUMN -->
                                 <StackPanel Grid.Column="1">
 
                                     <TextBlock Text="Correu:" FontSize="18" FontWeight="Bold"/>
@@ -58,11 +56,6 @@
                                              Margin="0,5,60,20"
                                              Height="35"/>
 
-                                    <TextBlock Text="Id:" FontSize="18" FontWeight="Bold"/>
-                                    <TextBox x:Name="txtId"
-                                             FontSize="18"
-                                             Margin="0,5,60,0"
-                                             Height="35"/>
                                 </StackPanel>
 
                             </Grid>
