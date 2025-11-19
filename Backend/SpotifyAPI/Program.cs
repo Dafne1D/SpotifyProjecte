@@ -21,6 +21,7 @@ SpotifyApp.MapSongEndpoints(dbConn);
 SpotifyApp.MapPlaylistEndpoints(dbConn);
 SpotifyApp.MapPermissionEndpoints(dbConn);
 SpotifyApp.MapRolePermissionEndpoints(dbConn);
+SpotifyApp.MapUserRoleEndpoints(dbConn);
 
 
 SpotifyApp.MapGet("/", () =>

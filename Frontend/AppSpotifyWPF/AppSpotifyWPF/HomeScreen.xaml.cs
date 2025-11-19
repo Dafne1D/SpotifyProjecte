@@ -28,7 +28,7 @@ namespace AppSpotifyWPF
 
         private void songManagementButton_Click(object sender, RoutedEventArgs e)
         {
-            changePage(new PagCreateUser());
+            changePage(new PagReadUser());
         }
 
         private void playlistManagementButton_Click(object sender, RoutedEventArgs e)
