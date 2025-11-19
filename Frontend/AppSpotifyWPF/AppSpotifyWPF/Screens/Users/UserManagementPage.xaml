@@ -37,8 +37,9 @@
                             <Viewbox Stretch="Uniform">
                                 <Button x:Name="newUserButton"
                                         Margin="10 0"  Padding="10"
-                                        Background="White"
-                                        BorderBrush="#E0E0E0"
+                                        Background="LimeGreen"
+                                        Foreground="DarkGreen"
+                                        BorderBrush="DarkGreen"
                                         BorderThickness="1"
                                         Click="newUserButton_Click" HorizontalAlignment="Left">
                                     <TextBlock FontFamily="Segoe MDL2 Assets"
@@ -82,8 +83,9 @@
                             <Viewbox Stretch="Uniform">
                                 <Button x:Name="deleteUserButton"
                                         Margin="10 0"  Padding="10"
-                                        Background="White"
-                                        BorderBrush="#E0E0E0"
+                                        Background="Red"
+                                        Foreground="DarkRed"
+                                        BorderBrush="DarkRed"
                                         BorderThickness="1"
                                         Click="deleteUserButton_Click" HorizontalAlignment="Left">
                                     <TextBlock FontFamily="Segoe MDL2 Assets"
