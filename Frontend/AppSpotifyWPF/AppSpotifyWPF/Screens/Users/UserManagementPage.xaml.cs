@@ -23,7 +23,8 @@ namespace AppSpotifyWPF.Screens.Users
     public partial class UserManagementPage : Page
     {
         private readonly ApiService _apiService = new ApiService();
-        private User selectedUser = null;
+        private User? selectedUser = null;
+        private Border? selectedBorder = null;
 
         public UserManagementPage()
         {
@@ -60,7 +61,7 @@ namespace AppSpotifyWPF.Screens.Users
 
             changePage(new UpdateUserPage(selectedUser));
         }
-        private void deleteUserButton_Click(object sender, RoutedEventArgs e)
+        private async void deleteUserButton_Click(object sender, RoutedEventArgs e)
         {
             if (selectedUser == null)
             {
@@ -68,7 +69,27 @@ namespace AppSpotifyWPF.Screens.Users
                 return;
             }
 
-            // Delete User somehow
+            var result = MessageBox.Show(
+            $"Are you sure you want to delete {selectedUser.Username}?",
+            "Confirm",
+            MessageBoxButton.YesNo,
+            MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    await _apiService.DeleteAsync($"/users/{selectedUser.Id}");
+                    MessageBox.Show("✅ User deleted.");
+
+                    unselectAllUsers();
+                    await LoadUsers();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("❌ Error deleting user:\n" + ex.Message);
+                }
+            }
         }
 
         private async void LoadUsers_Click(object sender, RoutedEventArgs e)
@@ -79,6 +100,21 @@ namespace AppSpotifyWPF.Screens.Users
         private void BackToHome_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void UserCard_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Border border && border.Tag is User user)
+            {
+                if (selectedBorder == border)
+                {
+                    unselectAllUsers();
+                    return;
+                }
+
+                unselectAllUsers();
+                selectUser(border, user);
+            }
         }
 
         /* PAGE METHODS */
@@ -147,20 +183,23 @@ namespace AppSpotifyWPF.Screens.Users
             }
         }
 
-        private void UserCard_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void unselectAllUsers()
         {
-            if (sender is Border border && border.Tag is User user)
+            foreach (var child in UsersWrap.Children)
             {
-                foreach (var child in UsersWrap.Children)
-                {
-                    if (child is Border b)
-                        b.BorderBrush = Brushes.Transparent;
-                }
-
-                border.BorderBrush = Brushes.DeepSkyBlue;
-
-                selectedUser = user;
+                if (child is Border b)
+                    b.BorderBrush = Brushes.Transparent;
             }
+            selectedUser = null;
+            selectedBorder = null;
+        }
+
+        private void selectUser(Border border, User user)
+        {
+            border.BorderBrush = Brushes.DeepSkyBlue;
+
+            selectedUser = user;
+            selectedBorder = border;
         }
     }
 }
