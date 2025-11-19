@@ -27,14 +27,14 @@ namespace AppSpotifyWPF.Screens.Users
         {
             string name = txtName.Text;
             string email = txtEmail.Text;
-            //string password = txtPassword.Password;
-            //string repeatPassword = txtRepeatPassword.Password;
+            string password = txtPassword.Password;
+            string repeatPassword = txtRepeatPassword.Password;
 
-            //if (password != repeatPassword)
-            //{
-            //    MessageBox.Show("The passwords do not match!");
-            //    return;
-            //}
+            if (password != repeatPassword)
+            {
+                MessageBox.Show("The passwords do not match!");
+                return;
+            }
 
             var newUser = new User
             {
@@ -83,10 +83,61 @@ namespace AppSpotifyWPF.Screens.Users
         }
 
 
-        private void saveUserButton_Click(object sender, RoutedEventArgs e)
+        private async void saveUserButton_Click(object sender, RoutedEventArgs e)
         {
+            string name = txtName.Text;
+            string email = txtEmail.Text;
+            string password = txtPassword.Password;
+            string repeatPassword = txtRepeatPassword.Password;
 
+            if (password != repeatPassword)
+            {
+                MessageBox.Show("The passwords do not match!");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(email))
+            {
+                MessageBox.Show("Name and email are mandatory");
+                return;
+            }
+
+            if (!email.EndsWith("@gmail.com"))
+            {
+                MessageBox.Show("Email must be Gmail");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(password) || password.Length < 8)
+            {
+                MessageBox.Show("Password must have at least 8 characters.");
+                return;
+            }
+
+            var updatedUser = new User
+            {
+                Id = selectedUser.Id,
+                Username = name,
+                Email = email,
+                Password = password,
+                Salt = ""
+            };
+
+            try
+            {
+                await _apiService.PutAsync($"/users/{selectedUser.Id}", updatedUser);
+                MessageBox.Show("User updated!");
+
+                selectedUser.Username = name;
+                selectedUser.Email = email;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error updating user:\n{ex.Message}");
+            }
         }
+
+
         private void deleteUserButton_Click(object sender, RoutedEventArgs e)
         {
 
