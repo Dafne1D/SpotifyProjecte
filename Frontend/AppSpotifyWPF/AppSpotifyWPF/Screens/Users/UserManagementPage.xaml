@@ -17,6 +17,24 @@
 
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <StackPanel Margin="40">
+                    <Button
+                    Margin="0 0 0 5"
+                    Background="Transparent"
+                    Foreground="Gray"
+                    BorderBrush="Transparent"
+                    BorderThickness="1"
+                    Click="BackToHome_Click"
+                    HorizontalAlignment="Left">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets"
+                                   Text="&#xE76B;"
+                                   FontSize="16"
+                                   Margin="0 0 10 0"/>
+                            <TextBlock Text="Back to Home"
+                                   FontWeight="Bold"/>
+                        </StackPanel>
+                    </Button>
+                    
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -122,12 +140,6 @@
                             <WrapPanel x:Name="UsersWrap"
                             HorizontalAlignment="Left"
                             Margin="0,0,0,20"/>
-
-                            <Button Content="Back to Home"
-                            Click="BackToHome_Click"
-                            Background="White"
-                            BorderBrush="Gray"
-                            Width="150"/>
                         </StackPanel>
                     </Border>
 

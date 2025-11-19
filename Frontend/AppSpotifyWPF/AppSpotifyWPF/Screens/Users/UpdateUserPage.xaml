@@ -98,9 +98,9 @@
                             Grid.Column="0"
                             Margin="0"
                             Padding="12 8"
-                            Background="#4CAF50"
-                            Foreground="Black"
-                            BorderBrush="#388E3C"
+                            Background="LimeGreen"
+                            Foreground="DarkGreen"
+                            BorderBrush="DarkGreen"
                             BorderThickness="1"
                             Click="saveUserButton_Click">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -119,7 +119,7 @@
                             Margin="0"
                             Padding="12 8"
                             Background="Red"
-                            Foreground="Black"
+                            Foreground="DarkRed"
                             BorderBrush="DarkRed"
                             BorderThickness="1"
                             Click="deleteUserButton_Click">
