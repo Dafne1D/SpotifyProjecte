@@ -1,4 +1,4 @@
-﻿using AppSpotifyWPF.Models;
+﻿using AppSpotifyWPF.Classes;
 using AppSpotifyWPF.Services;
 using System;
 using System.Windows;

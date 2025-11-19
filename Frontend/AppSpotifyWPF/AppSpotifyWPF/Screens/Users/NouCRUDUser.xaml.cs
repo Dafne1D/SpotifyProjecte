@@ -1,4 +1,4 @@
-﻿//using AppSpotifyWPF.Models;
+﻿//using AppSpotifyWPF.Classes;
 //using AppSpotifyWPF.Services;
 //using System;
 //using System.Windows;
@@ -32,7 +32,7 @@
 //            {
 //                Username = name,
 //                Email = email,
-//                Password = password
+//                Rol
 //            };
 
 //            try
