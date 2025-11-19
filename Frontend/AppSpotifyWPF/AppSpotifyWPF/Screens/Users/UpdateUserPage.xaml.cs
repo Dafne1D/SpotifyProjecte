@@ -19,20 +19,20 @@ namespace AppSpotifyWPF.Screens.Users
         {
             string name = txtName.Text;
             string email = txtEmail.Text;
-            string password = txtPassword.Password;
-            string repeatPassword = txtRepeatPassword.Password;
+            //string password = txtPassword.Password;
+            //string repeatPassword = txtRepeatPassword.Password;
 
-            if (password != repeatPassword)
-            {
-                MessageBox.Show("The passwords do not match!");
-                return;
-            }
+            //if (password != repeatPassword)
+            //{
+            //    MessageBox.Show("The passwords do not match!");
+            //    return;
+            //}
 
             var newUser = new User
             {
                 Username = name,
                 Email = email,
-                Rol
+                //Rol
             };
 
             try
@@ -51,8 +51,8 @@ namespace AppSpotifyWPF.Screens.Users
         {
             txtName.Clear();
             txtEmail.Clear();
-            txtPassword.Clear();
-            txtRepeatPassword.Clear();
+            //txtPassword.Clear();
+            //txtRepeatPassword.Clear();
         }
         private void BackToHome_Click(object sender, RoutedEventArgs e)
         {
@@ -62,6 +62,21 @@ namespace AppSpotifyWPF.Screens.Users
                 home.MainFrame.Visibility = Visibility.Collapsed;
                 home.HomeContent.Visibility = Visibility.Visible;
             }
+        }
+
+        private void returnButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void viewUserButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void deleteUserButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
