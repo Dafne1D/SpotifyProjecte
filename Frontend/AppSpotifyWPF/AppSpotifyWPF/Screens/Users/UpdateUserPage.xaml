@@ -27,11 +27,12 @@
                     </StackPanel>
                 </Button>
 
-                <TextBlock Text="Edit User"
-                           FontSize="28"
-                           FontWeight="Bold"
-                           Foreground="Black"
-                           Margin="0,0,0,20"/>
+                <TextBlock x:Name="txtTitle"
+                FontSize="28"
+                FontWeight="Bold"
+                Foreground="Black"
+                Margin="0,0,0,20"/>
+
 
                 <Border Background="White"
                         CornerRadius="20"
@@ -44,26 +45,43 @@
                         </Grid.ColumnDefinitions>
 
                         <StackPanel Grid.Column="0">
-                            <TextBlock Text="Nom:" FontSize="18" FontWeight="Bold"/>
+
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock Text="Nom:" FontSize="18" FontWeight="Bold"/>
+                                <TextBlock x:Name="lblName" FontSize="18" Margin="10 0 0 0"/>
+                            </StackPanel>
+
                             <TextBox x:Name="txtName"
                                      FontSize="18"
                                      Margin="0,5,80,20"
                                      Height="35"/>
 
-                            <TextBlock Text="Role:" FontSize="18" FontWeight="Bold"/>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock Text="Role:" FontSize="18" FontWeight="Bold"/>
+                                <TextBlock x:Name="lblRole" FontSize="18" Margin="10 0 0 0"/>
+                            </StackPanel>
+
                             <TextBox x:Name="txtRole"
                                      FontSize="18"
                                      Margin="0,5,80,0"
                                      Height="35"/>
+
                         </StackPanel>
 
                         <StackPanel Grid.Column="1">
-                            <TextBlock Text="Correu:" FontSize="18" FontWeight="Bold"/>
+
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock Text="Correu:" FontSize="18" FontWeight="Bold"/>
+                                <TextBlock x:Name="lblEmail" FontSize="18" Margin="10 0 0 0"/>
+                            </StackPanel>
+
                             <TextBox x:Name="txtEmail"
                                      FontSize="18"
                                      Margin="0,5,60,20"
                                      Height="35"/>
+
                         </StackPanel>
+
                     </Grid>
                 </Border>
 
@@ -89,34 +107,12 @@
                             <TextBlock FontFamily="Segoe MDL2 Assets"
                                        Text="&#xE74E;"
                                        FontSize="18"
-                                       Margin="0 0 8 0"
-                                       VerticalAlignment="Center"/>
+                                       Margin="0 0 8 0"/>
                             <TextBlock Text="Guardar"
-                                       FontWeight="Bold"
-                                       VerticalAlignment="Center"/>
+                                       FontWeight="Bold"/>
                         </StackPanel>
                     </Button>
 
-                    <Button x:Name="viewUserButton"
-                            Grid.Column="2"
-                            Margin="0"
-                            Padding="12 8"
-                            Background="White"
-                            Foreground="Black"
-                            BorderBrush="#E0E0E0"
-                            BorderThickness="1"
-                            Click="viewUserButton_Click">
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <TextBlock FontFamily="Segoe MDL2 Assets"
-                                       Text="&#xE7B3;"
-                                       FontSize="18"
-                                       Margin="0 0 8 0"
-                                       VerticalAlignment="Center"/>
-                            <TextBlock Text="View User"
-                                       FontWeight="Bold"
-                                       VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </Button>
 
                     <Button x:Name="deleteUserButton"
                             Grid.Column="4"
@@ -131,11 +127,9 @@
                             <TextBlock FontFamily="Segoe MDL2 Assets"
                                        Text="&#xE74D;"
                                        FontSize="18"
-                                       Margin="0 0 8 0"
-                                       VerticalAlignment="Center"/>
+                                       Margin="0 0 8 0"/>
                             <TextBlock Text="Delete User"
-                                       FontWeight="Bold"
-                                       VerticalAlignment="Center"/>
+                                       FontWeight="Bold"/>
                         </StackPanel>
                     </Button>
 

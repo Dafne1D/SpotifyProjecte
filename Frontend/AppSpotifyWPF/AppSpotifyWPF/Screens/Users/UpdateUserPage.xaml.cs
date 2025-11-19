@@ -15,6 +15,12 @@ namespace AppSpotifyWPF.Screens.Users
         {
             InitializeComponent();
             this.selectedUser = selectedUser;
+
+            txtTitle.Text = $"Edit User \"{selectedUser.Username}\"";
+
+            lblName.Text = selectedUser.Username;
+            lblEmail.Text = selectedUser.Email;
+            lblRole.Text = "User";
         }
 
         private async void CreateUser_Click(object sender, RoutedEventArgs e)
@@ -81,12 +87,6 @@ namespace AppSpotifyWPF.Screens.Users
         {
 
         }
-
-        private void viewUserButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void deleteUserButton_Click(object sender, RoutedEventArgs e)
         {
 
