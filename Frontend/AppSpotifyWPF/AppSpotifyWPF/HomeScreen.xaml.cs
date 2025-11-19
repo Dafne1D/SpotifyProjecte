@@ -22,7 +22,8 @@ namespace AppSpotifyWPF
 
         private void userManagementButton_Click(object sender, RoutedEventArgs e)
         {
-            changePage(new UserManagementPage());
+            changePage(new NouCRUDUser());
+
         }
 
         private void songManagementButton_Click(object sender, RoutedEventArgs e)
