@@ -147,13 +147,29 @@ namespace AppSpotifyWPF.Screens.Users
 
             foreach (var user in sortedUsers)
             {
-                Ellipse avatar = new Ellipse
+                Ellipse avatarBackground = new Ellipse
                 {
                     Width = 80,
                     Height = 80,
-                    Fill = Brushes.LightGray,
+                    Fill = Brushes.LightGray
+                };
+
+                TextBlock avatarIcon = new TextBlock
+                {
+                    Text = char.ToUpper(user.Username[0]).ToString(),
+                    FontSize = 36,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center
+                };
+
+                Grid avatar = new Grid
+                {
+                    Width = 80,
+                    Height = 80,
                     Margin = new Thickness(0, 0, 0, 5)
                 };
+                avatar.Children.Add(avatarBackground);
+                avatar.Children.Add(avatarIcon);
 
                 TextBlock name = new TextBlock
                 {
