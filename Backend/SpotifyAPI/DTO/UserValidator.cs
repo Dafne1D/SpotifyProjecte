@@ -22,11 +22,6 @@ public static class UserValidator
             return Result.Failure("La longitud del nom d'usuari ha de ser inferior a 50", "LONGITUD_INCORRECTE");
         }
 
-        if (UserADO.UsernameExists(dbConn, user.Username))
-        {
-            return Result.Failure("Aquest nom d'usuari ja existeix", "USERNAME_DUPLICAT");
-        }
-        
         if (string.IsNullOrEmpty(user.Email))
         {
             return Result.Failure("El correu és obligatori", "EMAIL_OBLIGATORI");
@@ -35,11 +30,6 @@ public static class UserValidator
         if (!user.Email.EndsWith("@gmail.com"))
         {
             return Result.Failure("Només es permeten comptes de Gmail", "EMAIL_INVALID");
-        }
-
-        if (UserADO.EmailExists(dbConn, user.Email))
-        {
-            return Result.Failure("Aquest correu ja està registrat", "EMAIL_DUPLICAT");
         }
 
         if (string.IsNullOrEmpty(user.Password))
