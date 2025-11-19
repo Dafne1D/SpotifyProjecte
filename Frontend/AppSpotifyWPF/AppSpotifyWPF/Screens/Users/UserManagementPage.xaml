@@ -133,5 +133,10 @@
                 </StackPanel>
             </ScrollViewer>
         </Grid>
+
+        <Frame x:Name="MainFrame"
+               NavigationUIVisibility="Hidden"
+               Background="White"
+               Visibility="Collapsed"/>
     </Grid>
 </Page>

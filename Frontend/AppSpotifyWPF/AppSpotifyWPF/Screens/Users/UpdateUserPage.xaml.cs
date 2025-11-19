@@ -9,10 +9,12 @@ namespace AppSpotifyWPF.Screens.Users
     public partial class UpdateUserPage : Page
     {
         private readonly ApiService _apiService = new ApiService();
+        private User selectedUser;
 
-        public UpdateUserPage()
+        public UpdateUserPage(User selectedUser)
         {
             InitializeComponent();
+            this.selectedUser = selectedUser;
         }
 
         private async void CreateUser_Click(object sender, RoutedEventArgs e)

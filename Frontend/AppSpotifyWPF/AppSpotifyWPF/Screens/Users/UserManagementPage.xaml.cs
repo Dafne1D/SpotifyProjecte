@@ -23,6 +23,7 @@ namespace AppSpotifyWPF.Screens.Users
     public partial class UserManagementPage : Page
     {
         private readonly ApiService _apiService = new ApiService();
+        private User selectedUser = null;
 
         public UserManagementPage()
         {
@@ -40,7 +41,13 @@ namespace AppSpotifyWPF.Screens.Users
         }
         private void editUserButton_Click(object sender, RoutedEventArgs e)
         {
+            if (selectedUser == null)
+            {
+                MessageBox.Show("No User selected!");
+                return;
+            }
 
+            changePage(new UpdateUserPage(selectedUser));
         }
         private void deleteUserButton_Click(object sender, RoutedEventArgs e)
         {
@@ -58,6 +65,13 @@ namespace AppSpotifyWPF.Screens.Users
         }
 
         /* PAGE METHODS */
+        private void changePage(Page newPage)
+        {
+            MainGrid.Visibility = Visibility.Collapsed;
+            MainFrame.Visibility = Visibility.Visible;
+            MainFrame.Navigate(newPage);
+        }
+
         private async Task LoadUsers()
         {
             try
@@ -95,17 +109,40 @@ namespace AppSpotifyWPF.Screens.Users
                     FontWeight = FontWeights.Bold
                 };
 
-                StackPanel card = new StackPanel
+                Border border = new Border
                 {
+                    BorderBrush = Brushes.Transparent,
+                    BorderThickness = new Thickness(2),
+                    CornerRadius = new CornerRadius(5),
                     Margin = new Thickness(10),
                     Width = 100,
-                    HorizontalAlignment = HorizontalAlignment.Center
+                    Child = new StackPanel
+                    {
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        Children = { avatar, name }
+                    },
+                    Tag = user
                 };
 
-                card.Children.Add(avatar);
-                card.Children.Add(name);
+                border.MouseLeftButtonDown += UserCard_MouseLeftButtonDown;
 
-                UsersWrap.Children.Add(card);
+                UsersWrap.Children.Add(border);
+            }
+        }
+
+        private void UserCard_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Border border && border.Tag is User user)
+            {
+                foreach (var child in UsersWrap.Children)
+                {
+                    if (child is Border b)
+                        b.BorderBrush = Brushes.Transparent;
+                }
+
+                border.BorderBrush = Brushes.DeepSkyBlue;
+
+                selectedUser = user;
             }
         }
     }
