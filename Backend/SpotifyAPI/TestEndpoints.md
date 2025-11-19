@@ -90,3 +90,51 @@
 // DELETE http://localhost:5000/playlistSong/{id}
 ```
 # SongFile
+
+
+# Roles
+```JSON
+// GET http://localhost:5000/roles
+```
+```JSON
+// POST http://localhost:5000/roles/
+{
+  "name" : "rol2",
+  "description" : "description2"
+}
+```
+
+# Permissions
+```JSON
+// GET http://localhost:5000/permissions
+```
+```JSON
+// POST http://localhost:5000/permissions
+{
+  "name" : "client",
+  "description" : "description1"
+}
+```
+
+# RolePermissions
+
+```JSON
+// GET http://localhost:5000/rolePermissions
+```
+
+```JSON
+// POST http://localhost:5000/rolePermissions/
+
+{
+  "roleId" : "4244ca69-05b4-4e33-b101-a4c9b9b954cb",
+  "permissionId" : "bfc8b526-71ed-4d5f-9c8e-2494c0819cff"
+}
+```
+```JSON
+Get by Role Id
+// GET http://localhost:5000/rolePermissions/role/5b01d447-2b76-40a8-b806-3bc9802ba6bb
+```
+```JSON
+Get by Permission Id
+http://localhost:5000/rolePermissions/permission/bfc8b526-71ed-4d5f-9c8e-2494c0819cff
+```
