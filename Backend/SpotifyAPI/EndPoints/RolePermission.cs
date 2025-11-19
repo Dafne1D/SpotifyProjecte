@@ -23,20 +23,6 @@ public static class RolePermissionEndpoints
             return Results.Created($"/rolePermissions/{rolPer.Id}", rolPer);
         });
 
-        // GET /rolePermissions/role/{roleId}
-        app.MapGet("/rolePermissions/role/{roleId}", (Guid roleId) =>
-        {
-            List<RolePermission> rolPer = RolePermissionADO.GetByRole(dbConn, roleId);
-            return Results.Ok(rolPer);
-        });
-
-        // GET /rolePermissions/permission/{permissionId}
-        app.MapGet("/rolePermissions/permission/{permissionId}", (Guid permissionId) =>
-        {
-            List<RolePermission> rolPer = RolePermissionADO.GetByPermission(dbConn, permissionId);
-            return Results.Ok(rolPer);
-        });
-
         // DELETE /rolePermissions
         app.MapDelete("/rolePermissions", (Guid roleId, Guid permissionId) =>
         {
