@@ -17,12 +17,7 @@ namespace AppSpotifyWPF.Screens.Users
 
         private void BackToHome_Click(object sender, RoutedEventArgs e)
         {
-            Window parentWindow = Window.GetWindow(this);
-            if (parentWindow is HomeScreen home)
-            {
-                home.MainFrame.Visibility = Visibility.Collapsed;
-                home.HomeContent.Visibility = Visibility.Visible;
-            }
+            NavigationService.Navigate(new HomePage());
         }
 
         private async void CreateUserButton_Click(object sender, RoutedEventArgs e)
@@ -98,17 +93,6 @@ namespace AppSpotifyWPF.Screens.Users
             txtEmail.Clear();
             txtPassword.Clear();
             txtRepeatPassword.Clear();
-        }
-
-        private void BackToHome_Click(object sender, RoutedEventArgs e)
-        {
-            Window parentWindow = Window.GetWindow(this);
-
-            if (parentWindow is HomeScreen home)
-            {
-                home.MainFrame.Visibility = Visibility.Collapsed;
-                home.HomeContent.Visibility = Visibility.Visible;
-            }
         }
     }
 }
