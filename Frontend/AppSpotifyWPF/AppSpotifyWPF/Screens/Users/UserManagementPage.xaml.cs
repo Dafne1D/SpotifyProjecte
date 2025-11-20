@@ -23,28 +23,73 @@ namespace AppSpotifyWPF.Screens.Users
     public partial class UserManagementPage : Page
     {
         private readonly ApiService _apiService = new ApiService();
+        private User? selectedUser = null;
+        private Border? selectedBorder = null;
 
         public UserManagementPage()
         {
             InitializeComponent();
         }
 
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            await LoadUsers();
+        }
+
         /* BUTTON METHODS */
         private void newUserButton_Click(object sender, RoutedEventArgs e)
         {
-
+            // changePage(new CreateUserPage());
         }
         private void viewUserButton_Click(object sender, RoutedEventArgs e)
         {
+            if (selectedUser == null)
+            {
+                MessageBox.Show("No User selected!");
+                return;
+            }
 
+            // changePage(new ReadUserPage(selectedUser));
         }
         private void editUserButton_Click(object sender, RoutedEventArgs e)
         {
+            if (selectedUser == null)
+            {
+                MessageBox.Show("No User selected!");
+                return;
+            }
 
+            changePage(new UpdateUserPage(selectedUser));
         }
-        private void deleteUserButton_Click(object sender, RoutedEventArgs e)
+        private async void deleteUserButton_Click(object sender, RoutedEventArgs e)
         {
+            if (selectedUser == null)
+            {
+                MessageBox.Show("No User selected!");
+                return;
+            }
 
+            var result = MessageBox.Show(
+            $"Are you sure you want to delete {selectedUser.Username}?",
+            "Confirm",
+            MessageBoxButton.YesNo,
+            MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    await _apiService.DeleteAsync($"/users/{selectedUser.Id}");
+                    MessageBox.Show("✅ User deleted.");
+
+                    unselectAllUsers();
+                    await LoadUsers();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("❌ Error deleting user:\n" + ex.Message);
+                }
+            }
         }
 
         private async void LoadUsers_Click(object sender, RoutedEventArgs e)
@@ -57,7 +102,29 @@ namespace AppSpotifyWPF.Screens.Users
 
         }
 
+        private void UserCard_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Border border && border.Tag is User user)
+            {
+                if (selectedBorder == border)
+                {
+                    unselectAllUsers();
+                    return;
+                }
+
+                unselectAllUsers();
+                selectUser(border, user);
+            }
+        }
+
         /* PAGE METHODS */
+        private void changePage(Page newPage)
+        {
+            MainGrid.Visibility = Visibility.Collapsed;
+            MainFrame.Visibility = Visibility.Visible;
+            MainFrame.Navigate(newPage);
+        }
+
         private async Task LoadUsers()
         {
             try
@@ -80,13 +147,29 @@ namespace AppSpotifyWPF.Screens.Users
 
             foreach (var user in sortedUsers)
             {
-                Ellipse avatar = new Ellipse
+                Ellipse avatarBackground = new Ellipse
                 {
                     Width = 80,
                     Height = 80,
-                    Fill = Brushes.LightGray,
+                    Fill = Brushes.LightGray
+                };
+
+                TextBlock avatarIcon = new TextBlock
+                {
+                    Text = char.ToUpper(user.Username[0]).ToString(),
+                    FontSize = 36,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center
+                };
+
+                Grid avatar = new Grid
+                {
+                    Width = 80,
+                    Height = 80,
                     Margin = new Thickness(0, 0, 0, 5)
                 };
+                avatar.Children.Add(avatarBackground);
+                avatar.Children.Add(avatarIcon);
 
                 TextBlock name = new TextBlock
                 {
@@ -95,18 +178,44 @@ namespace AppSpotifyWPF.Screens.Users
                     FontWeight = FontWeights.Bold
                 };
 
-                StackPanel card = new StackPanel
+                Border border = new Border
                 {
+                    BorderBrush = Brushes.Transparent,
+                    BorderThickness = new Thickness(2),
+                    CornerRadius = new CornerRadius(5),
                     Margin = new Thickness(10),
                     Width = 100,
-                    HorizontalAlignment = HorizontalAlignment.Center
+                    Child = new StackPanel
+                    {
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        Children = { avatar, name }
+                    },
+                    Tag = user
                 };
 
-                card.Children.Add(avatar);
-                card.Children.Add(name);
+                border.MouseLeftButtonDown += UserCard_MouseLeftButtonDown;
 
-                UsersWrap.Children.Add(card);
+                UsersWrap.Children.Add(border);
             }
+        }
+
+        private void unselectAllUsers()
+        {
+            foreach (var child in UsersWrap.Children)
+            {
+                if (child is Border b)
+                    b.BorderBrush = Brushes.Transparent;
+            }
+            selectedUser = null;
+            selectedBorder = null;
+        }
+
+        private void selectUser(Border border, User user)
+        {
+            border.BorderBrush = Brushes.DeepSkyBlue;
+
+            selectedUser = user;
+            selectedBorder = border;
         }
     }
 }
