@@ -38,12 +38,6 @@ namespace AppSpotifyWPF.Screens.Users
 
         private void newUserButton_Click(object sender, RoutedEventArgs e)
         {
-            if (selectedUser == null)
-            {
-                MessageBox.Show("No User selected!");
-                return;
-            }
-
             changePage(new CreateUserPage());
         }
 

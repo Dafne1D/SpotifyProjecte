@@ -73,11 +73,7 @@ namespace AppSpotifyWPF.Screens.Users
         {
             Window parentWindow = Window.GetWindow(this);
 
-            if (parentWindow is HomeScreen home)
-            {
-                home.MainFrame.Visibility = Visibility.Collapsed;
-                home.HomeContent.Visibility = Visibility.Visible;
-            }
+            NavigationService.GoBack();
         }
     }
 }
