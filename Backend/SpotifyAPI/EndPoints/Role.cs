@@ -10,6 +10,7 @@ public static class RoleEndpoints
     public static void MapRoleEndpoints(this WebApplication app, SpotifyDBConnection dbConn)
     {
 
+
         // GET /roles
         app.MapGet("/roles", () =>
         {
@@ -20,6 +21,13 @@ public static class RoleEndpoints
                 roleResponses.Add(RoleResponse.FromRole(role));
             }
             return Results.Ok(roleResponses);
+        });
+
+        // GET /roles/{id}/permissions
+        app.MapGet("/roles/{roleId}/permissions", (Guid roleId) =>
+        {
+            List<RolePermission> rolPer = RolePermissionADO.GetAll(dbConn, roleId);
+            return Results.Ok(rolPer);
         });
     }
 }

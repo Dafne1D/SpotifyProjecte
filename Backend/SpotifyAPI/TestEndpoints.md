@@ -96,13 +96,6 @@
 ```JSON
 // GET http://localhost:5000/roles
 ```
-```JSON
-// POST http://localhost:5000/roles/
-{
-  "name" : "rol2",
-  "description" : "description2"
-}
-```
 
 # Permissions
 ```JSON
