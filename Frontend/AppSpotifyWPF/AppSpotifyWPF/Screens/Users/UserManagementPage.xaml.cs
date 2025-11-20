@@ -49,8 +49,9 @@ namespace AppSpotifyWPF.Screens.Users
                 return;
             }
 
-            // changePage(new ReadUserPage(selectedUser));
+            changePage(new ViewUserPage(selectedUser));
         }
+
         private void editUserButton_Click(object sender, RoutedEventArgs e)
         {
             if (selectedUser == null)
