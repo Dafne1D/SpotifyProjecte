@@ -3,7 +3,6 @@ using AppSpotifyWPF.Services;
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Xml.Linq;
 
 namespace AppSpotifyWPF.Screens.Users
 {
@@ -14,6 +13,16 @@ namespace AppSpotifyWPF.Screens.Users
         public CreateUserPage()
         {
             InitializeComponent();
+        }
+
+        private void BackToHome_Click(object sender, RoutedEventArgs e)
+        {
+            Window parentWindow = Window.GetWindow(this);
+            if (parentWindow is HomeScreen home)
+            {
+                home.MainFrame.Visibility = Visibility.Collapsed;
+                home.HomeContent.Visibility = Visibility.Visible;
+            }
         }
 
         private async void CreateUserButton_Click(object sender, RoutedEventArgs e)
@@ -31,15 +40,32 @@ namespace AppSpotifyWPF.Screens.Users
 
             if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(email))
             {
-                MessageBox.Show("El nom i el correu són obligatoris");
+                MessageBox.Show("El nom d'usuari i el correu són obligatoris");
                 return;
             }
 
             if (!email.EndsWith("@gmail.com"))
             {
-                MessageBox.Show("Només es permeten correus Gmail");
+                MessageBox.Show("Només es permeten comptes de Gmail");
                 return;
             }
+
+            if (string.IsNullOrWhiteSpace(password) || password.Length < 8)
+            {
+                MessageBox.Show("La contrasenya ha de tenir almenys 8 caràcters");
+                return;
+            }
+
+            bool hasUpper = password.Any(char.IsUpper);
+            bool hasLower = password.Any(char.IsLower);
+            bool hasDigit = password.Any(char.IsDigit);
+
+            if (!hasUpper || !hasLower || !hasDigit)
+            {
+                MessageBox.Show("La contrasenya ha de contenir majúscules, minúscules i números");
+                return;
+            }
+
 
             var newUser = new User
             {
@@ -51,32 +77,18 @@ namespace AppSpotifyWPF.Screens.Users
 
             try
             {
-                var createdUser = await _apiService.PostAsync<User>("/users", newUser);
-                MessageBox.Show($"Usuari creat correctament! ID: {createdUser.Id}");
-                ClearFields();
+                await _apiService.PostAsync<User>("/users", newUser);
+                MessageBox.Show("Usuari creat correctament");
+
+                txtName.Clear();
+                txtEmail.Clear();
+                txtPassword.Clear();
+                txtRepeatPassword.Clear();
+                txtRole.Clear();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error creant l'usuari:\n" + ex.Message);
-            }
-        }
-
-        private void ClearFields()
-        {
-            txtName.Clear();
-            txtEmail.Clear();
-            txtPassword.Clear();
-            txtRepeatPassword.Clear();
-        }
-
-        private void BackToHome_Click(object sender, RoutedEventArgs e)
-        {
-            Window parentWindow = Window.GetWindow(this);
-
-            if (parentWindow is HomeScreen home)
-            {
-                home.MainFrame.Visibility = Visibility.Collapsed;
-                home.HomeContent.Visibility = Visibility.Visible;
+                MessageBox.Show($"Error creant l'usuari:\n{ex.Message}");
             }
         }
     }

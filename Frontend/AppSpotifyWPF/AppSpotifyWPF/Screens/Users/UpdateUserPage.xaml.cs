@@ -114,6 +114,17 @@ namespace AppSpotifyWPF.Screens.Users
                 return;
             }
 
+            bool hasUpper = password.Any(char.IsUpper);
+            bool hasLower = password.Any(char.IsLower);
+            bool hasDigit = password.Any(char.IsDigit);
+
+            if (!hasUpper || !hasLower || !hasDigit)
+            {
+                MessageBox.Show("La contrasenya ha de contenir majúscules, minúscules i números");
+                return;
+            }
+
+
             var updatedUser = new User
             {
                 Id = selectedUser.Id,
