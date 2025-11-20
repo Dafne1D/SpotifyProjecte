@@ -10,146 +10,137 @@
       Background="#F5F6FA"
       Loaded="Page_Loaded">
 
-    <Grid>
+    <Grid x:Name="MainGrid">
 
-        <!-- ====== MAIN GRID ====== -->
-        <Grid x:Name="MainGrid">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="40">
+                <Button
+            Margin="0 0 0 5"
+            Background="Transparent"
+            Foreground="Gray"
+            BorderBrush="Transparent"
+            BorderThickness="1"
+            Click="BackToHome_Click"
+            HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontFamily="Segoe MDL2 Assets"
+                           Text="&#xE76B;"
+                           FontSize="16"
+                           Margin="0 0 10 0"/>
+                        <TextBlock Text="Back to Home"
+                           FontWeight="Bold"/>
+                    </StackPanel>
+                </Button>
 
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <StackPanel Margin="40">
-                    <Button
-                    Margin="0 0 0 5"
-                    Background="Transparent"
-                    Foreground="Gray"
-                    BorderBrush="Transparent"
-                    BorderThickness="1"
-                    Click="BackToHome_Click"
-                    HorizontalAlignment="Left">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe MDL2 Assets"
-                                   Text="&#xE76B;"
-                                   FontSize="16"
-                                   Margin="0 0 10 0"/>
-                            <TextBlock Text="Back to Home"
-                                   FontWeight="Bold"/>
-                        </StackPanel>
-                    </Button>
-                    
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <!-- 50% -->
-                            <ColumnDefinition Width="*" />
-                            <!-- 50% -->
-                        </Grid.ColumnDefinitions>
-                        
-                        <!-- Main Title -->
-                        <TextBlock Text="User Management" Grid.Column="0"
-                               FontSize="28"
-                               FontWeight="Bold"
-                               Foreground="Black"
-                               Margin="0,0,0,20"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <!-- 50% -->
+                        <ColumnDefinition Width="*" />
+                        <!-- 50% -->
+                    </Grid.ColumnDefinitions>
 
-                        <StackPanel Orientation="Horizontal" Grid.Column="1"
-                                    HorizontalAlignment="Right">
-                            <!-- Create Button -->
-                            <Viewbox Stretch="Uniform">
-                                <Button x:Name="newUserButton"
-                                        Margin="10 0"  Padding="10"
-                                        Background="LimeGreen"
-                                        Foreground="DarkGreen"
-                                        BorderBrush="DarkGreen"
-                                        BorderThickness="1"
-                                        Click="newUserButton_Click" HorizontalAlignment="Left">
-                                    <TextBlock FontFamily="Segoe MDL2 Assets"
-                                                   Text="&#xE710;"
-                                                   FontSize="18"
-                                                   HorizontalAlignment="Center"/>
-                                </Button>
-                            </Viewbox>
+                    <!-- Main Title -->
+                    <TextBlock Text="User Management" Grid.Column="0"
+                       FontSize="28"
+                       FontWeight="Bold"
+                       Foreground="Black"
+                       Margin="0,0,0,20"/>
 
-                            <!-- Read Button -->
-                            <Viewbox Stretch="Uniform">
-                                <Button x:Name="viewUserButton"
-                                        Margin="10 0"  Padding="10"
-                                        Background="White"
-                                        BorderBrush="#E0E0E0"
-                                        BorderThickness="1"
-                                        Click="viewUserButton_Click" HorizontalAlignment="Left">
-                                    <TextBlock FontFamily="Segoe MDL2 Assets"
-                                                   Text="&#xE7B3;"
-                                                   FontSize="18"
-                                                   HorizontalAlignment="Center"/>
-                                </Button>
-                            </Viewbox>
+                    <StackPanel Orientation="Horizontal" Grid.Column="1"
+                            HorizontalAlignment="Right">
+                        <!-- Create Button -->
+                        <Viewbox Stretch="Uniform">
+                            <Button x:Name="newUserButton"
+                                Margin="10 0"  Padding="10"
+                                Background="LimeGreen"
+                                Foreground="DarkGreen"
+                                BorderBrush="DarkGreen"
+                                BorderThickness="1"
+                                Click="newUserButton_Click" HorizontalAlignment="Left">
+                                <TextBlock FontFamily="Segoe MDL2 Assets"
+                                           Text="&#xE710;"
+                                           FontSize="18"
+                                           HorizontalAlignment="Center"/>
+                            </Button>
+                        </Viewbox>
 
-                            <!-- Update Button -->
-                            <Viewbox Stretch="Uniform">
-                                <Button x:Name="editUserButton"
-                                        Margin="10 0"  Padding="10"
-                                        Background="White"
-                                        BorderBrush="#E0E0E0"
-                                        BorderThickness="1"
-                                        Click="editUserButton_Click" HorizontalAlignment="Left">
-                                    <TextBlock FontFamily="Segoe MDL2 Assets"
-                                                   Text="&#xE70F;"
-                                                   FontSize="18"
-                                                   HorizontalAlignment="Center"/>
-                                </Button>
-                            </Viewbox>
+                        <!-- Read Button -->
+                        <Viewbox Stretch="Uniform">
+                            <Button x:Name="viewUserButton"
+                                Margin="10 0"  Padding="10"
+                                Background="White"
+                                BorderBrush="#E0E0E0"
+                                BorderThickness="1"
+                                Click="viewUserButton_Click" HorizontalAlignment="Left">
+                                <TextBlock FontFamily="Segoe MDL2 Assets"
+                                           Text="&#xE7B3;"
+                                           FontSize="18"
+                                           HorizontalAlignment="Center"/>
+                            </Button>
+                        </Viewbox>
 
-                            <!-- Delete Button -->
-                            <Viewbox Stretch="Uniform">
-                                <Button x:Name="deleteUserButton"
-                                        Margin="10 0"  Padding="10"
-                                        Background="Red"
-                                        Foreground="DarkRed"
-                                        BorderBrush="DarkRed"
-                                        BorderThickness="1"
-                                        Click="deleteUserButton_Click" HorizontalAlignment="Left">
-                                    <TextBlock FontFamily="Segoe MDL2 Assets"
-                                                   Text="&#xE74D;"
-                                                   FontSize="18"
-                                                   HorizontalAlignment="Center"/>
-                                </Button>
-                            </Viewbox>
-                        </StackPanel>
-                    </Grid>
+                        <!-- Update Button -->
+                        <Viewbox Stretch="Uniform">
+                            <Button x:Name="editUserButton"
+                                Margin="10 0"  Padding="10"
+                                Background="White"
+                                BorderBrush="#E0E0E0"
+                                BorderThickness="1"
+                                Click="editUserButton_Click" HorizontalAlignment="Left">
+                                <TextBlock FontFamily="Segoe MDL2 Assets"
+                                           Text="&#xE70F;"
+                                           FontSize="18"
+                                           HorizontalAlignment="Center"/>
+                            </Button>
+                        </Viewbox>
 
-                    <!-- MAIN -->
-                    <Border Background="White" CornerRadius="10" Padding="20" Margin="0,0,0,25">
-                        <StackPanel>
-                            <!-- Search bar -->
-                            <DockPanel Margin="0,0,0,30">
-                                <TextBox x:Name="txtSearch" Width="400" Height="35"
-                                Text=""
-                                HorizontalContentAlignment="Left"
-                                VerticalContentAlignment="Center"/>
-                            </DockPanel>
+                        <!-- Delete Button -->
+                        <Viewbox Stretch="Uniform">
+                            <Button x:Name="deleteUserButton"
+                                Margin="10 0"  Padding="10"
+                                Background="Red"
+                                Foreground="DarkRed"
+                                BorderBrush="DarkRed"
+                                BorderThickness="1"
+                                Click="deleteUserButton_Click" HorizontalAlignment="Left">
+                                <TextBlock FontFamily="Segoe MDL2 Assets"
+                                           Text="&#xE74D;"
+                                           FontSize="18"
+                                           HorizontalAlignment="Center"/>
+                            </Button>
+                        </Viewbox>
+                    </StackPanel>
+                </Grid>
 
-                            <!-- Load users -->
-                            <Button Content="Load"
-                            Background="#4CAF50"
-                            Foreground="White"
-                            Width="150"
-                            Height="35"
-                            Click="LoadUsers_Click"
-                            Margin="0,0,0,20"/>
+                <!-- MAIN -->
+                <Border Background="White" CornerRadius="10" Padding="20" Margin="0,0,0,25">
+                    <StackPanel>
+                        <!-- Search bar -->
+                        <DockPanel Margin="0,0,0,30">
+                            <TextBox x:Name="txtSearch" Width="400" Height="35"
+                        Text=""
+                        HorizontalContentAlignment="Left"
+                        VerticalContentAlignment="Center"/>
+                        </DockPanel>
 
-                            <!-- Users grid -->
-                            <WrapPanel x:Name="UsersWrap"
-                            HorizontalAlignment="Left"
-                            Margin="0,0,0,20"/>
-                        </StackPanel>
-                    </Border>
+                        <!-- Load users -->
+                        <Button Content="Load"
+                    Background="#4CAF50"
+                    Foreground="White"
+                    Width="150"
+                    Height="35"
+                    Click="LoadUsers_Click"
+                    Margin="0,0,0,20"/>
 
-                </StackPanel>
-            </ScrollViewer>
-        </Grid>
+                        <!-- Users grid -->
+                        <WrapPanel x:Name="UsersWrap"
+                    HorizontalAlignment="Left"
+                    Margin="0,0,0,20"/>
+                    </StackPanel>
+                </Border>
 
-        <Frame x:Name="MainFrame"
-               NavigationUIVisibility="Hidden"
-               Background="White"
-               Visibility="Collapsed"/>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

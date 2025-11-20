@@ -1,23 +1,34 @@
-﻿
+﻿using AppSpotifyWPF.Screens.Users;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
-using AppSpotifyWPF.Screens.Users;
-using AppSpotifyWPF.Screens.Songs;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
-namespace AppSpotifyWPF
+namespace AppSpotifyWPF.Screens
 {
-    public partial class HomeScreen : Window
+    /// <summary>
+    /// Interaction logic for HomePage.xaml
+    /// </summary>
+    public partial class HomePage : Page
     {
-        public HomeScreen()
+        public HomePage()
         {
             InitializeComponent();
         }
 
         private void changePage(Page newPage)
         {
-            HomeContent.Visibility = Visibility.Collapsed;
-            MainFrame.Visibility = Visibility.Visible;
-            MainFrame.Navigate(newPage);
+            NavigationService.Navigate(newPage);
         }
 
         private void userManagementButton_Click(object sender, RoutedEventArgs e)

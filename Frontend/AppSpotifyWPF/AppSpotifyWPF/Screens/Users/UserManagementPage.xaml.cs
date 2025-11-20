@@ -120,9 +120,7 @@ namespace AppSpotifyWPF.Screens.Users
         /* PAGE METHODS */
         private void changePage(Page newPage)
         {
-            MainGrid.Visibility = Visibility.Collapsed;
-            MainFrame.Visibility = Visibility.Visible;
-            MainFrame.Navigate(newPage);
+            NavigationService.Navigate(newPage);
         }
 
         private async Task LoadUsers()
