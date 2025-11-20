@@ -62,24 +62,10 @@ namespace AppSpotifyWPF.Screens.Users
             //txtPassword.Clear();
             //txtRepeatPassword.Clear();
         }
-        private void BackToHome_Click(object sender, RoutedEventArgs e)
-        {
-            Window parentWindow = Window.GetWindow(this);
-            if (parentWindow is HomeScreen home)
-            {
-                home.MainFrame.Visibility = Visibility.Collapsed;
-                home.HomeContent.Visibility = Visibility.Visible;
-            }
-        }
 
         private void returnButton_Click(object sender, RoutedEventArgs e)
         {
-            var parentWindow = Window.GetWindow(this);
-            if (parentWindow is HomeScreen home)
-            {
-                home.MainFrame.Visibility = Visibility.Collapsed;
-                home.HomeContent.Visibility = Visibility.Visible;
-            }
+            NavigationService.Navigate(new UserManagementPage());
         }
 
 
@@ -170,12 +156,7 @@ namespace AppSpotifyWPF.Screens.Users
                     await _apiService.DeleteAsync($"/users/{selectedUser.Id}");
                     MessageBox.Show("Usuari eliminat");
 
-                    var parentWindow = Window.GetWindow(this);
-                    if (parentWindow is HomeScreen home)
-                    {
-                        home.MainFrame.Visibility = Visibility.Collapsed;
-                        home.HomeContent.Visibility = Visibility.Visible;
-                    }
+                    NavigationService.Navigate(new UserManagementPage());
                 }
                 catch (Exception ex)
                 {

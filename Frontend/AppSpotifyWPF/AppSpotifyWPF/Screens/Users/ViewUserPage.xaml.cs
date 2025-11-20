@@ -22,13 +22,13 @@ namespace AppSpotifyWPF.Screens.Users
 
         private void BackToHome_Click(object sender, RoutedEventArgs e)
         {
-            Window parentWindow = Window.GetWindow(this);
+            //Window parentWindow = Window.GetWindow(this);
 
-            if (parentWindow is HomeScreen home)
-            {
-                home.MainFrame.Visibility = Visibility.Collapsed;
-                home.HomeContent.Visibility = Visibility.Visible;
-            }
+            //if (parentWindow is HomeScreen home)
+            //{
+            //    home.MainFrame.Visibility = Visibility.Collapsed;
+            //    home.HomeContent.Visibility = Visibility.Visible;
+            //}
         }
     }
 }

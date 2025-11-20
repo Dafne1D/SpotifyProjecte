@@ -88,7 +88,26 @@ namespace AppSpotifyWPF.Screens.Users
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error creant l'usuari:\n{ex.Message}");
+                MessageBox.Show("Error creant l'usuari:\n" + ex.Message);
+            }
+        }
+
+        private void ClearFields()
+        {
+            txtName.Clear();
+            txtEmail.Clear();
+            txtPassword.Clear();
+            txtRepeatPassword.Clear();
+        }
+
+        private void BackToHome_Click(object sender, RoutedEventArgs e)
+        {
+            Window parentWindow = Window.GetWindow(this);
+
+            if (parentWindow is HomeScreen home)
+            {
+                home.MainFrame.Visibility = Visibility.Collapsed;
+                home.HomeContent.Visibility = Visibility.Visible;
             }
         }
     }

@@ -1,111 +1,105 @@
-﻿<Window x:Class="AppSpotifyWPF.HomeScreen"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Admin Dashboard" Height="800" Width="1000"
-        Background="#F5F6FA">
+﻿<Page x:Class="AppSpotifyWPF.Screens.HomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AppSpotifyWPF.Screens"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Admin Dashboard" Height="800" Width="1000"
+      Background="#F5F6FA">
 
-    <Grid>
+    <Grid x:Name="MainContent">
 
-        <!-- ====== VISTA PRINCIPAL (HOME) ====== -->
-        <Grid x:Name="HomeContent">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="40">
 
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <StackPanel Margin="40">
-
-                    <!-- Título principal -->
-                    <TextBlock Text="Home Screen"
+                <!-- Título principal -->
+                <TextBlock Text="Home Screen"
                                FontSize="28"
                                FontWeight="Bold"
                                Foreground="Black"
                                Margin="0,0,0,20"/>
 
-                    <!-- MAIN -->
-                    <Border Background="White" CornerRadius="10" Padding="20" Margin="0,0,0,25">
-                        <StackPanel>
-                            <UniformGrid Columns="3" Rows="1"
+                <!-- MAIN -->
+                <Border Background="White" CornerRadius="10" Padding="20" Margin="0,0,0,25">
+                    <StackPanel>
+                        <UniformGrid Columns="3" Rows="1"
                                          Margin="0,10,0,0"
                                          HorizontalAlignment="Center"
                                          Width="700">
 
-                                <!-- User Management -->
-                                <Button x:Name="userManagementButton"
+                            <!-- User Management -->
+                            <Button x:Name="userManagementButton"
                                         Margin="10" Padding="20"
                                         Background="White"
                                         BorderBrush="#E0E0E0"
                                         BorderThickness="1"
                                         Click="userManagementButton_Click" HorizontalAlignment="Left" Width="155">
-                                    <StackPanel HorizontalAlignment="Center">
-                                        <TextBlock FontFamily="Segoe MDL2 Assets"
+                                <StackPanel HorizontalAlignment="Center">
+                                    <TextBlock FontFamily="Segoe MDL2 Assets"
                                                    Text="&#xE716;"
                                                    FontSize="36"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Users"
+                                    <TextBlock Text="Users"
                                                    FontWeight="Bold"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Users management"
+                                    <TextBlock Text="Users management"
                                                    FontSize="12"
                                                    Foreground="Gray"
                                                    HorizontalAlignment="Center"/>
-                                    </StackPanel>
-                                </Button>
+                                </StackPanel>
+                            </Button>
 
-                                <!-- Song Management -->
-                                <Button x:Name="songManagementButton"
+                            <!-- Song Management -->
+                            <Button x:Name="songManagementButton"
                                         Margin="10" Padding="20"
                                         Background="White"
                                         BorderBrush="#E0E0E0"
                                         BorderThickness="1"
                                         Click="songManagementButton_Click" HorizontalAlignment="Left" Width="155">
-                                    <StackPanel HorizontalAlignment="Center">
-                                        <TextBlock FontFamily="Segoe MDL2 Assets"
+                                <StackPanel HorizontalAlignment="Center">
+                                    <TextBlock FontFamily="Segoe MDL2 Assets"
                                                    Text="&#xE189;"
                                                    FontSize="36"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Songs"
+                                    <TextBlock Text="Songs"
                                                    FontWeight="Bold"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Songs management"
+                                    <TextBlock Text="Songs management"
                                                    FontSize="12"
                                                    Foreground="Gray"
                                                    HorizontalAlignment="Center"/>
-                                    </StackPanel>
-                                </Button>
+                                </StackPanel>
+                            </Button>
 
-                                <!-- Playlist Management -->
-                                <Button x:Name="playlistManagementButton"
+                            <!-- Playlist Management -->
+                            <Button x:Name="playlistManagementButton"
                                         Margin="10" Padding="20"
                                         Background="White"
                                         BorderBrush="#E0E0E0"
                                         BorderThickness="1"
                                         Click="playlistManagementButton_Click" HorizontalAlignment="Left" Width="155">
-                                    <StackPanel HorizontalAlignment="Center">
-                                        <TextBlock FontFamily="Segoe MDL2 Assets"
+                                <StackPanel HorizontalAlignment="Center">
+                                    <TextBlock FontFamily="Segoe MDL2 Assets"
                                                    Text="&#xE179;"
                                                    FontSize="36"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Playlists"
+                                    <TextBlock Text="Playlists"
                                                    FontWeight="Bold"
                                                    HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Playlists management"
+                                    <TextBlock Text="Playlists management"
                                                    FontSize="12"
                                                    Foreground="Gray"
                                                    HorizontalAlignment="Center"/>
-                                    </StackPanel>
-                                </Button>
+                                </StackPanel>
+                            </Button>
 
-                            </UniformGrid>
-                        </StackPanel>
-                    </Border>
+                        </UniformGrid>
+                    </StackPanel>
+                </Border>
 
-                </StackPanel>
-            </ScrollViewer>
-        </Grid>
-
-
-        <!-- ====== FRAME PARA PANTALLAS CRUD ====== -->
-        <Frame x:Name="MainFrame"
-               NavigationUIVisibility="Hidden"
-               Background="White"
-               Visibility="Collapsed"/>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
-</Window>
+</Page>
