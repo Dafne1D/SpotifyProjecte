@@ -107,7 +107,7 @@
                                 <Button x:Name="saveUserButton"
                                         Width="120"
                                         Margin="0 0 10 0"
-                                        Padding="10 6"
+                                        Padding="12 8"
                                         Background="#4CAF50"
                                         Foreground="Black"
                                         BorderBrush="#388E3C"
@@ -124,8 +124,7 @@
                                 </Button>
 
                                 <Button x:Name="deleteUserButton"
-                                        Width="120"
-                                        Padding="10 6"
+                                        Padding="12 8"
                                         Background="Red"
                                         Foreground="Black"
                                         BorderBrush="DarkRed"
