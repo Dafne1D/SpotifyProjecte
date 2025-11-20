@@ -92,25 +92,25 @@ namespace AppSpotifyWPF.Screens.Users
 
             if (password != repeatPassword)
             {
-                MessageBox.Show("The passwords do not match!");
+                MessageBox.Show("Les contrasenyes no coincideixen");
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(email))
             {
-                MessageBox.Show("Name and email are mandatory");
+                MessageBox.Show("El nom d'usuari i el correu són obligatoris");
                 return;
             }
 
             if (!email.EndsWith("@gmail.com"))
             {
-                MessageBox.Show("Email must be Gmail");
+                MessageBox.Show("Només es permeten comptes de Gmail");
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(password) || password.Length < 8)
             {
-                MessageBox.Show("Password must have at least 8 characters.");
+                MessageBox.Show("La contrasenya ha de tenir almenys 8 caràcters");
                 return;
             }
 
@@ -138,10 +138,41 @@ namespace AppSpotifyWPF.Screens.Users
         }
 
 
-        private void deleteUserButton_Click(object sender, RoutedEventArgs e)
+        private async void deleteUserButton_Click(object sender, RoutedEventArgs e)
         {
+            if (selectedUser == null)
+            {
+                MessageBox.Show("No hi ha cap usuari seleccionat");
+                return;
+            }
 
+            var result = MessageBox.Show(
+                $"Estàs segur que vols eliminar \"{selectedUser.Username}\"?",
+                "Confirmació",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    await _apiService.DeleteAsync($"/users/{selectedUser.Id}");
+                    MessageBox.Show("Usuari eliminat");
+
+                    var parentWindow = Window.GetWindow(this);
+                    if (parentWindow is HomeScreen home)
+                    {
+                        home.MainFrame.Visibility = Visibility.Collapsed;
+                        home.HomeContent.Visibility = Visibility.Visible;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error eliminant l'usuari:\n" + ex.Message);
+                }
+            }
         }
+
 
 
     }

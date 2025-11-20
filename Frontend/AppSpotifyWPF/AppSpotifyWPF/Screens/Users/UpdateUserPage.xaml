@@ -43,7 +43,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <!-- LEFT COLUMN (Nom + Role + Buttons) -->
+                        <!-- LEFT COLUMN -->
                         <StackPanel Grid.Column="0">
 
                             <StackPanel Orientation="Horizontal">
@@ -57,23 +57,57 @@
                                      Height="35"/>
 
                             <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Password:" FontSize="18" FontWeight="Bold"/>
+                            </StackPanel>
+
+                            <PasswordBox x:Name="txtPassword"
+                                         FontSize="18"
+                                         Margin="0,5,80,20"
+                                         Height="35"/>
+
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Repeat Password:" FontSize="18" FontWeight="Bold"/>
+                            </StackPanel>
+
+                            <PasswordBox x:Name="txtRepeatPassword"
+                                         FontSize="18"
+                                         Margin="0,5,80,0"
+                                         Height="35"/>
+
+                        </StackPanel>
+
+                        <!-- RIGHT COLUMN -->
+                        <StackPanel Grid.Column="1">
+
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Correu:" FontSize="18" FontWeight="Bold"/>
+                                <TextBlock x:Name="lblEmail" FontSize="18" Margin="10 0 0 0"/>
+                            </StackPanel>
+
+                            <TextBox x:Name="txtEmail"
+                                     FontSize="18"
+                                     Margin="0,5,60,20"
+                                     Height="35"/>
+
+                            <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Role:" FontSize="18" FontWeight="Bold"/>
                                 <TextBlock x:Name="lblRole" FontSize="18" Margin="10 0 0 0"/>
                             </StackPanel>
 
                             <TextBox x:Name="txtRole"
                                      FontSize="18"
-                                     Margin="0,5,80,20"
+                                     Margin="0,5,60,20"
                                      Height="35"/>
 
-                            <!-- BUTTONS LEFT-ALIGNED UNDER ROLE -->
+                            <!-- BUTTONS ALIGNED UNDER ROLE, NOT PAST TEXTBOX -->
                             <StackPanel Orientation="Horizontal"
-                                        HorizontalAlignment="Left"
-                                        Margin="0,20,0,0">
+                                        Margin="0,10,60,0"
+                                        HorizontalAlignment="Left">
 
                                 <Button x:Name="saveUserButton"
+                                        Width="120"
                                         Margin="0 0 10 0"
-                                        Padding="12 8"
+                                        Padding="10 6"
                                         Background="#4CAF50"
                                         Foreground="Black"
                                         BorderBrush="#388E3C"
@@ -90,7 +124,8 @@
                                 </Button>
 
                                 <Button x:Name="deleteUserButton"
-                                        Padding="12 8"
+                                        Width="120"
+                                        Padding="10 6"
                                         Background="Red"
                                         Foreground="Black"
                                         BorderBrush="DarkRed"
@@ -107,39 +142,6 @@
                                 </Button>
 
                             </StackPanel>
-
-                        </StackPanel>
-
-                        <!-- RIGHT COLUMN (Email + Password + Repeat Password) -->
-                        <StackPanel Grid.Column="1">
-
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Correu:" FontSize="18" FontWeight="Bold"/>
-                                <TextBlock x:Name="lblEmail" FontSize="18" Margin="10 0 0 0"/>
-                            </StackPanel>
-
-                            <TextBox x:Name="txtEmail"
-                                     FontSize="18"
-                                     Margin="0,5,60,20"
-                                     Height="35"/>
-
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Password:" FontSize="18" FontWeight="Bold"/>
-                            </StackPanel>
-
-                            <PasswordBox x:Name="txtPassword"
-                                         FontSize="18"
-                                         Margin="0,5,60,20"
-                                         Height="35"/>
-
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Repeat Password:" FontSize="18" FontWeight="Bold"/>
-                            </StackPanel>
-
-                            <PasswordBox x:Name="txtRepeatPassword"
-                                         FontSize="18"
-                                         Margin="0,5,60,0"
-                                         Height="35"/>
 
                         </StackPanel>
 
