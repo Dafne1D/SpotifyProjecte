@@ -43,7 +43,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <!-- LEFT COLUMN (Nom + Role + Buttons) -->
+                        <!-- LEFT COLUMN -->
                         <StackPanel Grid.Column="0">
 
                             <StackPanel Orientation="Horizontal">
@@ -57,26 +57,35 @@
                                      Height="35"/>
 
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Role:" FontSize="18" FontWeight="Bold"/>
-                                <TextBlock x:Name="lblRole" FontSize="18" Margin="10 0 0 0"/>
+                                <TextBlock Text="Password:" FontSize="18" FontWeight="Bold"/>
                             </StackPanel>
 
-                            <TextBox x:Name="txtRole"
-                                     FontSize="18"
-                                     Margin="0,5,80,20"
-                                     Height="35"/>
+                            <PasswordBox x:Name="txtPassword"
+                                         FontSize="18"
+                                         Margin="0,5,80,20"
+                                         Height="35"/>
 
-                            <!-- BUTTONS LEFT-ALIGNED UNDER ROLE -->
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Repeat Password:" FontSize="18" FontWeight="Bold"/>
+                            </StackPanel>
+
+                            <PasswordBox x:Name="txtRepeatPassword"
+                                         FontSize="18"
+                                         Margin="0,5,80,20"
+                                         Height="35"/>
+
+                            <!-- BUTTONS NOW BELOW REPEAT PASSWORD -->
                             <StackPanel Orientation="Horizontal"
                                         HorizontalAlignment="Left"
-                                        Margin="0,20,0,0">
+                                        Margin="0,10,0,0">
 
                                 <Button x:Name="saveUserButton"
+                                        Width="120"
                                         Margin="0 0 10 0"
                                         Padding="12 8"
-                                        Background="LimeGreen"
-                                        Foreground="DarkGreen"
-                                        BorderBrush="DarkGreen"
+                                        Background="#4CAF50"
+                                        Foreground="Black"
+                                        BorderBrush="#388E3C"
                                         BorderThickness="1"
                                         Click="saveUserButton_Click">
                                     <StackPanel Orientation="Horizontal">
@@ -89,30 +98,29 @@
                                     </StackPanel>
                                 </Button>
 
-                    <Button x:Name="deleteUserButton"
-                            Grid.Column="4"
-                            Margin="0"
-                            Padding="12 8"
-                            Background="Red"
-                            Foreground="Black"
-                            BorderBrush="DarkRed"
-                            BorderThickness="1"
-                            Click="deleteUserButton_Click">
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <TextBlock FontFamily="Segoe MDL2 Assets"
-                                       Text="&#xE74D;"
-                                       FontSize="18"
-                                       Margin="0 0 8 0"/>
-                            <TextBlock Text="Delete User"
-                                       FontWeight="Bold"/>
-                        </StackPanel>
-                    </Button>
+                                <Button x:Name="deleteUserButton"
+                                        Width="120"
+                                        Padding="12 8"
+                                        Background="Red"
+                                        Foreground="Black"
+                                        BorderBrush="DarkRed"
+                                        BorderThickness="1"
+                                        Click="deleteUserButton_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock FontFamily="Segoe MDL2 Assets"
+                                                   Text="&#xE74D;"
+                                                   FontSize="18"
+                                                   Margin="0 0 8 0"/>
+                                        <TextBlock Text="Delete User"
+                                                   FontWeight="Bold"/>
+                                    </StackPanel>
+                                </Button>
 
                             </StackPanel>
 
                         </StackPanel>
 
-                        <!-- RIGHT COLUMN (Email + Password + Repeat Password) -->
+                        <!-- RIGHT COLUMN -->
                         <StackPanel Grid.Column="1">
 
                             <StackPanel Orientation="Horizontal">
@@ -126,22 +134,14 @@
                                      Height="35"/>
 
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Password:" FontSize="18" FontWeight="Bold"/>
+                                <TextBlock Text="Role:" FontSize="18" FontWeight="Bold"/>
+                                <TextBlock x:Name="lblRole" FontSize="18" Margin="10 0 0 0"/>
                             </StackPanel>
 
-                            <PasswordBox x:Name="txtPassword"
-                                         FontSize="18"
-                                         Margin="0,5,60,20"
-                                         Height="35"/>
-
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Repeat Password:" FontSize="18" FontWeight="Bold"/>
-                            </StackPanel>
-
-                            <PasswordBox x:Name="txtRepeatPassword"
-                                         FontSize="18"
-                                         Margin="0,5,60,0"
-                                         Height="35"/>
+                            <TextBox x:Name="txtRole"
+                                     FontSize="18"
+                                     Margin="0,5,60,20"
+                                     Height="35"/>
 
                         </StackPanel>
 
