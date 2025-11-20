@@ -165,7 +165,9 @@ namespace AppSpotifyWPF.Screens.Users
             }
         }
 
-
-
+        private void viewUserButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ViewUserPage(selectedUser));
+        }
     }
 }
