@@ -4,91 +4,127 @@
       Title="View User" Height="800" Width="1000"
       Background="#F5F6FA">
 
-    <Grid Margin="40">
+    <Grid x:Name="HomeContent">
 
-        <StackPanel>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="40">
 
-            <!-- BACK BUTTON -->
-            <Button
-                Margin="0 0 0 10"
-                Background="Transparent"
-                Foreground="Gray"
-                BorderBrush="Transparent"
-                BorderThickness="1"
-                Click="BackToHome_Click"
-                HorizontalAlignment="Left">
+                <!-- Back button -->
+                <Button
+                    Margin="0 0 0 5"
+                    Background="Transparent"
+                    Foreground="Gray"
+                    BorderBrush="Transparent"
+                    BorderThickness="1"
+                    Click="BackToHome_Click"
+                    HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontFamily="Segoe MDL2 Assets"
+                                   Text="&#xE76B;"
+                                   FontSize="16"
+                                   Margin="0 0 10 0"/>
+                        <TextBlock Text="Back to Users"
+                                   FontWeight="Bold"/>
+                    </StackPanel>
+                </Button>
 
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock FontFamily="Segoe MDL2 Assets"
-                               Text="&#xE76B;"
-                               FontSize="16"
-                               Margin="0 0 10 0"/>
-                    <TextBlock Text="Back to Home"
-                               FontWeight="Bold"/>
+                <!-- Title -->
+                <TextBlock x:Name="txtTitle"
+                           Text="Veure Usuari"
+                           FontSize="28"
+                           FontWeight="Bold"
+                           Foreground="Black"
+                           Margin="0,0,0,20"/>
+
+                <!-- Main Card -->
+                <Border Background="White"
+                        CornerRadius="20"
+                        Padding="30">
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- LEFT COLUMN -->
+                        <StackPanel Grid.Column="0">
+
+                            <TextBlock Text="Nom:" FontSize="18" FontWeight="Bold"/>
+                            <TextBlock x:Name="lblName"
+                                     FontSize="18"
+                                     Margin="0,5,80,20"
+                                     Height="35"/>
+
+                            <TextBlock Text="Role:" FontSize="18" FontWeight="Bold"/>
+                            <TextBlock x:Name="lblRole"
+                                     FontSize="18"
+                                     Margin="0,5,60,20"
+                                     Height="35"/>
+                        </StackPanel>
+
+                        <!-- RIGHT COLUMN -->
+                        <StackPanel Grid.Column="1">
+
+                            <TextBlock Text="Correu:" FontSize="18" FontWeight="Bold"/>
+                            <TextBlock x:Name="lblEmail"
+                                     FontSize="18"
+                                     Margin="0,5,60,20"
+                                     Height="35"/>
+
+                            <TextBlock Text="Permisos:" FontSize="18" FontWeight="Bold"/>
+                            <TextBlock x:Name="lblPermissions"
+                                     FontSize="18"
+                                     Margin="0,5,60,20"
+                                     Height="35"/>
+
+                        </StackPanel>
+
+                    </Grid>
+                </Border>
+
+                <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Right"
+                                        Margin="0,10,0,0" Grid.Column="1">
+                    <Button x:Name="editUserButton"
+                                        Width="120"
+                                        Margin="10 0"
+                                        Padding="12 8"
+                                        Background="White"
+                                        BorderBrush="#E0E0E0"
+                                        BorderThickness="1"
+                                        Click="editUserButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets"
+                                                   Text="&#xE70F;"
+                                                   FontSize="18"
+                                                   Margin="0 0 8 0"/>
+                            <TextBlock Text="Edit User"
+                                                   FontWeight="Bold"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button x:Name="deleteUserButton"
+                                        Width="120"
+                                        Padding="12 8"
+                                        Background="Red"
+                                        Foreground="DarkRed"
+                                        BorderBrush="DarkRed"
+                                        BorderThickness="1"
+                                        Click="deleteUserButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets"
+                                                   Text="&#xE74D;"
+                                                   FontSize="18"
+                                                   Margin="0 0 8 0"/>
+                            <TextBlock Text="Delete User"
+                                                   FontWeight="Bold"/>
+                        </StackPanel>
+                    </Button>
+
                 </StackPanel>
-            </Button>
 
-            <!-- TITLE -->
-            <Border Background="#D3D3D3"
-                    CornerRadius="10"
-                    Padding="20"
-                    HorizontalAlignment="Left"
-                    Margin="0 0 0 20">
-                <TextBlock Text="USUARI"
-                           FontSize="32"
-                           FontWeight="Bold"/>
-            </Border>
-
-            <!-- INFORMATION BOX -->
-            <Border Background="#808080"
-                    CornerRadius="15"
-                    Padding="30">
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <!-- LEFT COLUMN -->
-                    <StackPanel Grid.Column="0">
-
-                        <TextBlock Text="Nom:"
-                                   FontSize="18"
-                                   FontWeight="Bold"/>
-                        <TextBlock x:Name="lblName"
-                                   FontSize="18"
-                                   Margin="0 0 0 20"/>
-
-                        <TextBlock Text="Rol:"
-                                   FontSize="18"
-                                   FontWeight="Bold"/>
-                        <TextBlock x:Name="lblRole"
-                                   FontSize="18"/>
-                    </StackPanel>
-
-                    <!-- RIGHT COLUMN -->
-                    <StackPanel Grid.Column="1">
-
-                        <TextBlock Text="Correu:"
-                                   FontSize="18"
-                                   FontWeight="Bold"/>
-                        <TextBlock x:Name="lblEmail"
-                                   FontSize="18"
-                                   Margin="0 0 0 20"/>
-
-                        <TextBlock Text="Permisos:"
-                                   FontSize="18"
-                                   FontWeight="Bold"/>
-                        <TextBlock x:Name="lblPermissions"
-                                   FontSize="18"/>
-                    </StackPanel>
-
-                </Grid>
-
-            </Border>
-
-        </StackPanel>
-
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>
