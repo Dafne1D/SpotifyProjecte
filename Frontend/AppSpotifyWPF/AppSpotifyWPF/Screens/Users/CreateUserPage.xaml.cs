@@ -17,7 +17,7 @@ namespace AppSpotifyWPF.Screens.Users
 
         private void BackToHome_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new HomePage());
+            NavigationService.Navigate(new UserManagementPage());
         }
 
         private async void CreateUserButton_Click(object sender, RoutedEventArgs e)

@@ -67,27 +67,6 @@
                                          FontSize="18"
                                          Margin="0,5,80,20"
                                          Height="35"/>
-
-                            <!-- CREATE BUTTON -->
-                            <Button x:Name="CreateUserButton"
-                                    Width="120"
-                                    Padding="12 8"
-                                    Background="#4CAF50"
-                                    Foreground="Black"
-                                    BorderBrush="#388E3C"
-                                    BorderThickness="1"
-                                    Click="CreateUserButton_Click"
-                                    HorizontalAlignment="Left">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock FontFamily="Segoe MDL2 Assets"
-                                               Text="&#xE74E;"
-                                               FontSize="18"
-                                               Margin="0 0 8 0"/>
-                                    <TextBlock Text="Crear"
-                                               FontWeight="Bold"/>
-                                </StackPanel>
-                            </Button>
-
                         </StackPanel>
 
                         <!-- RIGHT COLUMN -->
@@ -109,6 +88,31 @@
 
                     </Grid>
                 </Border>
+
+                <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Left"
+                                        Margin="0,10,0,0" Grid.Column="0">
+
+                    <Button x:Name="CreateUserButton"
+                                        Width="120"
+                                        Margin="0 0 10 0"
+                                        Padding="12 8"
+                                        Background="LimeGreen"
+                                        Foreground="DarkGreen"
+                                        BorderBrush="DarkGreen"
+                                        BorderThickness="1"
+                                        Click="CreateUserButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets"
+                                                   Text="&#xE74E;"
+                                                   FontSize="18"
+                                                   Margin="0 0 8 0"/>
+                            <TextBlock Text="Crear Usuari"
+                                                   FontWeight="Bold"/>
+                        </StackPanel>
+                    </Button>
+
+                </StackPanel>
 
             </StackPanel>
         </ScrollViewer>
