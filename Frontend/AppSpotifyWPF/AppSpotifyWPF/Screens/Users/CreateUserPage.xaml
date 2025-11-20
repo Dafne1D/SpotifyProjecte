@@ -1,14 +1,116 @@
-﻿<Page x:Class="AppSpotifyWPF.Screens.Users.Page1"
+﻿<Page x:Class="AppSpotifyWPF.Screens.Users.CreateUserPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:AppSpotifyWPF.Screens.Users"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Page1">
+      Title="Create User" Height="800" Width="1000"
+      Background="#F5F6FA">
 
-    <Grid>
-        
+    <Grid x:Name="HomeContent">
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="40">
+
+                <!-- Back button -->
+                <Button
+                    Margin="0 0 0 5"
+                    Background="Transparent"
+                    Foreground="Gray"
+                    BorderBrush="Transparent"
+                    BorderThickness="1"
+                    Click="BackToHome_Click"
+                    HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontFamily="Segoe MDL2 Assets"
+                                   Text="&#xE76B;"
+                                   FontSize="16"
+                                   Margin="0 0 10 0"/>
+                        <TextBlock Text="Back to Users"
+                                   FontWeight="Bold"/>
+                    </StackPanel>
+                </Button>
+
+                <!-- Title -->
+                <TextBlock x:Name="txtTitle"
+                           Text="Crear Usuari"
+                           FontSize="28"
+                           FontWeight="Bold"
+                           Foreground="Black"
+                           Margin="0,0,0,20"/>
+
+                <!-- Main Card -->
+                <Border Background="White"
+                        CornerRadius="20"
+                        Padding="30">
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- LEFT COLUMN -->
+                        <StackPanel Grid.Column="0">
+
+                            <TextBlock Text="Nom:" FontSize="18" FontWeight="Bold"/>
+                            <TextBox x:Name="txtName"
+                                     FontSize="18"
+                                     Margin="0,5,80,20"
+                                     Height="35"/>
+
+                            <TextBlock Text="Password:" FontSize="18" FontWeight="Bold"/>
+                            <PasswordBox x:Name="txtPassword"
+                                         FontSize="18"
+                                         Margin="0,5,80,20"
+                                         Height="35"/>
+
+                            <TextBlock Text="Repeat Password:" FontSize="18" FontWeight="Bold"/>
+                            <PasswordBox x:Name="txtRepeatPassword"
+                                         FontSize="18"
+                                         Margin="0,5,80,20"
+                                         Height="35"/>
+
+                            <!-- CREATE BUTTON -->
+                            <Button x:Name="CreateUserButton"
+                                    Width="120"
+                                    Padding="12 8"
+                                    Background="#4CAF50"
+                                    Foreground="Black"
+                                    BorderBrush="#388E3C"
+                                    BorderThickness="1"
+                                    Click="CreateUserButton_Click"
+                                    HorizontalAlignment="Left">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontFamily="Segoe MDL2 Assets"
+                                               Text="&#xE74E;"
+                                               FontSize="18"
+                                               Margin="0 0 8 0"/>
+                                    <TextBlock Text="Crear"
+                                               FontWeight="Bold"/>
+                                </StackPanel>
+                            </Button>
+
+                        </StackPanel>
+
+                        <!-- RIGHT COLUMN -->
+                        <StackPanel Grid.Column="1">
+
+                            <TextBlock Text="Correu:" FontSize="18" FontWeight="Bold"/>
+                            <TextBox x:Name="txtEmail"
+                                     FontSize="18"
+                                     Margin="0,5,60,20"
+                                     Height="35"/>
+
+                            <TextBlock Text="Role:" FontSize="18" FontWeight="Bold"/>
+                            <TextBox x:Name="txtRole"
+                                     FontSize="18"
+                                     Margin="0,5,60,20"
+                                     Height="35"/>
+
+                        </StackPanel>
+
+                    </Grid>
+                </Border>
+
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

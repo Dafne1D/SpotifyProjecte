@@ -36,7 +36,6 @@ namespace AppSpotifyWPF.Screens.Users
             await LoadUsers();
         }
 
-        /* BUTTON METHODS */
         private void newUserButton_Click(object sender, RoutedEventArgs e)
         {
             if (selectedUser == null)
@@ -45,7 +44,7 @@ namespace AppSpotifyWPF.Screens.Users
                 return;
             }
 
-            changePage(new CreateUserPage(selectedUser));
+            changePage(new CreateUserPage());
         }
 
         private void viewUserButton_Click(object sender, RoutedEventArgs e)
