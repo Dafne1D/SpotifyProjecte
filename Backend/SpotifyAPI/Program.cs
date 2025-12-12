@@ -10,10 +10,21 @@ builder.Configuration
     .SetBasePath(AppContext.BaseDirectory)
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp",
+        policy => policy
+            .WithOrigins("http://localhost:8081") // your React app
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
+
 string connectionString = builder.Configuration.GetConnectionString("SpotifyDBConnection") ?? "";
 SpotifyDBConnection dbConn = new SpotifyDBConnection(connectionString);
 
 WebApplication SpotifyApp = builder.Build();
+
+SpotifyApp.UseCors("AllowReactApp");
 
 SpotifyApp.MapUserEndpoints(dbConn);
 SpotifyApp.MapRoleEndpoints(dbConn);
