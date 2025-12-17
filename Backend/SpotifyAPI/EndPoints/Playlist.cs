@@ -1,6 +1,7 @@
 using SpotifyAPI.Repository;
 using SpotifyAPI.Services;
 using SpotifyAPI.Model;
+using SpotifyAPI.DTO;
 using System.Data.Common;
 
 namespace SpotifyAPI.EndPoints;
@@ -78,6 +79,18 @@ public static class PlaylistEndpoints
             };
             PlaylistSongADO.Insert(dbConn, playlistsong);
             return Results.Created($"/playlists/{playlistsong.Id}", playlistsong);
+        });
+
+        // GET /playlists/{playlistId}/songs
+        app.MapGet("/playlists/{playlistId}/songs", (Guid playlistId) =>
+        {
+            List<Song> songs = PlaylistADO.GetSongs(dbConn, playlistId);
+            List<SongResponse> songResponses = new List<SongResponse>();
+            foreach (Song song in songs)
+            {
+                songResponses.Add(SongResponse.FromSong(song));
+            }
+            return Results.Ok(songResponses);
         });
         // DELETE /playlists/{playlistId}/remove/{songId}
         // app.MapDelete("/playlistSong/{id}", (Guid id) => PlaylistSongADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
