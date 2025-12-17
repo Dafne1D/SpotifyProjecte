@@ -9,7 +9,7 @@ static class UserADO
 {
     public static void Insert(SpotifyDBConnection dbConn, User user)
     {
-        
+
         user.Salt = Hash.GenerateSalt();
         user.Password = Hash.ComputeHash(user.Password, user.Salt);
 
@@ -128,33 +128,59 @@ static class UserADO
 
     public static bool UsernameExists(SpotifyDBConnection dbConn, string username)
     {
-    dbConn.Open();
-    string sql = "SELECT COUNT(*) FROM Users WHERE Username = @Username";
+        dbConn.Open();
+        string sql = "SELECT COUNT(*) FROM Users WHERE Username = @Username";
 
-    using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
-    cmd.Parameters.AddWithValue("@Username", username);
+        using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+        cmd.Parameters.AddWithValue("@Username", username);
 
-    int count = (int)cmd.ExecuteScalar();
+        int count = (int)cmd.ExecuteScalar();
 
-    dbConn.Close();
+        dbConn.Close();
 
-    return count > 0;
+        return count > 0;
     }
 
     public static bool EmailExists(SpotifyDBConnection dbConn, string email)
     {
-    dbConn.Open();
-    string sql = "SELECT COUNT(*) FROM Users WHERE Email = @Email";
+        dbConn.Open();
+        string sql = "SELECT COUNT(*) FROM Users WHERE Email = @Email";
 
-    using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
-    cmd.Parameters.AddWithValue("@Email", email);
+        using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+        cmd.Parameters.AddWithValue("@Email", email);
 
-    int count = (int)cmd.ExecuteScalar();
+        int count = (int)cmd.ExecuteScalar();
 
-    dbConn.Close();
+        dbConn.Close();
 
-    return count > 0;
+        return count > 0;
     }
 
+    public static List<Playlist> GetPlaylists(SpotifyDBConnection dbConn, Guid id)
+    {
+        List<Playlist> playlists = new();
 
+        dbConn.Open();
+        string sql = @"SELECT Id, UserId, Name, Description FROM Playlists
+                        WHERE UserId = @UserId";
+
+        using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+        cmd.Parameters.AddWithValue("@UserId", id);
+
+        using SqlDataReader reader = cmd.ExecuteReader();
+
+        while (reader.Read())
+        {
+            playlists.Add(new Playlist
+            {
+                Id = reader.GetGuid(0),
+                UserId = reader.GetGuid(1),
+                Name = reader.GetString(2),
+                Description = reader.IsDBNull(3) ? null : reader.GetString(3)
+            });
+        }
+
+        dbConn.Close();
+        return playlists;
+    }
 }

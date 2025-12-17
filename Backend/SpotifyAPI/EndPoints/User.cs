@@ -12,7 +12,7 @@ public static class UserEndpoints
 
     public static void MapUserEndpoints(this WebApplication app, SpotifyDBConnection dbConn)
     {
-        
+
         // POST /users
         app.MapPost("/users", (UserRequest req) =>
         {
@@ -20,21 +20,21 @@ public static class UserEndpoints
             Result result = UserValidator.Validate(req, dbConn);
             if (!result.IsOk)
             {
-            return Results.BadRequest(new
-            {
-            error = result.ErrorCode,
-            message = result.ErrorMessage
-            });
+                return Results.BadRequest(new
+                {
+                    error = result.ErrorCode,
+                    message = result.ErrorMessage
+                });
             }
 
             Result duplicateCheck = UserADOValidator.Validate(req, dbConn);
             if (!duplicateCheck.IsOk)
             {
-            return Results.BadRequest(new
-            {
-            error = duplicateCheck.ErrorCode,
-            message = duplicateCheck.ErrorMessage
-            });
+                return Results.BadRequest(new
+                {
+                    error = duplicateCheck.ErrorCode,
+                    message = duplicateCheck.ErrorMessage
+                });
             }
 
             id = Guid.NewGuid();
@@ -75,36 +75,36 @@ public static class UserEndpoints
 
             if (existing == null)
             {
-            return Results.NotFound();
+                return Results.NotFound();
             }
 
             Result result = UserValidator.Validate(req, dbConn);
             if (!result.IsOk)
             {
-            return Results.BadRequest(new
-            {
-            error = result.ErrorCode,
-            message = result.ErrorMessage
-            });
+                return Results.BadRequest(new
+                {
+                    error = result.ErrorCode,
+                    message = result.ErrorMessage
+                });
             }
 
             Result duplicateCheck = UserADOValidator.Validate(req, dbConn);
             if (!duplicateCheck.IsOk)
             {
-            return Results.BadRequest(new
-            {
-            error = duplicateCheck.ErrorCode,
-            message = duplicateCheck.ErrorMessage
-            });
+                return Results.BadRequest(new
+                {
+                    error = duplicateCheck.ErrorCode,
+                    message = duplicateCheck.ErrorMessage
+                });
             }
 
             User updated = new User
             {
-            Id = id,
-            Username = req.Username,
-            Email = req.Email,
-            Password = req.Password,
-            Salt = req.Salt
+                Id = id,
+                Username = req.Username,
+                Email = req.Email,
+                Password = req.Password,
+                Salt = req.Salt
             };
 
             UserADO.Update(dbConn, updated);
@@ -116,6 +116,7 @@ public static class UserEndpoints
         // DELETE /users/{id}
         app.MapDelete("/users/{id}", (Guid id) => UserADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
 
+        // --------- ROLES ---------
 
         // POST /users/{userId}/role/{roleId}
         app.MapPost("/users/{userId}/role/{roleId}", (Guid userId, Guid roleId) =>
@@ -132,6 +133,14 @@ public static class UserEndpoints
 
         // DELETE /users/{userId}/role/{roleId}
         app.MapDelete("/users/{userId}/role/{roleId}", (Guid userId, Guid roleId) => UserRoleADO.Delete(dbConn, userId, roleId) ? Results.NoContent() : Results.NotFound());
+
+        // --------- PLAYLISTS ---------
+        app.MapGet("/users/{userId}/playlists", (Guid userId) =>
+        {
+            List<Playlist> playlists = UserADO.GetPlaylists(dbConn, userId);
+            // S'ha de afegir DTO
+            return Results.Ok(playlists);
+        });
     }
 
 }
