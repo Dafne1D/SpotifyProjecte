@@ -60,6 +60,7 @@ CREATE TABLE Playlists (
     UserId UNIQUEIDENTIFIER NOT NULL,
     Name NVARCHAR(100) NOT NULL,
     Description NVARCHAR(255),
+    ImageUrl NVARCHAR(255),
     CONSTRAINT FKPlaylistsUsers FOREIGN KEY (UserId)
         REFERENCES Users(Id)
 );
@@ -81,7 +82,3 @@ CREATE TABLE PlaylistSongs (
     CONSTRAINT FKPlaylistSongsSongs FOREIGN KEY (SongId)
         REFERENCES Songs(Id)
 );
-
-
-
-
