@@ -33,7 +33,7 @@ static class PlaylistADO
         List<Playlist> playlists = new();
 
         dbConn.Open();
-        string sql = "SELECT Id, UserId, Name, Description FROM Playlists";
+        string sql = "SELECT Id, UserId, Name, Description, ImageUrl FROM Playlists";
 
         using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
         using SqlDataReader reader = cmd.ExecuteReader();
@@ -45,7 +45,8 @@ static class PlaylistADO
                 Id = reader.GetGuid(0),
                 UserId = reader.GetGuid(1),
                 Name = reader.GetString(2),
-                Description = reader.IsDBNull(3) ? null : reader.GetString(3)
+                Description = reader.IsDBNull(3) ? null : reader.GetString(3),
+                ImageUrl = reader.GetString(4)
             });
         }
 
