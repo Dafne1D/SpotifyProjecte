@@ -19,7 +19,8 @@ public static class PlaylistEndpoints
                 Id = Guid.NewGuid(),
                 UserId = req.UserId,
                 Name = req.Name,
-                Description = req.Description
+                Description = req.Description,
+                ImageUrl = req.ImageUrl
             };
             PlaylistADO.Insert(dbConn, playlist);
             return Results.Created($"/playlists/{playlist.Id}", playlist);
@@ -97,4 +98,4 @@ public static class PlaylistEndpoints
     }
 }
 
-public record PlaylistRequest(Guid UserId, string Name, string Description);
+public record PlaylistRequest(Guid UserId, string Name, string Description, string ImageUrl);

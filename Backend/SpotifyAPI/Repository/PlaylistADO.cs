@@ -12,14 +12,15 @@ static class PlaylistADO
 
         dbConn.Open();
 
-        string sql = @"INSERT INTO Playlists (Id, UserId, Name, Description)
-                      VALUES (@Id, @UserId, @Name, @Description)";
+        string sql = @"INSERT INTO Playlists (Id, UserId, Name, Description, ImageUrl)
+                      VALUES (@Id, @UserId, @Name, @Description, @ImageUrl)";
 
         using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
         cmd.Parameters.AddWithValue("@Id", playlist.Id);
         cmd.Parameters.AddWithValue("@UserId", playlist.UserId);
         cmd.Parameters.AddWithValue("@Name", playlist.Name);
         cmd.Parameters.AddWithValue("@Description", playlist.Description);
+        cmd.Parameters.AddWithValue("@ImageUrl", playlist.ImageUrl);
 
         int rows = cmd.ExecuteNonQuery();
         Console.WriteLine($"{rows} fila inserida.");
