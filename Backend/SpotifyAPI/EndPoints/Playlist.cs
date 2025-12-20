@@ -58,7 +58,8 @@ public static class PlaylistEndpoints
                 Id = id,
                 UserId = req.UserId,
                 Name = req.Name,
-                Description = req.Description
+                Description = req.Description,
+                ImageUrl = req.ImageUrl
             };
 
             PlaylistADO.Update(dbConn, updated);

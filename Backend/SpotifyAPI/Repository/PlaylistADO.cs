@@ -89,7 +89,8 @@ static class PlaylistADO
         string sql = @"UPDATE Playlists
                     SET UserId = @UserId,
                         Name = @Name,
-                        Description = @Description
+                        Description = @Description,
+                        ImageUrl = @ImageUrl
                     WHERE Id = @Id";
 
         using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
@@ -97,6 +98,7 @@ static class PlaylistADO
         cmd.Parameters.AddWithValue("@UserId", playlist.UserId);
         cmd.Parameters.AddWithValue("@Name", playlist.Name);
         cmd.Parameters.AddWithValue("@Description", playlist.Description ?? (object)DBNull.Value);
+        cmd.Parameters.AddWithValue("@ImageUrl", playlist.ImageUrl);
 
         int rows = cmd.ExecuteNonQuery();
 
