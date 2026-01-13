@@ -3,13 +3,12 @@ using SpotifyAPI.Services;
 using SpotifyAPI.Model;
 using SpotifyAPI.DTO;
 using SpotifyAPI.Common;
+using SpotifyAPI.Validators;
 
 namespace SpotifyAPI.EndPoints;
 
 public static class UserEndpoints
 {
-
-
     public static void MapUserEndpoints(this WebApplication app, SpotifyDBConnection dbConn)
     {
 
