@@ -4,6 +4,8 @@ using SpotifyAPI.Model;
 using SpotifyAPI.DTO;
 using SpotifyAPI.Common;
 using SpotifyAPI.Validators;
+using SpotifyAPI.Utils;
+
 
 namespace SpotifyAPI.EndPoints;
 
@@ -37,14 +39,18 @@ public static class UserEndpoints
             }
 
             id = Guid.NewGuid();
+            string salt = Hash.GenerateSalt();
+            string hash = Hash.ComputeHash(req.Password, salt);
+
             User user = new User
             {
                 Id = id,
                 Username = req.Username,
                 Email = req.Email,
-                Password = req.Password,
-                Salt = req.Salt
+                Password = hash,
+                Salt = salt
             };
+
             UserADO.Insert(dbConn, user);
             return Results.Created($"/users/{user.Id}", UserResponse.FromUser(user));
 
@@ -97,13 +103,16 @@ public static class UserEndpoints
                 });
             }
 
+            string salt = Hash.GenerateSalt();
+            string hash = Hash.ComputeHash(req.Password, salt);
+
             User updated = new User
             {
                 Id = id,
                 Username = req.Username,
                 Email = req.Email,
-                Password = req.Password,
-                Salt = req.Salt
+                Password = hash,
+                Salt = salt
             };
 
             UserADO.Update(dbConn, updated);

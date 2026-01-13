@@ -1,7 +1,6 @@
 using Microsoft.Data.SqlClient;
 using SpotifyAPI.Services;
 using SpotifyAPI.Model;
-using SpotifyAPI.Utils;
 
 namespace SpotifyAPI.Repository;
 
@@ -9,9 +8,6 @@ static class UserADO
 {
     public static void Insert(SpotifyDBConnection dbConn, User user)
     {
-
-        user.Salt = Hash.GenerateSalt();
-        user.Password = Hash.ComputeHash(user.Password, user.Salt);
 
         dbConn.Open();
 
@@ -82,8 +78,6 @@ static class UserADO
 
     public static void Update(SpotifyDBConnection dbConn, User user)
     {
-        user.Salt = Hash.GenerateSalt();
-        user.Password = Hash.ComputeHash(user.Password, user.Salt);
 
         dbConn.Open();
 
