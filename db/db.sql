@@ -74,7 +74,6 @@ CREATE TABLE SongFiles (
     Url NVARCHAR(255) NOT NULL,
     CONSTRAINT FKSongsFiles FOREIGN KEY (SongId)
         REFERENCES Songs(Id)
-    FileName VARCHAR(255)
 );
 
 CREATE TABLE PlaylistSongs (
