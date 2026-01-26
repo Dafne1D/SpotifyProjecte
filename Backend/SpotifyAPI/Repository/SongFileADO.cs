@@ -50,6 +50,33 @@ static class SongFileADO
         return songFile;
     }
 
+
+    public static List<SongFile> GetBySongId(SpotifyDBConnection dbConn, Guid songId)
+    {
+        dbConn.Open();
+
+        string sql = @"
+            SELECT Id, SongId, Url
+            FROM SongFiles
+            WHERE SongId = @SongId
+        ";
+
+        using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+        cmd.Parameters.Add(new SqlParameter("@SongId", songId));
+
+        using SqlDataReader reader = cmd.ExecuteReader();
+
+        List<SongFile> list = new();
+
+        while (reader.Read())
+        {
+            list.Add(Map(reader));
+        }
+
+        dbConn.Close();
+        return list;
+    }
+
     public static bool Delete(SpotifyDBConnection dbConn, Guid id)
     {
         dbConn.Open();
