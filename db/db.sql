@@ -2,17 +2,20 @@ CREATE DATABASE SpotifyDB;
 Use SpotifyDB;
 
 CREATE TABLE Roles (
-	Id UNIQUEIDENTIFIER NOT NULL PRIMARY KEY,
-	Name NVARCHAR(50) NOT NULL,
-	Description NVARCHAR(255)
+    Id UNIQUEIDENTIFIER NOT NULL PRIMARY KEY,
+    Code NVARCHAR(50) NOT NULL UNIQUE,
+    Name NVARCHAR(50) NOT NULL,
+    Description NVARCHAR(255)
 );
 
+
 CREATE TABLE Permissions (
-	Id UNIQUEIDENTIFIER NOT NULL PRIMARY KEY,
-	Name NVARCHAR(50) NOT NULL,
-	Code NVARCHAR(8) NOT NULL,
-	Description NVARCHAR(255)
+    Id UNIQUEIDENTIFIER NOT NULL PRIMARY KEY,
+    Code NVARCHAR(50) NOT NULL UNIQUE,
+    Name NVARCHAR(50) NOT NULL,
+    Description NVARCHAR(255)
 );
+
 
 CREATE TABLE Users (
     Id UNIQUEIDENTIFIER NOT NULL PRIMARY KEY,
@@ -83,3 +86,17 @@ CREATE TABLE PlaylistSongs (
     CONSTRAINT FKPlaylistSongsSongs FOREIGN KEY (SongId)
         REFERENCES Songs(Id)
 );
+
+INSERT INTO Roles (Id, Code, Name) VALUES
+(NEWID(), 'Listener', 'Listener'),
+(NEWID(), 'Artist', 'Artist'),
+(NEWID(), 'Admin', 'Admin');
+
+INSERT INTO Permissions (Id, Code, Name) VALUES
+(NEWID(), 'VIEW_SONGS', 'View Songs'),
+(NEWID(), 'MANAGE_SONGS', 'Manage Songs'),
+(NEWID(), 'VIEW_PLAYLISTS', 'View Playlists'),
+(NEWID(), 'MANAGE_PLAYLISTS', 'Manage Playlists'),
+(NEWID(), 'VIEW_USERS', 'View Users'),
+(NEWID(), 'MANAGE_USERS', 'Manage Users');
+
