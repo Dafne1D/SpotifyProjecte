@@ -17,7 +17,6 @@ public static class RoleEndpoints
         app.MapGet("/roles", (Guid requesterId) =>
         {
             var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
-
             if (!perms.Contains(Permissions.ManageUsers))
                 return Results.StatusCode(403);
 
@@ -33,7 +32,6 @@ public static class RoleEndpoints
         app.MapGet("/roles/{roleId}/permissions", (Guid requesterId, Guid roleId) =>
         {
             var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
-
             if (!perms.Contains(Permissions.ManageUsers))
                 return Results.StatusCode(403);
 
