@@ -120,12 +120,26 @@ JOIN Permissions p ON
     (r.Code = 'Admin')
 );
 
-DECLARE @AdminUserId UNIQUEIDENTIFIER = NEWID();
+DECLARE @ADMIN_USER UNIQUEIDENTIFIER = '99999999-9999-9999-9999-999999999999';
 
+IF NOT EXISTS (SELECT 1 FROM Users WHERE Id = @ADMIN_USER)
 INSERT INTO Users (Id, Username, Email, Password, Salt)
-VALUES (@AdminUserId, 'admin', 'admin@test.com', 'HASH', 'S');
+VALUES (
+  @ADMIN_USER,
+  'admin',
+  'admin@test.com',
+  '935e296d3dab0c9e023396152244cbbc2d222e765995427c9f36f669a4f90284',
+  '3'
+);
 
+IF NOT EXISTS (
+    SELECT 1
+    FROM UserRoles ur
+    JOIN Roles r ON r.Id = ur.RoleId
+    WHERE ur.UserId = '99999999-9999-9999-9999-999999999999'
+      AND r.Code = 'Admin'
+)
 INSERT INTO UserRoles (Id, UserId, RoleId)
-SELECT NEWID(), @AdminUserId, Id
-FROM Roles
-WHERE Code = 'Admin';
+SELECT NEWID(), '99999999-9999-9999-9999-999999999999', r.Id
+FROM Roles r
+WHERE r.Code = 'Admin';
