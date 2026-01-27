@@ -2,6 +2,7 @@ using SpotifyAPI.Services;
 using SpotifyAPI.Model;
 using SpotifyAPI.Repository;
 using SpotifyAPI.DTO;
+using SpotifyAPI.Common;
 
 namespace SpotifyAPI.EndPoints;
 

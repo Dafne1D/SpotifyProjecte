@@ -143,3 +143,10 @@ INSERT INTO UserRoles (Id, UserId, RoleId)
 SELECT NEWID(), '99999999-9999-9999-9999-999999999999', r.Id
 FROM Roles r
 WHERE r.Code = 'Admin';
+
+SELECT r.Code AS Role, p.Code AS Permission
+FROM RolePermissions rp
+JOIN Roles r ON r.Id = rp.RoleId
+JOIN Permissions p ON p.Id = rp.PermissionId
+ORDER BY r.Code, p.Code;
+
