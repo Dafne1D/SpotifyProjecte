@@ -120,7 +120,12 @@ JOIN Permissions p ON
     (r.Code = 'Admin')
 );
 
+DECLARE @AdminUserId UNIQUEIDENTIFIER = NEWID();
+
+INSERT INTO Users (Id, Username, Email, Password, Salt)
+VALUES (@AdminUserId, 'admin', 'admin@test.com', 'HASH', 'S');
+
 INSERT INTO UserRoles (Id, UserId, RoleId)
-SELECT NEWID(), '93e8923b-bc4c-4e53-8262-86572d586485', Id
+SELECT NEWID(), @AdminUserId, Id
 FROM Roles
 WHERE Code = 'Admin';
