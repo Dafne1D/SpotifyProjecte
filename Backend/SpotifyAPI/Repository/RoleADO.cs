@@ -7,6 +7,22 @@ namespace SpotifyAPI.Repository;
 
 static class RoleADO
 {
+    public static Guid? GetRoleIdByCode(SpotifyDBConnection dbConn, string code)
+    {
+    dbConn.Open();
+
+    string sql = "SELECT Id FROM Roles WHERE Code = @Code";
+
+    using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+    cmd.Parameters.AddWithValue("@Code", code);
+
+    object? result = cmd.ExecuteScalar();
+
+    dbConn.Close();
+
+    return result == null ? null : (Guid)result;
+    }
+
     public static void Insert(SpotifyDBConnection dbConn, Role role)
     {
         dbConn.Open();

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http.Abstractions;
-
+using SpotifyAPI.Common;
 using SpotifyAPI.Repository;
 using SpotifyAPI.Model;
 using SpotifyAPI.Services;
@@ -15,8 +15,12 @@ public static class SongEndpoints
     public static void MapSongEndpoints(this WebApplication app, SpotifyDBConnection dbConn)
     {
         // POST /songs
-        app.MapPost("/songs", (SongRequest req) =>
+        app.MapPost("/songs", (Guid requesterId, SongRequest req) =>
         {
+            var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
+            if (!perms.Contains(Permissions.ManageSongs))
+            return Results.StatusCode(403);
+
             Song song = new Song
             {
                 Id = Guid.NewGuid(),
@@ -34,8 +38,12 @@ public static class SongEndpoints
         });
 
         // GET /songs
-        app.MapGet("/songs", () =>
+        app.MapGet("/songs", (Guid requesterId) =>
         {
+            var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
+            if (!perms.Contains(Permissions.ViewSongs))
+            return Results.StatusCode(403);
+
             List<Song> songs = SongADO.GetAll(dbConn);
             List<SongResponse> songResponses = new List<SongResponse>();
             foreach (Song song in songs)

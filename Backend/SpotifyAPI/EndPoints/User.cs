@@ -52,6 +52,18 @@ public static class UserEndpoints
             };
 
             UserADO.Insert(dbConn, user);
+            var listenerRoleId = RoleADO.GetRoleIdByCode(dbConn, "Listener");
+
+            if (listenerRoleId != null)
+            {
+                UserRoleADO.Insert(dbConn, new UserRole
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = user.Id,
+                    RoleId = listenerRoleId.Value
+                });
+            }
+
             return Results.Created($"/users/{user.Id}", UserResponse.FromUser(user));
 
         });
