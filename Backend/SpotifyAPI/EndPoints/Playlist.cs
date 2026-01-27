@@ -16,7 +16,7 @@ public static class PlaylistEndpoints
         {
             var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
             if (!perms.Contains(Permissions.ManagePlaylists))
-            return Results.StatusCode(403);
+                return Results.StatusCode(403);
 
             Playlist playlist = new Playlist
             {
@@ -26,16 +26,18 @@ public static class PlaylistEndpoints
                 Description = req.Description,
                 ImageUrl = req.ImageUrl
             };
+
             PlaylistADO.Insert(dbConn, playlist);
             return Results.Created($"/playlists/{playlist.Id}", playlist);
         });
+
 
         // GET /playlists
         app.MapGet("/playlists", (Guid requesterId) =>
         {
             var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
             if (!perms.Contains(Permissions.ViewPlaylists))
-            return Results.StatusCode(403);
+                return Results.StatusCode(403);
 
             List<Playlist> playlists = PlaylistADO.GetAll(dbConn);
             return Results.Ok(playlists);
@@ -46,7 +48,7 @@ public static class PlaylistEndpoints
         {
             var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
             if (!perms.Contains(Permissions.ViewPlaylists))
-            return Results.StatusCode(403);
+                return Results.StatusCode(403);
 
             Playlist? playlist = PlaylistADO.GetById(dbConn, id);
 
@@ -60,35 +62,41 @@ public static class PlaylistEndpoints
         {
             var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
             if (!perms.Contains(Permissions.ManagePlaylists))
-            return Results.StatusCode(403);
+                return Results.StatusCode(403);
 
             Playlist? existing = PlaylistADO.GetById(dbConn, id);
-
             if (existing == null)
-            {
                 return Results.NotFound();
-            }
+
+            if (existing.UserId != requesterId && !perms.Contains(Permissions.ManageUsers))
+                return Results.StatusCode(403);
 
             Playlist updated = new Playlist
             {
                 Id = id,
-                UserId = requesterId,
-
+                UserId = existing.UserId,
                 Name = req.Name,
                 Description = req.Description,
                 ImageUrl = req.ImageUrl
             };
 
             PlaylistADO.Update(dbConn, updated);
-
             return Results.Ok(updated);
         });
+
 
         // DELETE /playlists/{id}
         app.MapDelete("/playlists/{id}", (Guid requesterId, Guid id) =>
         {
             var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
             if (!perms.Contains(Permissions.ManagePlaylists))
+                return Results.StatusCode(403);
+
+            Playlist? existing = PlaylistADO.GetById(dbConn, id);
+            if (existing == null)
+                return Results.NotFound();
+
+            if (existing.UserId != requesterId && !perms.Contains(Permissions.ManageUsers))
                 return Results.StatusCode(403);
 
             return PlaylistADO.Delete(dbConn, id)
@@ -102,7 +110,7 @@ public static class PlaylistEndpoints
         {
             var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
             if (!perms.Contains(Permissions.ManagePlaylists))
-            return Results.StatusCode(403);
+                return Results.StatusCode(403);
 
             PlaylistSong playlistsong = new PlaylistSong
             {
@@ -119,7 +127,7 @@ public static class PlaylistEndpoints
         {
             var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
             if (!perms.Contains(Permissions.ViewPlaylists))
-            return Results.StatusCode(403);
+                return Results.StatusCode(403);
 
             List<Song> songs = PlaylistADO.GetSongs(dbConn, playlistId);
             List<SongResponse> songResponses = new List<SongResponse>();
@@ -131,6 +139,7 @@ public static class PlaylistEndpoints
         });
         // DELETE /playlists/{playlistId}/remove/{songId}
         // app.MapDelete("/playlistSong/{id}", (Guid id) => PlaylistSongADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
+        
     }
 }
 
