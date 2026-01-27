@@ -72,18 +72,20 @@ public static class UserEndpoints
         app.MapGet("/users", (Guid requesterId) =>
         {
             var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
-
             if (!perms.Contains(Permissions.ViewUsers))
                 return Results.StatusCode(403);
-
             List<User> users = UserADO.GetAll(dbConn);
             return Results.Ok(users);
         });
 
 
         // GET /users User by id
-        app.MapGet("/users/{id}", (Guid id) =>
+        app.MapGet("/users/{id}", (Guid requesterId, Guid id) =>
         {
+            var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
+            if (requesterId != id && !perms.Contains(Permissions.ViewUsers))
+                return Results.StatusCode(403);
+
             User? user = UserADO.GetById(dbConn, id);
 
             return user is not null
@@ -92,8 +94,12 @@ public static class UserEndpoints
         });
 
         // PUT /users by id
-        app.MapPut("/users/{id}", (Guid id, UserRequest req) =>
+        app.MapPut("/users/{id}", (Guid requesterId, Guid id, UserRequest req) =>
         {
+            var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
+            if (requesterId != id && !perms.Contains(Permissions.ManageUsers))
+                return Results.StatusCode(403);
+
             User? existing = UserADO.GetById(dbConn, id);
 
             if (existing == null)
@@ -140,13 +146,28 @@ public static class UserEndpoints
 
 
         // DELETE /users/{id}
-        app.MapDelete("/users/{id}", (Guid id) => UserADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
+        app.MapDelete("/users/{id}", (Guid requesterId, Guid id) =>
+        {
+            var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
+            if (!perms.Contains(Permissions.ManageUsers))
+                return Results.StatusCode(403);
+
+            return UserADO.Delete(dbConn, id)
+                ? Results.NoContent()
+                : Results.NotFound();
+        });
+
 
         // --------- ROLES ---------
 
         // POST /users/{userId}/role/{roleId}
-        app.MapPost("/users/{userId}/role/{roleId}", (Guid userId, Guid roleId) =>
+        app.MapPost("/users/{userId}/role/{roleId}", (Guid requesterId, Guid userId, Guid roleId) =>
         {
+            var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
+            if (!perms.Contains(Permissions.ManageUsers))
+                return Results.StatusCode(403);
+
+
             UserRole userRole = new UserRole
             {
                 Id = Guid.NewGuid(),
@@ -158,11 +179,25 @@ public static class UserEndpoints
         });
 
         // DELETE /users/{userId}/role/{roleId}
-        app.MapDelete("/users/{userId}/role/{roleId}", (Guid userId, Guid roleId) => UserRoleADO.Delete(dbConn, userId, roleId) ? Results.NoContent() : Results.NotFound());
+        app.MapDelete("/users/{userId}/role/{roleId}", (Guid requesterId, Guid userId, Guid roleId) =>
+        {
+            var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
+            if (!perms.Contains(Permissions.ManageUsers))
+                return Results.StatusCode(403);
+
+            return UserRoleADO.Delete(dbConn, userId, roleId)
+                ? Results.NoContent()
+                : Results.NotFound();
+        });
+
 
         // --------- PLAYLISTS ---------
-        app.MapGet("/users/{userId}/playlists", (Guid userId) =>
+        app.MapGet("/users/{userId}/playlists", (Guid requesterId, Guid userId) =>
         {
+            var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
+            if (requesterId != userId && !perms.Contains(Permissions.ViewUsers))
+                return Results.StatusCode(403);
+
             List<Playlist> playlists = UserADO.GetPlaylists(dbConn, userId);
             // S'ha de afegir DTO
             return Results.Ok(playlists);
