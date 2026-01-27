@@ -57,11 +57,17 @@ public static class UserEndpoints
         });
 
         // GET /users
-        app.MapGet("/users", () =>
+        app.MapGet("/users", (Guid requesterId) =>
         {
+            var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
+
+            if (!perms.Contains(Permissions.ViewUsers))
+                return Results.StatusCode(403);
+
             List<User> users = UserADO.GetAll(dbConn);
             return Results.Ok(users);
         });
+
 
         // GET /users User by id
         app.MapGet("/users/{id}", (Guid id) =>

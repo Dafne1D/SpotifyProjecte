@@ -29,7 +29,7 @@ static class UserADO
 
     public static List<User> GetAll(SpotifyDBConnection dbConn)
     {
-        List<User> users = new();
+        List<User> users = new List<User>();
 
         dbConn.Open();
         string sql = "SELECT Id, Username, Email FROM Users";
@@ -152,7 +152,7 @@ static class UserADO
 
     public static List<Playlist> GetPlaylists(SpotifyDBConnection dbConn, Guid id)
     {
-        List<Playlist> playlists = new();
+        List<Playlist> playlists = new List<Playlist>();
 
         dbConn.Open();
         string sql = @"SELECT Id, UserId, Name, Description, ImageUrl FROM Playlists

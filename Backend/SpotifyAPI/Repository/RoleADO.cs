@@ -1,5 +1,5 @@
 using Microsoft.Data.SqlClient;
-
+using SpotifyAPI.Common;
 using SpotifyAPI.Model;
 using SpotifyAPI.Services;
 
@@ -30,7 +30,7 @@ static class RoleADO
         List<Role> roles = new();
 
         dbConn.Open();
-        string sql = "SELECT Id, Name, Description FROM Roles";
+        string sql = "SELECT Id, Code, Name, Description FROM Roles";
 
         using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
         using SqlDataReader reader = cmd.ExecuteReader();
@@ -40,8 +40,9 @@ static class RoleADO
             roles.Add(new Role
             {
                 Id = reader.GetGuid(0),
-                Name = reader.GetString(1),
-                Description = reader.GetString(2)
+                Code = reader.GetString(1),
+                Name = reader.GetString(2),
+                Description = reader.IsDBNull(3) ? "" : reader.GetString(3)
             });
         }
 
@@ -52,7 +53,7 @@ static class RoleADO
     public static Role? GetById(SpotifyDBConnection dbConn, Guid id)
     {
         dbConn.Open();
-        string sql = "SELECT Id, Name, Description FROM Roles WHERE Id = @Id";
+        string sql = "SELECT Id, Code, Name, Description FROM Roles WHERE Id = @Id";
 
         using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
         cmd.Parameters.AddWithValue("@Id", id);
@@ -65,8 +66,9 @@ static class RoleADO
             role = new Role
             {
                 Id = reader.GetGuid(0),
-                Name = reader.GetString(1),
-                Description = reader.GetString(2)
+                Code = reader.GetString(1),
+                Name = reader.GetString(2),
+                Description = reader.IsDBNull(3) ? "" : reader.GetString(3)
             };
         }
 

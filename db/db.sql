@@ -86,16 +86,41 @@ CREATE TABLE PlaylistSongs (
         REFERENCES Songs(Id)
 );
 
-INSERT INTO Roles (Id, Code, Name) VALUES
-(NEWID(), 'Listener', 'Listener'),
-(NEWID(), 'Artist', 'Artist'),
-(NEWID(), 'Admin', 'Admin');
+INSERT INTO Roles (Id, Code, Name, Description) VALUES
+(NEWID(), 'Listener', 'Listener', 'Can browse songs and manage own playlists'),
+(NEWID(), 'Artist', 'Artist', 'Can manage songs and manage own playlists'),
+(NEWID(), 'Admin', 'Admin', 'Full system access including user and role management');
 
-INSERT INTO Permissions (Id, Code, Name) VALUES
-(NEWID(), 'VIEW_SONGS', 'View Songs'),
-(NEWID(), 'MANAGE_SONGS', 'Manage Songs'),
-(NEWID(), 'VIEW_PLAYLISTS', 'View Playlists'),
-(NEWID(), 'MANAGE_PLAYLISTS', 'Manage Playlists'),
-(NEWID(), 'VIEW_USERS', 'View Users'),
-(NEWID(), 'MANAGE_USERS', 'Manage Users');
+INSERT INTO Permissions (Id, Code, Name, Description) VALUES
+(NEWID(), 'VIEW_SONGS', 'View Songs', 'Allows viewing and browsing songs'),
+(NEWID(), 'MANAGE_SONGS', 'Manage Songs', 'Allows creating, editing, and deleting songs'),
+(NEWID(), 'VIEW_PLAYLISTS', 'View Playlists', 'Allows viewing playlists'),
+(NEWID(), 'MANAGE_PLAYLISTS', 'Manage Playlists', 'Allows creating and editing playlists'),
+(NEWID(), 'VIEW_USERS', 'View Users', 'Allows viewing user accounts'),
+(NEWID(), 'MANAGE_USERS', 'Manage Users', 'Allows managing users and role assignments');
 
+INSERT INTO RolePermissions (Id, RoleId, PermissionId)
+SELECT NEWID(), r.Id, p.Id
+FROM Roles r
+JOIN Permissions p ON
+(
+    (r.Code = 'Listener' AND p.Code IN (
+        'VIEW_SONGS',
+        'VIEW_PLAYLISTS',
+        'MANAGE_PLAYLISTS'
+    )) OR
+
+    (r.Code = 'Artist' AND p.Code IN (
+        'VIEW_SONGS',
+        'MANAGE_SONGS',
+        'VIEW_PLAYLISTS',
+        'MANAGE_PLAYLISTS'
+    )) OR
+
+    (r.Code = 'Admin')
+);
+
+INSERT INTO UserRoles (Id, UserId, RoleId)
+SELECT NEWID(), '93e8923b-bc4c-4e53-8262-86572d586485', Id
+FROM Roles
+WHERE Code = 'Admin';

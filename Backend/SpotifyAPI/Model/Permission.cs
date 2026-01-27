@@ -1,3 +1,5 @@
+namespace SpotifyAPI.Model;
+
 public class Permission
 {
     public Guid Id { get; set; }
