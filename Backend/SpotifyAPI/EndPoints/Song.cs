@@ -19,7 +19,7 @@ public static class SongEndpoints
         {
             var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
             if (!perms.Contains(Permissions.ManageSongs))
-            return Results.StatusCode(403);
+                return Results.StatusCode(403);
 
             Song song = new Song
             {
@@ -42,7 +42,7 @@ public static class SongEndpoints
         {
             var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
             if (!perms.Contains(Permissions.ViewSongs))
-            return Results.StatusCode(403);
+                return Results.StatusCode(403);
 
             List<Song> songs = SongADO.GetAll(dbConn);
             List<SongResponse> songResponses = new List<SongResponse>();
@@ -58,7 +58,7 @@ public static class SongEndpoints
         {
             var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
             if (!perms.Contains(Permissions.ViewSongs))
-            return Results.StatusCode(403);
+                return Results.StatusCode(403);
 
             Song? song = SongADO.GetById(dbConn, id);
 
@@ -72,7 +72,7 @@ public static class SongEndpoints
         {
             var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
             if (!perms.Contains(Permissions.ManageSongs))
-            return Results.StatusCode(403);
+                return Results.StatusCode(403);
 
             Song? existing = SongADO.GetById(dbConn, id);
 
@@ -115,7 +115,7 @@ public static class SongEndpoints
         {
             var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
             if (!perms.Contains(Permissions.ManageSongs))
-            return Results.StatusCode(403);
+                return Results.StatusCode(403);
 
             IFormFile[] filesArray = files.ToArray();
             if (filesArray == null)
@@ -137,7 +137,7 @@ public static class SongEndpoints
         {
             var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
             if (!perms.Contains(Permissions.ManageSongs))
-            return Results.StatusCode(403);
+                return Results.StatusCode(403);
 
             Song? song = SongADO.GetById(dbConn, id);
             if (song is null)
