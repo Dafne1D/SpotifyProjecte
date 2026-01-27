@@ -12,7 +12,7 @@ static class AuthADO
         dbConn.Open();
 
         string sql = @"
-            SELECT p.Code
+            SELECT DISTINCT p.Code
             FROM UserRoles ur
             JOIN RolePermissions rp ON rp.RoleId = ur.RoleId
             JOIN Permissions p ON p.Id = rp.PermissionId
