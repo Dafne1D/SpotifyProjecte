@@ -27,7 +27,7 @@ static class RoleADO
 
     public static List<Role> GetAll(SpotifyDBConnection dbConn)
     {
-        List<Role> roles = new();
+        List<Role> roles = new List<Role>();
 
         dbConn.Open();
         string sql = "SELECT Id, Code, Name, Description FROM Roles";

@@ -27,7 +27,7 @@ static class PlaylistSongADO
     }
     public static List<Song> GetByPlaylistId(SpotifyDBConnection dbConn, Guid playlistId)
     {
-        List<Song> songs = new();
+        List<Song> songs = new List<Song>();
 
         dbConn.Open();
         string sql = @"

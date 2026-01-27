@@ -118,7 +118,7 @@ static class PermissionADO
 
     public static List<Permission> GetByRole(SpotifyDBConnection dbConn, Guid roleId)
     {  
-        List<Permission> list = new();
+        List<Permission> list = new List<Permission>();
 
         dbConn.Open();
 

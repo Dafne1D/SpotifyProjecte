@@ -7,7 +7,7 @@ static class AuthADO
 {
     public static List<string> GetUserPermissionCodes(SpotifyDBConnection dbConn, Guid userId)
     {
-        List<string> perms = new();
+        List<string> perms = new List<string>();
 
         dbConn.Open();
 

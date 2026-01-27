@@ -30,7 +30,7 @@ static class SongADO
 
     public static List<Song> GetAll(SpotifyDBConnection dbConn)
     {
-        List<Song> songs = new();
+        List<Song> songs = new List<Song>();
 
         dbConn.Open();
         string sql = "SELECT Id, Title, Artist, Album, Duration, Genre, ImageUrl FROM Songs";

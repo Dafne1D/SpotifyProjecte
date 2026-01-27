@@ -27,7 +27,7 @@ static class UserRoleADO
 
       public static List<UserRole> GetAll(SpotifyDBConnection dbConn)
     {
-        List<UserRole> userRoles = new();
+        List<UserRole> userRoles = new List<UserRole>();
 
         dbConn.Open();
         string sql = "SELECT Id, UserId, RoleId FROM UserRoles";
@@ -50,7 +50,7 @@ static class UserRoleADO
     }
     public static List<UserRole> GetByRole(SpotifyDBConnection dbConn, Guid roleId)
     {
-        List<UserRole> userRoles = new();
+        List<UserRole> userRoles = new List<UserRole>();
 
         dbConn.Open();
 
@@ -78,7 +78,7 @@ static class UserRoleADO
 
     public static List<UserRole> GetByUser(SpotifyDBConnection dbConn, Guid userId)
     {
-        List<UserRole> userRoles = new();
+        List<UserRole> userRoles = new List<UserRole>();
 
         dbConn.Open();
 

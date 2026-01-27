@@ -149,7 +149,6 @@ static class UserADO
 
         return count > 0;
     }
-
     public static List<Playlist> GetPlaylists(SpotifyDBConnection dbConn, Guid id)
     {
         List<Playlist> playlists = new List<Playlist>();
