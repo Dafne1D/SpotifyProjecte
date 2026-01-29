@@ -24,6 +24,32 @@ static class SongFileADO
         dbConn.Close();
     }
 
+    public static List<SongFile> GetAllFiles(SpotifyDBConnection dbConn)
+{
+    dbConn.Open();
+
+    string sql = "SELECT Id, SongId, Url FROM SongFiles";
+
+    using SqlCommand cmd = new(sql, dbConn.sqlConnection);
+    using SqlDataReader reader = cmd.ExecuteReader();
+
+    List<SongFile> list = new();
+
+    while (reader.Read())
+    {
+        list.Add(new SongFile
+        {
+            Id = reader.GetGuid(0),
+            SongId = reader.GetGuid(1),
+            Url = reader.GetString(2)
+        });
+    }
+
+    dbConn.Close();
+    return list;
+}
+
+
     public static SongFile? GetById(SpotifyDBConnection dbConn, Guid id)
     {
         dbConn.Open();

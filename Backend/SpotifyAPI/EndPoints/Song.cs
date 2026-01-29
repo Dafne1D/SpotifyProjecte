@@ -106,7 +106,7 @@ public static class SongEndpoints
 
             return SongADO.Delete(dbConn, id)
                 ? Results.NoContent()
-                : Results.NotFound();
+                : Results.NotFound(); 
         });
 
         // POST Upload File by id
@@ -158,7 +158,7 @@ public static class SongEndpoints
         {
             Song? song = SongADO.GetById(dbConn, songId);
             if (song is null)
-                return Results.NotFound(new { message = $"Song with Id {id} not found." });
+                return Results.NotFound(new { message = $"Song with Id {songId} not found." });
 
             SongFile? songFile = SongFileADO.GetById(dbConn, fileId);
             if (songFile is null || songFile.SongId != songId)
@@ -166,6 +166,23 @@ public static class SongEndpoints
 
             if (!File.Exists(songFile.Url))
                 return Results.NotFound(new { message = "File not found in the disk" });
+
+            byte[] fileBytes = File.ReadAllBytes(songFile.Url);
+            string fileName = Path.GetFileName(songFile.Url);
+            string contentType = "application/octet-stream";
+
+            return Results.File(fileBytes, contentType, fileName);
+        });
+
+        //GET /songs{songId}/files
+
+        app.MapGet("/songs/{songId}/files/", (Guid songId) =>
+        {
+            Song? song = SongADO.GetById(dbConn, songId);
+            if (song is null)
+                return Results.NotFound(new { message = $"Song with Id {songId} not found." });
+
+            SongFile? songFile = SongFileADO.GetById(dbConn);
 
             byte[] fileBytes = File.ReadAllBytes(songFile.Url);
             string fileName = Path.GetFileName(songFile.Url);
