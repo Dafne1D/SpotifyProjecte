@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Spotify Song-viewer Server/1.0.0": {
+        "runtime": {
+          "Spotify Song-viewer Server.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Spotify Song-viewer Server/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

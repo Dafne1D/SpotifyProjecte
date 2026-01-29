@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http.Abstractions;
-
+using SpotifyAPI.Common;
 using SpotifyAPI.Repository;
 using SpotifyAPI.Model;
 using SpotifyAPI.Services;
@@ -15,8 +15,12 @@ public static class SongEndpoints
     public static void MapSongEndpoints(this WebApplication app, SpotifyDBConnection dbConn)
     {
         // POST /songs
-        app.MapPost("/songs", (SongRequest req) =>
+        app.MapPost("/songs", (Guid requesterId, SongRequest req) =>
         {
+            var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
+            if (!perms.Contains(Permissions.ManageSongs))
+                return Results.StatusCode(403);
+
             Song song = new Song
             {
                 Id = Guid.NewGuid(),
@@ -34,8 +38,12 @@ public static class SongEndpoints
         });
 
         // GET /songs
-        app.MapGet("/songs", () =>
+        app.MapGet("/songs", (Guid requesterId) =>
         {
+            var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
+            if (!perms.Contains(Permissions.ViewSongs))
+                return Results.StatusCode(403);
+
             List<Song> songs = SongADO.GetAll(dbConn);
             List<SongResponse> songResponses = new List<SongResponse>();
             foreach (Song song in songs)
@@ -46,8 +54,12 @@ public static class SongEndpoints
         });
 
         // GET /songs Song by id
-        app.MapGet("/songs/{id}", (Guid id) =>
+        app.MapGet("/songs/{id}", (Guid requesterId, Guid id) =>
         {
+            var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
+            if (!perms.Contains(Permissions.ViewSongs))
+                return Results.StatusCode(403);
+
             Song? song = SongADO.GetById(dbConn, id);
 
             return song is not null
@@ -56,8 +68,12 @@ public static class SongEndpoints
         });
 
         // PUT /songs by id
-        app.MapPut("/songs/{id}", (Guid id, SongRequest req) =>
+        app.MapPut("/songs/{id}", (Guid requesterId, Guid id, SongRequest req) =>
         {
+            var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
+            if (!perms.Contains(Permissions.ManageSongs))
+                return Results.StatusCode(403);
+
             Song? existing = SongADO.GetById(dbConn, id);
 
             if (existing == null)
@@ -82,11 +98,24 @@ public static class SongEndpoints
         });
 
         // DELETE /songs by id
-        app.MapDelete("/songs/{id}", (Guid id) => SongADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
+        app.MapDelete("/songs/{id}", (Guid requesterId, Guid id) =>
+        {
+            var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
+            if (!perms.Contains(Permissions.ManageSongs))
+                return Results.StatusCode(403);
+
+            return SongADO.Delete(dbConn, id)
+                ? Results.NoContent()
+                : Results.NotFound();
+        });
 
         // POST Upload File by id
-        app.MapPost("/songs/{id}/upload", (Guid id, [FromForm] IFormFileCollection files) =>
+        app.MapPost("/songs/{id}/upload", (Guid requesterId, Guid id, [FromForm] IFormFileCollection files) =>
         {
+            var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
+            if (!perms.Contains(Permissions.ManageSongs))
+                return Results.StatusCode(403);
+
             IFormFile[] filesArray = files.ToArray();
             if (filesArray == null)
                 return Results.BadRequest(new { message = "No files recieved", files });
@@ -101,5 +130,25 @@ public static class SongEndpoints
         })
         .Accepts<IFormFile[]>("multipart/form-data")
         .DisableAntiforgery();
+
+        // DELETE File from Song
+        app.MapDelete("/songs/{id}/delete/{fileId}", (Guid requesterId, Guid id, Guid fileId) =>
+        {
+            var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
+            if (!perms.Contains(Permissions.ManageSongs))
+                return Results.StatusCode(403);
+
+            Song? song = SongADO.GetById(dbConn, id);
+            if (song is null)
+                return Results.NotFound(new { message = $"Song with Id {id} not found." });
+
+            SongFile? songFile = SongFileADO.GetById(dbConn, fileId);
+            if (songFile is null)
+                return Results.NotFound(new { message = $"Song file with Id {songFile} not found." });
+
+            SongFileADO.Delete(dbConn, fileId);
+
+            return Results.Ok(new { message = "File successfully deleted", songFile });
+        });
     }
 }
