@@ -101,21 +101,5 @@ public static class SongEndpoints
         })
         .Accepts<IFormFile[]>("multipart/form-data")
         .DisableAntiforgery();
-
-        // DELETE File from Song
-        app.MapDelete("/songs/{id}/delete/{fileId}", (Guid id, Guid fileId) =>
-        {
-            Song? song = SongADO.GetById(dbConn, id);
-            if (song is null)
-                return Results.NotFound(new { message = $"Song with Id {id} not found." });
-
-            SongFile? songFile = SongFileADO.GetById(dbConn, fileId);
-            if (songFile is null)
-                return Results.NotFound(new { message = $"Song file with Id {songFile} not found." });
-
-            SongFileADO.Delete(dbConn, fileId);
-
-            return Results.Ok(new { message = "File successfully deleted", songFile });
-        });
     }
 }
