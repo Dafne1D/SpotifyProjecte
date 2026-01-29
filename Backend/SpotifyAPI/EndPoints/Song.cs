@@ -110,7 +110,7 @@ public static class SongEndpoints
         });
 
         // POST Upload File by id
-        app.MapPost("/songs/{id}/upload", (Guid requesterId, Guid id, [FromForm] IFormFileCollection files) =>
+        app.MapPost("/songs/{id}/files", (Guid requesterId, Guid id, [FromForm] IFormFileCollection files) =>
         {
             var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
             if (!perms.Contains(Permissions.ManageSongs))
@@ -132,7 +132,7 @@ public static class SongEndpoints
         .DisableAntiforgery();
 
         // DELETE File from Song
-        app.MapDelete("/songs/{id}/delete/{fileId}", (Guid requesterId, Guid id, Guid fileId) =>
+        app.MapDelete("/songs/{id}/files/{fileId}", (Guid requesterId, Guid id, Guid fileId) =>
         {
             var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
             if (!perms.Contains(Permissions.ManageSongs))
@@ -149,6 +149,29 @@ public static class SongEndpoints
             SongFileADO.Delete(dbConn, fileId);
 
             return Results.Ok(new { message = "File successfully deleted", songFile });
+        });
+
+
+        // GET /songs/{songId}/files/{fileId}
+
+        app.MapGet("/songs/{songId}/files/{fileId}", (Guid songId, Guid fileId) =>
+        {
+            Song? song = SongADO.GetById(dbConn, songId);
+            if (song is null)
+                return Results.NotFound(new { message = $"Song with Id {id} not found." });
+
+            SongFile? songFile = SongFileADO.GetById(dbConn, fileId);
+            if (songFile is null || songFile.SongId != songId)
+                return Results.NotFound(new { message = $"Song file with Id {songFile} not found." });
+
+            if (!File.Exists(songFile.Url))
+                return Results.NotFound(new { message = "File not found in the disk" });
+
+            byte[] fileBytes = File.ReadAllBytes(songFile.Url);
+            string fileName = Path.GetFileName(songFile.Url);
+            string contentType = "application/octet-stream";
+
+            return Results.File(fileBytes, contentType, fileName);
         });
     }
 }
