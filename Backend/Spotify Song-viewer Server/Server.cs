@@ -51,11 +51,11 @@ class Server
                     if (type != "Join")
                         continue;
 
-                    string username = doc.RootElement.GetProperty("username").GetString()!;
-                    string songName = doc.RootElement.GetProperty("song").GetString()!;
+                    Guid userId = doc.RootElement.GetProperty("userId").GetGuid()!;
+                    Guid songId = doc.RootElement.GetProperty("songId").GetGuid()!;
 
-                    User user = new User(Guid.NewGuid(), username, "");
-                    Song song = new Song(Guid.NewGuid(), songName, "Unknown", "Unknown", 0, "Unknown", "");
+                    User user = new User(userId, "username", "");
+                    Song song = new Song(songId, "songName", "Unknown", "Unknown", 0, "Unknown", "");
 
                     lock (clientsLock)
                     {
@@ -69,8 +69,8 @@ class Server
                 {
                     if (type == "UpdateSong")
                     {
-                        string newSong = doc.RootElement.GetProperty("song").GetString()!;
-                        Song song = new Song(Guid.NewGuid(), newSong, "Unknown", "Unknown", 0, "Unknown", "");
+                        Guid newSongId = doc.RootElement.GetProperty("songId").GetGuid()!;
+                        Song song = new Song(newSongId, "newSong", "Unknown", "Unknown", 0, "Unknown", "");
 
                         lock (clientsLock)
                         {

@@ -3,11 +3,11 @@
   "WorkspaceRootPath": "C:\\Users\\Uriens\\Desktop\\2DAM\\PROJECTES\\SpotifyProjecte\\Backend\\Spotify Song-viewer Server\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E3064F3F-834E-4CC1-B964-E6D0DE8CEE7C}|..\\Spotify Song-Viewer Client\\Spotify Song-Viewer Client.csproj|c:\\users\\uriens\\desktop\\2dam\\projectes\\spotifyprojecte\\backend\\spotify song-viewer client\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{9DA718A7-1DF3-4FF6-A6A2-F8E399BF81F1}|Spotify Song-viewer Server.csproj|c:\\users\\uriens\\desktop\\2dam\\projectes\\spotifyprojecte\\backend\\spotify song-viewer server\\server.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9DA718A7-1DF3-4FF6-A6A2-F8E399BF81F1}|Spotify Song-viewer Server.csproj|solutionrelative:server.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3064F3F-834E-4CC1-B964-E6D0DE8CEE7C}|..\\Spotify Song-Viewer Client\\Spotify Song-Viewer Client.csproj|c:\\users\\uriens\\desktop\\2dam\\projectes\\spotifyprojecte\\backend\\spotify song-viewer client\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9DA718A7-1DF3-4FF6-A6A2-F8E399BF81F1}|Spotify Song-viewer Server.csproj|c:\\users\\uriens\\desktop\\2dam\\projectes\\spotifyprojecte\\backend\\spotify song-viewer server\\models\\song.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -29,30 +29,30 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Client.cs",
               "DocumentMoniker": "C:\\Users\\Uriens\\Desktop\\2DAM\\PROJECTES\\SpotifyProjecte\\Backend\\Spotify Song-Viewer Client\\Client.cs",
               "RelativeDocumentMoniker": "..\\Spotify Song-Viewer Client\\Client.cs",
               "ToolTip": "C:\\Users\\Uriens\\Desktop\\2DAM\\PROJECTES\\SpotifyProjecte\\Backend\\Spotify Song-Viewer Client\\Client.cs",
               "RelativeToolTip": "..\\Spotify Song-Viewer Client\\Client.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAAwAsAAAAyAAAAAAAAAA==",
+              "ViewState": "AgIAACAAAAAAAAAAAAAgwDsAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-28T23:11:59.331Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Server.cs",
               "DocumentMoniker": "C:\\Users\\Uriens\\Desktop\\2DAM\\PROJECTES\\SpotifyProjecte\\Backend\\Spotify Song-viewer Server\\Server.cs",
               "RelativeDocumentMoniker": "Server.cs",
               "ToolTip": "C:\\Users\\Uriens\\Desktop\\2DAM\\PROJECTES\\SpotifyProjecte\\Backend\\Spotify Song-viewer Server\\Server.cs",
               "RelativeToolTip": "Server.cs",
-              "ViewState": "AgIAAC0AAAAAAAAAAAAYwEoAAAAqAAAAAAAAAA==",
+              "ViewState": "AgIAAGUAAAAAAAAAAAA3wEgAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-27T17:18:45.91Z",
               "EditorCaption": ""
@@ -80,8 +80,7 @@
               "RelativeToolTip": "Models\\User.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-30T15:40:15.956Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-30T15:40:15.956Z"
             },
             {
               "$type": "Document",
@@ -93,8 +92,7 @@
               "RelativeToolTip": "Models\\ClientInfo.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-28T23:04:22.767Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-28T23:04:22.767Z"
             }
           ]
         }
