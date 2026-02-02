@@ -1,8 +1,8 @@
-﻿using System.Net;
+﻿using Spotify_Song_viewer_Server.Models;
+using System.Net;
 using System.Net.Sockets;
 using System.Text.Json;
-
-using Spotify_Song_viewer_Server.Models;
+using static System.Net.WebRequestMethods;
 
 class Server
 {
@@ -11,6 +11,13 @@ class Server
 
     private static readonly Dictionary<TcpClient, ClientInfo> clients = new();
     private static readonly object clientsLock = new();
+
+    private static readonly string apiBaseUrl = "http://localhost:5000";
+    private static readonly HttpClient httpClient = new HttpClient
+    {
+        Timeout = TimeSpan.FromSeconds(5)
+    };
+
 
     static async Task Main()
     {
@@ -54,7 +61,7 @@ class Server
                     Guid userId = doc.RootElement.GetProperty("userId").GetGuid()!;
                     Guid songId = doc.RootElement.GetProperty("songId").GetGuid()!;
 
-                    User user = new User(userId, "username", "");
+                    User user = await GetUserAsync(userId);
                     Song song = new Song(songId, "songName", "Unknown", "Unknown", 0, "Unknown", "");
 
                     lock (clientsLock)
@@ -134,4 +141,16 @@ class Server
             }
         }
     }
+
+    private static async Task<User> GetUserAsync(Guid userId)
+    {
+        HttpResponseMessage response =
+            await httpClient.GetAsync($"{apiBaseUrl}/users/{userId}");
+
+        response.EnsureSuccessStatusCode();
+
+        string json = await response.Content.ReadAsStringAsync();
+        return JsonSerializer.Deserialize<User>(json)!;
+    }
+
 }
