@@ -2,8 +2,6 @@ using SpotifyAPI.Services;
 using SpotifyAPI.Model;
 using SpotifyAPI.Repository;
 using SpotifyAPI.DTO;
-using SpotifyAPI.Common;
-
 
 namespace SpotifyAPI.EndPoints;
 
@@ -14,31 +12,22 @@ public static class RoleEndpoints
 
 
         // GET /roles
-        app.MapGet("/roles", (Guid requesterId) =>
+        app.MapGet("/roles", () =>
         {
-            var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
-            if (!perms.Contains(Permissions.ManageUsers))
-                return Results.StatusCode(403);
-
             List<Role> roles = RoleADO.GetAll(dbConn);
-            List<RoleResponse> roleResponses = new();
+            List<RoleResponse> roleResponses = new List<RoleResponse>();
             foreach (Role role in roles)
+            {
                 roleResponses.Add(RoleResponse.FromRole(role));
-
+            }
             return Results.Ok(roleResponses);
         });
 
         // GET /roles/{id}/permissions
-        app.MapGet("/roles/{roleId}/permissions", (Guid requesterId, Guid roleId) =>
+        app.MapGet("/roles/{roleId}/permissions", (Guid roleId) =>
         {
-            var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
-            if (!perms.Contains(Permissions.ManageUsers))
-                return Results.StatusCode(403);
-
-            var permissions = PermissionADO.GetByRole(dbConn, roleId);
-            return Results.Ok(permissions);
+            List<RolePermission> rolPer = RolePermissionADO.GetAll(dbConn, roleId);
+            return Results.Ok(rolPer);
         });
-
-
     }
 }

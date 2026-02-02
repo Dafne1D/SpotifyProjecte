@@ -149,4 +149,3 @@ FROM RolePermissions rp
 JOIN Roles r ON r.Id = rp.RoleId
 JOIN Permissions p ON p.Id = rp.PermissionId
 ORDER BY r.Code, p.Code;
-

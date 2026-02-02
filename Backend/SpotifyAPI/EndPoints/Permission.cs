@@ -2,7 +2,6 @@ using SpotifyAPI.Services;
 using SpotifyAPI.Model;
 using SpotifyAPI.Repository;
 using SpotifyAPI.DTO;
-using SpotifyAPI.Common;
 
 namespace SpotifyAPI.EndPoints;
 
@@ -11,12 +10,8 @@ public static class PermissionEndpoints
     public static void MapPermissionEndpoints(this WebApplication app, SpotifyDBConnection dbConn)
     {
         // POST /permissions
-        app.MapPost("/permissions", (Guid requesterId, PermissionRequest req) =>
+        app.MapPost("/permissions", (PermissionRequest req) =>
         {
-            var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
-            if (!perms.Contains(Permissions.ManageUsers))
-                return Results.StatusCode(403);
-
             Permission permission = new Permission
             {
                 Id = Guid.NewGuid(),
@@ -30,12 +25,8 @@ public static class PermissionEndpoints
         });
 
         // GET /permissions
-        app.MapGet("/permissions", (Guid requesterId) =>
+        app.MapGet("/permissions", () =>
         {
-            var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
-            if (!perms.Contains(Permissions.ViewUsers))
-                return Results.StatusCode(403);
-
             List<Permission> permissions = PermissionADO.GetAll(dbConn);
             List<PermissionResponse> permissionResponses = new List<PermissionResponse>();
             foreach (Permission permission in permissions)
@@ -46,12 +37,8 @@ public static class PermissionEndpoints
         });
 
         // GET /permissions by id
-        app.MapGet("/permissions/{id}", (Guid requesterId, Guid id) =>
+        app.MapGet("/permissions/{id}", (Guid id) =>
         {
-            var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
-            if (!perms.Contains(Permissions.ViewUsers))
-                return Results.StatusCode(403);
-
             Permission? permission = PermissionADO.GetById(dbConn, id);
 
             return permission is not null
@@ -60,12 +47,8 @@ public static class PermissionEndpoints
         });
 
         // PUT /permissions
-        app.MapPut("/permissions/{id}", (Guid requesterId, Guid id, PermissionRequest req) =>
+        app.MapPut("/permissions/{id}", (Guid id, PermissionRequest req) =>
         {
-            var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
-            if (!perms.Contains(Permissions.ManageUsers))
-                return Results.StatusCode(403);
-
             Permission? existing = PermissionADO.GetById(dbConn, id);
 
             if (existing == null)
@@ -86,15 +69,6 @@ public static class PermissionEndpoints
         });
 
         // DELETE /permissions
-        app.MapDelete("/permissions/{id}", (Guid requesterId, Guid id) =>
-        {
-            var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
-            if (!perms.Contains(Permissions.ManageUsers))
-                return Results.StatusCode(403);
-
-            return PermissionADO.Delete(dbConn, id)
-                ? Results.NoContent()
-                : Results.NotFound();
-        });
+        app.MapDelete("/permissions/{id}", (Guid id) => PermissionADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
     }
 }

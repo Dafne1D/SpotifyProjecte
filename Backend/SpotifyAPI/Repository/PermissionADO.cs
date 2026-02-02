@@ -1,4 +1,3 @@
-using System.Security.Permissions;
 using Microsoft.Data.SqlClient;
 
 using SpotifyAPI.Model;
@@ -26,14 +25,12 @@ static class PermissionADO
         dbConn.Close();
     }
 
-
     public static List<Permission> GetAll(SpotifyDBConnection dbConn)
     {
-        List<Permission> permissions = new List<Permission>();
+        List<Permission> permissions = new();
 
         dbConn.Open();
-
-        string sql = "SELECT Id, Code, Name, Description FROM Permissions";
+        string sql = "SELECT Id, Name, Description FROM Permissions";
 
         using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
         using SqlDataReader reader = cmd.ExecuteReader();
@@ -43,16 +40,14 @@ static class PermissionADO
             permissions.Add(new Permission
             {
                 Id = reader.GetGuid(0),
-                Code = reader.GetString(1),
-                Name = reader.GetString(2),
-                Description = reader.IsDBNull(3) ? "" : reader.GetString(3)
+                Name = reader.GetString(1),
+                Description = reader.GetString(2)
             });
         }
 
         dbConn.Close();
         return permissions;
     }
-
 
     public static Permission? GetById(SpotifyDBConnection dbConn, Guid id)
     {
@@ -115,37 +110,4 @@ static class PermissionADO
 
         return rows > 0;
     }
-
-    public static List<Permission> GetByRole(SpotifyDBConnection dbConn, Guid roleId)
-    {  
-        List<Permission> list = new List<Permission>();
-
-        dbConn.Open();
-
-        string sql = @"
-            SELECT p.Id, p.Code, p.Name, p.Description
-            FROM RolePermissions rp
-            JOIN Permissions p ON p.Id = rp.PermissionId
-            WHERE rp.RoleId = @RoleId
-        ";
-
-        using SqlCommand cmd = new(sql, dbConn.sqlConnection);
-        cmd.Parameters.AddWithValue("@RoleId", roleId);
-
-        using SqlDataReader r = cmd.ExecuteReader();
-        while (r.Read())
-        {
-            list.Add(new Permission
-            {
-                Id = r.GetGuid(0),
-                Code = r.GetString(1),
-                Name = r.GetString(2),
-                Description = r.IsDBNull(3) ? "" : r.GetString(3)
-            });
-        }
-
-        dbConn.Close();
-        return list;
-    }
-
 }

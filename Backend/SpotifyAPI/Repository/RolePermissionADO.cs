@@ -27,7 +27,7 @@ static class RolePermissionADO
 
     public static List<RolePermission> GetAll(SpotifyDBConnection dbConn, Guid roleId)
     {
-        List<RolePermission> rolePermissions = new List<RolePermission>();
+        List<RolePermission> rolePermissions = new();
 
         dbConn.Open();
         string sql = "SELECT Id, RoleId, PermissionId FROM RolePermissions WHERE RoleId = @RoleId ";

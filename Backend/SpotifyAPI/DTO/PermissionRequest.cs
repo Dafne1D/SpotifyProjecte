@@ -4,12 +4,11 @@ namespace SpotifyAPI.DTO;
 
 public record PermissionRequest(string Name, string Description)
 {
-    public Permission ToPermission(Guid id, string code)
+    public Permission ToPermission(Guid id)
     {
         return new Permission
         {
             Id = id,
-            Code = code,
             Name = Name,
             Description = Description
         };

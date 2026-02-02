@@ -29,7 +29,7 @@ static class UserADO
 
     public static List<User> GetAll(SpotifyDBConnection dbConn)
     {
-        List<User> users = new List<User>();
+        List<User> users = new();
 
         dbConn.Open();
         string sql = "SELECT Id, Username, Email FROM Users";
@@ -149,9 +149,10 @@ static class UserADO
 
         return count > 0;
     }
+
     public static List<Playlist> GetPlaylists(SpotifyDBConnection dbConn, Guid id)
     {
-        List<Playlist> playlists = new List<Playlist>();
+        List<Playlist> playlists = new();
 
         dbConn.Open();
         string sql = @"SELECT Id, UserId, Name, Description, ImageUrl FROM Playlists

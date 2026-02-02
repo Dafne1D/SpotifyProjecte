@@ -1,5 +1,4 @@
 ﻿using AppSpotifyWPF.Screens.Users;
-using AppSpotifyWPF.Screens.Songs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,12 +38,12 @@ namespace AppSpotifyWPF.Screens
 
         private void songManagementButton_Click(object sender, RoutedEventArgs e)
         {
-            changePage(new PagReadSong());
+            changePage(new PagReadUser());
         }
 
         private void playlistManagementButton_Click(object sender, RoutedEventArgs e)
         {
-            changePage(new CreateUserPage());
+            changePage(new PagCreateUser());
         }
     }
 }

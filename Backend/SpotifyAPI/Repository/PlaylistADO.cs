@@ -30,7 +30,7 @@ static class PlaylistADO
 
     public static List<Playlist> GetAll(SpotifyDBConnection dbConn)
     {
-        List<Playlist> playlists = new List<Playlist>();
+        List<Playlist> playlists = new();
 
         dbConn.Open();
         string sql = "SELECT Id, UserId, Name, Description, ImageUrl FROM Playlists";
@@ -125,7 +125,7 @@ static class PlaylistADO
 
     public static List<Song> GetSongs(SpotifyDBConnection dbConn, Guid id)
     {
-        List<Song> songs = new List<Song>();
+        List<Song> songs = new();
 
         dbConn.Open();
         string sql = @"SELECT s.Id, s.Title, s.Artist, s.Album, s.Duration, s.Genre, s.ImageUrl FROM Songs s
