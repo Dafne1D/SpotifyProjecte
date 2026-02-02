@@ -52,11 +52,14 @@ class Server
                         continue;
 
                     string username = doc.RootElement.GetProperty("username").GetString()!;
-                    string song = doc.RootElement.GetProperty("song").GetString()!;
+                    string songName = doc.RootElement.GetProperty("song").GetString()!;
+
+                    User user = new User(Guid.NewGuid(), username, "");
+                    Song song = new Song(Guid.NewGuid(), songName, "Unknown", "Unknown", 0, "Unknown", "");
 
                     lock (clientsLock)
                     {
-                        clients[client] = new ClientInfo(username, song);
+                        clients[client] = new ClientInfo(user, song);
                     }
 
                     registered = true;
@@ -67,10 +70,11 @@ class Server
                     if (type == "UpdateSong")
                     {
                         string newSong = doc.RootElement.GetProperty("song").GetString()!;
+                        Song song = new Song(Guid.NewGuid(), newSong, "Unknown", "Unknown", 0, "Unknown", "");
 
                         lock (clientsLock)
                         {
-                            clients[client].Song = newSong;
+                            clients[client].Song = song;
                         }
 
                         BroadcastUserList();
@@ -102,7 +106,7 @@ class Server
         lock (clientsLock)
         {
             snapshot = clients.Values
-                .Select(c => new { username = c.Username, song = c.Song })
+                .Select(c => new { username = c.User, song = c.Song })
                 .Cast<object>()
                 .ToList();
         }

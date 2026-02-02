@@ -2,12 +2,12 @@
 {
     internal class ClientInfo
     {
-        public string Username { get; }
-        public string Song { get; set; }
+        public User User { get; }
+        public Song Song { get; set; }
 
-        public ClientInfo(string username, string song)
+        public ClientInfo(User user, Song song)
         {
-            Username = username;
+            User = user;
             Song = song;
         }
     }
