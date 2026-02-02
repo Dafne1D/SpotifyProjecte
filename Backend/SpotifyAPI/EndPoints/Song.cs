@@ -106,7 +106,7 @@ public static class SongEndpoints
 
             return SongADO.Delete(dbConn, id)
                 ? Results.NoContent()
-                : Results.NotFound(); 
+                : Results.NotFound();
         });
 
         // POST Upload File by id
@@ -182,7 +182,7 @@ public static class SongEndpoints
             if (song is null)
                 return Results.NotFound(new { message = $"Song with Id {songId} not found." });
 
-            SongFile? songFile = SongFileADO.GetById(dbConn);
+            SongFile? songFile = SongFileADO.GetById(dbConn, songId);
 
             byte[] fileBytes = File.ReadAllBytes(songFile.Url);
             string fileName = Path.GetFileName(songFile.Url);
