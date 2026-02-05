@@ -34,7 +34,7 @@ public static class UserValidator
 
     private const string PasswordWeakMessage = "La contrasenya ha de contenir majúscules, minúscules i números";
     private const string PasswordWeakCode = "PASSWORD_DÈBIL";
-    public static Result Validate(UserRequest user, SpotifyDBConnection dbConn)
+    public static Result Validate(UserRequest user)
     {
         var result = ValidateUsername(user);
         if (!result.IsOk) return result;

@@ -18,7 +18,7 @@ public static class UserEndpoints
         app.MapPost("/users", (UserRequest req) =>
         {
             Guid id;
-            Result result = UserValidator.Validate(req, dbConn);
+            Result result = UserValidator.Validate(req);
             if (!result.IsOk)
             {
                 return Results.BadRequest(new
@@ -83,7 +83,7 @@ public static class UserEndpoints
                 return Results.NotFound();
             }
 
-            Result result = UserValidator.Validate(req, dbConn);
+            Result result = UserValidator.Validate(req);
             if (!result.IsOk)
             {
                 return Results.BadRequest(new
