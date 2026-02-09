@@ -6,14 +6,12 @@ using SpotifyAPI.Common;
 using SpotifyAPI.Validators;
 using SpotifyAPI.Utils;
 
-
 namespace SpotifyAPI.EndPoints;
 
 public static class UserEndpoints
 {
     public static void MapUserEndpoints(this WebApplication app, SpotifyDBConnection dbConn)
     {
-
         // POST /users
         app.MapPost("/users", (UserRequest req) =>
         {
