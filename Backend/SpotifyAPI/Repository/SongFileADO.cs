@@ -10,10 +10,7 @@ static class SongFileADO
     {
         dbConn.Open();
 
-        string sql = """
-            INSERT INTO SongFiles (Id, SongId, Url)
-            VALUES (@Id, @SongId, @Url)
-            """;
+        string sql = "INSERT INTO SongFiles (Id, SongId, Url) VALUES (@Id, @SongId, @Url)";
 
         using SqlCommand cmd = new(sql, dbConn.sqlConnection);
         cmd.Parameters.AddWithValue("@Id", songFile.Id);
@@ -54,7 +51,7 @@ static class SongFileADO
     {
         dbConn.Open();
 
-        string sql = "SELECT Id, SongId, UrlFROM, SongFiles WHERE Id = @Id";
+        string sql = "SELECT Id, SongId, Url FROM SongFiles WHERE Id = @Id";
 
         using SqlCommand cmd = new(sql, dbConn.sqlConnection);
         cmd.Parameters.AddWithValue("@Id", id);
@@ -81,7 +78,7 @@ static class SongFileADO
     {
         dbConn.Open();
 
-        string sql = "SELECT Id, SongId, UrlFROM SongFilesWHERE SongId = @SongId";
+        string sql = "SELECT Id, SongId, Url FROM SongFiles WHERE SongId = @SongId";
 
         using SqlCommand cmd = new(sql, dbConn.sqlConnection);
         cmd.Parameters.AddWithValue("@SongId", songId);

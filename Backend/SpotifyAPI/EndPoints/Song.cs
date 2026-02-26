@@ -152,43 +152,51 @@ public static class SongEndpoints
         });
 
 
-        // GET /songs/{songId}/files/{fileId}
+        // GET file from song
 
         app.MapGet("/songs/{songId}/files/{fileId}", (Guid songId, Guid fileId) =>
         {
             Song? song = SongADO.GetById(dbConn, songId);
             if (song is null)
                 return Results.NotFound(new { message = $"Song with Id {songId} not found." });
-
+ 
             SongFile? songFile = SongFileADO.GetById(dbConn, fileId);
             if (songFile is null || songFile.SongId != songId)
-                return Results.NotFound(new { message = $"Song file with Id {songFile} not found." });
+                return Results.NotFound(new { message = $"Song file with Id {fileId} not found." });
 
-            if (!File.Exists(songFile.Url))
-                return Results.NotFound(new { message = "File not found in the disk" });
+            string fullPath = Path.IsPathRooted(songFile.Url)
+                ? songFile.Url
+                : Path.Combine(Directory.GetCurrentDirectory(), songFile.Url);
 
-            byte[] fileBytes = File.ReadAllBytes(songFile.Url);
-            string fileName = Path.GetFileName(songFile.Url);
-            string contentType = "application/octet-stream";
+            if (!File.Exists(fullPath))
+                return Results.NotFound(new { message = "File not found in the disk", fullPath });
+
+            byte[] fileBytes = File.ReadAllBytes(fullPath);
+            string fileName = Path.GetFileName(fullPath);
+            string contentType = "audio/mpeg";
 
             return Results.File(fileBytes, contentType, fileName);
         });
 
-        //GET /songs{songId}/files
 
-        app.MapGet("/songs/{songId}/files/", (Guid songId) =>
+
+        //GET all files
+        app.MapGet("/songs/files", ([FromQuery] Guid requesterId) =>
         {
-            Song? song = SongADO.GetById(dbConn, songId);
-            if (song is null)
-                return Results.NotFound(new { message = $"Song with Id {songId} not found." });
+        var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
+            if (!perms.Contains(Permissions.ViewSongs))
+                return Results.StatusCode(403);
 
-            SongFile? songFile = SongFileADO.GetById(dbConn);
+            var files = SongFileADO.GetAllFiles(dbConn);
 
-            byte[] fileBytes = File.ReadAllBytes(songFile.Url);
-            string fileName = Path.GetFileName(songFile.Url);
-            string contentType = "application/octet-stream";
+            var response = files.Select(file => new
+            {
+                file.Id,
+                file.SongId,
+                file.Url
+            });
 
-            return Results.File(fileBytes, contentType, fileName);
+            return Results.Ok(response);
         });
     }
 }
