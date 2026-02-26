@@ -17,17 +17,17 @@ class TestClient
         StreamReader reader = new(stream);
         StreamWriter writer = new(stream) { AutoFlush = true };
 
-        Console.Write("Username: ");
-        string username = Console.ReadLine()!;
+        Console.Write("User ID: ");
+        string userId = Console.ReadLine()!;
 
-        Console.Write("Initial song: ");
-        string song = Console.ReadLine()!;
+        Console.Write("Initial song ID: ");
+        string songId = Console.ReadLine()!;
 
         var joinMessage = new
         {
             type = "Join",
-            username = username,
-            song = song
+            userId = userId,
+            songId = songId
         };
 
         writer.WriteLine(JsonSerializer.Serialize(joinMessage));
@@ -48,16 +48,16 @@ class TestClient
 
         while (true)
         {
-            Console.Write("\nNew song (empty to quit): ");
-            string? newSong = Console.ReadLine();
+            Console.Write("\nNew song ID (empty to quit): ");
+            string? newSongId = Console.ReadLine();
 
-            if (string.IsNullOrWhiteSpace(newSong))
+            if (string.IsNullOrWhiteSpace(newSongId))
                 break;
 
             var updateMessage = new
             {
                 type = "UpdateSong",
-                song = newSong
+                songId = newSongId
             };
 
             writer.WriteLine(JsonSerializer.Serialize(updateMessage));

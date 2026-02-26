@@ -51,12 +51,15 @@ class Server
                     if (type != "Join")
                         continue;
 
-                    string username = doc.RootElement.GetProperty("username").GetString()!;
-                    string song = doc.RootElement.GetProperty("song").GetString()!;
+                    Guid userId = doc.RootElement.GetProperty("userId").GetGuid()!;
+                    Guid songId = doc.RootElement.GetProperty("songId").GetGuid()!;
+
+                    User user = new User(userId, "username", "");
+                    Song song = new Song(songId, "songName", "Unknown", "Unknown", 0, "Unknown", "");
 
                     lock (clientsLock)
                     {
-                        clients[client] = new ClientInfo(username, song);
+                        clients[client] = new ClientInfo(user, song);
                     }
 
                     registered = true;
@@ -66,11 +69,12 @@ class Server
                 {
                     if (type == "UpdateSong")
                     {
-                        string newSong = doc.RootElement.GetProperty("song").GetString()!;
+                        Guid newSongId = doc.RootElement.GetProperty("songId").GetGuid()!;
+                        Song song = new Song(newSongId, "newSong", "Unknown", "Unknown", 0, "Unknown", "");
 
                         lock (clientsLock)
                         {
-                            clients[client].Song = newSong;
+                            clients[client].Song = song;
                         }
 
                         BroadcastUserList();
@@ -102,7 +106,7 @@ class Server
         lock (clientsLock)
         {
             snapshot = clients.Values
-                .Select(c => new { username = c.Username, song = c.Song })
+                .Select(c => new { username = c.User, song = c.Song })
                 .Cast<object>()
                 .ToList();
         }
