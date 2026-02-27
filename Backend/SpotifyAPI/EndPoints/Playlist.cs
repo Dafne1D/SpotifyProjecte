@@ -94,8 +94,9 @@ public static class PlaylistEndpoints
             }
             return Results.Ok(songResponses);
         });
-        // DELETE /playlists/{playlistId}/remove/{songId}
-        // app.MapDelete("/playlistSong/{id}", (Guid id) => PlaylistSongADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
+
+        // DELETE /playlists/{playlistId}/song/{songId}
+        app.MapDelete("/playlists/{playlistId}/song/{songId}", (Guid playlistId, Guid songId) => PlaylistSongADO.Delete(dbConn, playlistId, songId) ? Results.NoContent() : Results.NotFound());
     }
 }
 
