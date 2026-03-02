@@ -53,17 +53,36 @@ class TestClient
                 if (type.ToLower() == "error")
                 {
                     string message = doc.RootElement.GetProperty("message").GetString()!;
-                    Console.WriteLine($"ERROR: {message}");
+                    Console.Clear();
+                    Console.WriteLine($"\nERROR: {message}");
                 }
                 else if (type.ToLower() == "userlist")
                 {
                     JsonElement usersElement = doc.RootElement.GetProperty("users");
 
-                    Console.WriteLine($"USER LIST: {usersElement.GetRawText()}");
+                    Console.Clear();
+                    Console.WriteLine($"\nUSER LIST: {usersElement.GetRawText()}");
+
+                    if (usersElement.GetArrayLength() == 0)
+                    {
+                        Console.WriteLine("No users connected.");
+                    }
+
+                    foreach (JsonElement item in usersElement.EnumerateArray())
+                    {
+                        JsonElement user = item.GetProperty("user");
+                        JsonElement song = item.GetProperty("song");
+
+                        string username = user.GetProperty("Username").GetString();
+                        string songTitle = song.GetProperty("Title").GetString();
+
+                        Console.WriteLine($"- {username} is listening to {songTitle}");
+                    }
+                    Console.Write("\nNew song ID (empty to quit): ");
                 }
                 else
                 {
-                    Console.WriteLine("SERVER: " + line);
+                    Console.WriteLine("\nSERVER: " + line);
                 }
             }
         });
