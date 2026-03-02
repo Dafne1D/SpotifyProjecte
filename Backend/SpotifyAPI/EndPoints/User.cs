@@ -5,13 +5,83 @@ using SpotifyAPI.DTO;
 using SpotifyAPI.Common;
 using SpotifyAPI.Validators;
 using SpotifyAPI.Utils;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 
 namespace SpotifyAPI.EndPoints;
 
 public static class UserEndpoints
 {
     public static void MapUserEndpoints(this WebApplication app, SpotifyDBConnection dbConn)
-    {
+    {   
+
+        // GET /jwt
+
+        app.MapGet("/jwt", (JswTokenService jwtService) =>
+        {        
+            return Results.Ok(jwtService.GenerateToken(
+                userId: "user identification",
+                email: "anna@exemple.com",
+                issuer: "demo",
+                role: "admin",
+                audience: "public",    
+                lifetime: TimeSpan.FromHours(2)));
+        }).WithTags("Users");
+
+        // https://www.jwt.io/
+
+        app.MapPost("/debug/token", (
+            TokenRequest request,
+            JswTokenService jwtService) =>
+        {
+            try
+            {
+                List<Claim> claims = jwtService.ValidateAndGetClaimsFromToken(request.Token);
+
+                List<object> decodedClaims = new List<object>();
+
+                foreach (Claim claim in claims)
+                {
+                    decodedClaims.Add(new
+                    {
+                        type = claim.Type,
+                        value = claim.Value
+                    });
+                }
+
+                return Results.Ok(new
+                {
+                    valid = true,
+                    claims = decodedClaims
+                });
+            }
+            catch (SecurityTokenExpiredException)
+            {
+                return Results.Unauthorized();
+            }
+            catch (SecurityTokenException)
+            {
+                return Results.BadRequest("Token invalid or manipulated");
+            }
+        }).WithTags("Debug"); 
+
+        app.MapGet("/admin-data-manual", ( ClaimsPrincipal user) =>
+        {
+            if (!user.Identity?.IsAuthenticated ?? true)
+                return Results.Unauthorized();
+
+            bool isAdmin = user.Claims.Any(c =>
+                c.Type == ClaimTypes.Role && c.Value == "admin");
+
+            if (!isAdmin)
+                return Results.Forbid();
+
+            return Results.Ok("Només admins (manual)");
+        });
+
         // POST /users
         app.MapPost("/users", (UserRequest req) =>
         {
@@ -147,6 +217,7 @@ public static class UserEndpoints
             // S'ha de afegir DTO
             return Results.Ok(playlists);
         });
+        
     }
-
+    public record TokenRequest(string Token);
 }
