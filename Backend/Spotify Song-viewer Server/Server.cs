@@ -187,36 +187,41 @@ class Server
 
     private static void BroadcastUserList()
     {
-        List<object> snapshot;
+        List<(TcpClient Client, ClientInfo Info)> snapshot;
 
         lock (clientsLock)
         {
-            snapshot = clients.Values
-                .Select(c => new { user = c.User, song = c.Song })
-                .Cast<object>()
-                .ToList();
+            snapshot = clients
+                     .Select(kv => (kv.Key, kv.Value))
+                     .ToList();
         }
 
-        var message = JsonSerializer.Serialize(new
+        foreach (var target in snapshot)
         {
-            type = "UserList",
-            users = snapshot
-        });
-
-        lock (clientsLock)
-        {
-            foreach (var kv in clients)
+            try
             {
-                try
+                var userList = snapshot
+                    .Where(x => x.Client != target.Client)
+                    .Select(x => new
+                    {
+                        user = x.Info.User,
+                        song = x.Info.Song
+                    })
+                    .ToList();
+
+                var message = JsonSerializer.Serialize(new
                 {
-                    NetworkStream stream = kv.Key.GetStream();
-                    StreamWriter writer = new(stream) { AutoFlush = true };
-                    writer.WriteLine(message);
-                }
-                catch
-                {
-                    // ignore broken sockets
-                }
+                    type = "UserList",
+                    users = userList
+                });
+
+                NetworkStream stream = target.Client.GetStream();
+                StreamWriter writer = new(stream) { AutoFlush = true };
+                writer.WriteLine(message);
+            }
+            catch
+            {
+                // ignore broken sockets
             }
         }
     }
