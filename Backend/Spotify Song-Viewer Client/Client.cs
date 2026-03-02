@@ -3,7 +3,7 @@ using System.Text.Json;
 
 class TestClient
 {
-    private const int Port = 5000;
+    private const int Port = 6000;
     private const string ServerIp = "127.0.0.1";
 
     static async Task Main()
@@ -11,11 +11,11 @@ class TestClient
         using TcpClient client = new TcpClient();
         await client.ConnectAsync(ServerIp, Port);
 
-        Console.WriteLine("Connected to server");
-
         NetworkStream stream = client.GetStream();
         StreamReader reader = new(stream);
         StreamWriter writer = new(stream) { AutoFlush = true };
+
+        Console.WriteLine("Connected to server");
 
         Console.Write("User ID: ");
         string userId = Console.ReadLine()!;
@@ -30,6 +30,8 @@ class TestClient
             songId = songId
         };
 
+        Console.WriteLine(joinMessage);
+
         writer.WriteLine(JsonSerializer.Serialize(joinMessage));
 
         _ = Task.Run(async () =>
@@ -40,9 +42,7 @@ class TestClient
                 if (line == null)
                     break;
 
-                Console.WriteLine("\n--- Server update ---");
-                Console.WriteLine(line);
-                Console.WriteLine("---------------------");
+                Console.WriteLine("SERVER: "+line);
             }
         });
 

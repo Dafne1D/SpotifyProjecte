@@ -1,16 +1,18 @@
-﻿using System.Net;
+﻿using Spotify_Song_viewer_Server.Models;
+using System.Net;
+using System.Net.Http;
 using System.Net.Sockets;
 using System.Text.Json;
 
-using Spotify_Song_viewer_Server.Models;
-
 class Server
 {
-    private const int Port = 5000;
+    private const int Port = 6000;
     private static TcpListener listener;
 
     private static readonly Dictionary<TcpClient, ClientInfo> clients = new();
     private static readonly object clientsLock = new();
+
+    private static readonly HttpClient httpClient = new HttpClient();
 
     static async Task Main()
     {
@@ -54,6 +56,12 @@ class Server
                     Guid userId = doc.RootElement.GetProperty("userId").GetGuid()!;
                     Guid songId = doc.RootElement.GetProperty("songId").GetGuid()!;
 
+                    string userApi = await GetUser(userId);
+                    string songApi = await GetSong(songId);
+
+                    Console.WriteLine("USER: "+userApi);
+                    Console.WriteLine("SONG: "+songApi);
+
                     User user = new User(userId, "username", "");
                     Song song = new Song(songId, "songName", "Unknown", "Unknown", 0, "Unknown", "");
 
@@ -96,6 +104,33 @@ class Server
             client.Close();
             BroadcastUserList();
             Console.WriteLine("Client disconnected");
+        }
+    }
+
+    private static Task<string?> GetUser(Guid userId)
+    {
+        string url = $"http://localhost:5000/users/{userId}";
+        return GetFromApiAsync(url);
+    }
+
+    private static Task<string?> GetSong(Guid songId)
+    {
+        string url = $"http://localhost:5000/songs/{songId}";
+        return GetFromApiAsync(url);
+    }
+
+    private static async Task<string?> GetFromApiAsync(string url)
+    {
+        try
+        {
+            HttpResponseMessage response = await httpClient.GetAsync($"{url}?requesterId=99999999-9999-9999-9999-999999999999");
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadAsStringAsync();
+        }
+        catch (HttpRequestException ex)
+        {
+            Console.WriteLine("ERROR: " + ex.Message);
+            return null;
         }
     }
 
