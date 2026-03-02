@@ -1,16 +1,18 @@
-﻿using System.Net;
+﻿using Spotify_Song_viewer_Server.Models;
+using System.Net;
+using System.Net.Http;
 using System.Net.Sockets;
 using System.Text.Json;
 
-using Spotify_Song_viewer_Server.Models;
-
 class Server
 {
-    private const int Port = 5000;
+    private const int Port = 6000;
     private static TcpListener listener;
 
     private static readonly Dictionary<TcpClient, ClientInfo> clients = new();
     private static readonly object clientsLock = new();
+
+    private static readonly HttpClient httpClient = new HttpClient();
 
     static async Task Main()
     {
@@ -54,8 +56,8 @@ class Server
                     Guid userId = doc.RootElement.GetProperty("userId").GetGuid()!;
                     Guid songId = doc.RootElement.GetProperty("songId").GetGuid()!;
 
-                    User user = new User(userId, "username", "");
-                    Song song = new Song(songId, "songName", "Unknown", "Unknown", 0, "Unknown", "");
+                    User user = await GetUser(userId);
+                    Song song = await GetSong(songId);
 
                     lock (clientsLock)
                     {
@@ -99,6 +101,60 @@ class Server
         }
     }
 
+    private static async Task<User?> GetUser(Guid userId)
+    {
+        string url = $"http://localhost:5000/users/{userId}";
+
+        string? json = await GetFromApiAsync(url);
+        if (json == null)
+            return null;
+
+        using JsonDocument doc = JsonDocument.Parse(json);
+        JsonElement root = doc.RootElement;
+
+        Guid id = root.GetProperty("id").GetGuid();
+        string? username = root.GetProperty("username").GetString();
+        string? email = root.GetProperty("email").GetString();
+
+        return new User(id, username, email);
+    }
+
+    private static async Task<Song?> GetSong(Guid songId)
+    {
+        string url = $"http://localhost:5000/songs/{songId}";
+        string? json = await GetFromApiAsync(url);
+        if (json == null)
+            return null;
+
+        using JsonDocument doc = JsonDocument.Parse(json);
+        JsonElement root = doc.RootElement;
+
+        Guid id = root.GetProperty("id").GetGuid();
+        string? title = root.GetProperty("title").GetString();
+        string? artist = root.GetProperty("artist").GetString();
+        string? album = root.GetProperty("album").GetString();
+        int duration = root.GetProperty("duration").GetInt16();
+        string? genre = root.GetProperty("genre").GetString();
+        string? imageUrl = root.GetProperty("imageUrl").GetString();
+
+        return new Song(id, title, artist, album, duration, genre, imageUrl);
+    }
+
+    private static async Task<string?> GetFromApiAsync(string url)
+    {
+        try
+        {
+            HttpResponseMessage response = await httpClient.GetAsync($"{url}?requesterId=99999999-9999-9999-9999-999999999999");
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadAsStringAsync();
+        }
+        catch (HttpRequestException ex)
+        {
+            Console.WriteLine("ERROR: " + ex.Message);
+            return null;
+        }
+    }
+
     private static void BroadcastUserList()
     {
         List<object> snapshot;
@@ -106,7 +162,7 @@ class Server
         lock (clientsLock)
         {
             snapshot = clients.Values
-                .Select(c => new { username = c.User, song = c.Song })
+                .Select(c => new { user = c.User, song = c.Song })
                 .Cast<object>()
                 .ToList();
         }
