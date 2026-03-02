@@ -51,13 +51,26 @@ class Server
                 if (!registered)
                 {
                     if (type != "Join")
-                        continue;
+                    {
+                        SendError(writer, $"Expected message of type Join (recieved {type}). Disconnecting...");
+                        break;
+                    }
 
                     Guid userId = doc.RootElement.GetProperty("userId").GetGuid()!;
                     Guid songId = doc.RootElement.GetProperty("songId").GetGuid()!;
 
                     User user = await GetUser(userId);
+                    if (user == null)
+                    {
+                        SendError(writer, "Error on User ID. Disconnecting...");
+                        break;
+                    }
                     Song song = await GetSong(songId);
+                    if (song == null)
+                    {
+                        SendError(writer, "Error on Song ID. Disconnecting...");
+                        break;
+                    }
 
                     lock (clientsLock)
                     {
@@ -153,6 +166,18 @@ class Server
             Console.WriteLine("ERROR: " + ex.Message);
             return null;
         }
+    }
+
+    private static void SendError(StreamWriter writer, string message)
+    {
+        var errorMessage = JsonSerializer.Serialize(new
+        {
+            type = "Error",
+            message = message
+        });
+
+        writer.WriteLine(errorMessage);
+        Console.WriteLine($"Client error: {message}");
     }
 
     private static void BroadcastUserList()

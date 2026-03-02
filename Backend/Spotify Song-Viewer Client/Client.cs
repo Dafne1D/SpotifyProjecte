@@ -15,6 +15,8 @@ class TestClient
         StreamReader reader = new(stream);
         StreamWriter writer = new(stream) { AutoFlush = true };
 
+        bool connected;
+
         Console.WriteLine("Connected to server");
 
         Console.Write("User ID: ");
@@ -32,19 +34,41 @@ class TestClient
 
         writer.WriteLine(JsonSerializer.Serialize(joinMessage));
 
+        connected = true;
+
         _ = Task.Run(async () =>
         {
             while (true)
             {
                 string? line = await reader.ReadLineAsync();
                 if (line == null)
+                {
+                    connected = false;
                     break;
+                }
 
-                Console.WriteLine("SERVER: "+line);
+                using JsonDocument doc = JsonDocument.Parse(line);
+                string type = doc.RootElement.GetProperty("type").GetString()!;
+
+                if (type.ToLower() == "error")
+                {
+                    string message = doc.RootElement.GetProperty("message").GetString()!;
+                    Console.WriteLine($"ERROR: {message}");
+                }
+                else if (type.ToLower() == "userlist")
+                {
+                    JsonElement usersElement = doc.RootElement.GetProperty("users");
+
+                    Console.WriteLine($"USER LIST: {usersElement.GetRawText()}");
+                }
+                else
+                {
+                    Console.WriteLine("SERVER: " + line);
+                }
             }
         });
 
-        while (true)
+        while (connected)
         {
             Console.Write("\nNew song ID (empty to quit): ");
             string? newSongId = Console.ReadLine();
@@ -58,7 +82,15 @@ class TestClient
                 songId = newSongId
             };
 
-            writer.WriteLine(JsonSerializer.Serialize(updateMessage));
+            try
+            {
+                writer.WriteLine(JsonSerializer.Serialize(updateMessage));
+            }
+            catch
+            {
+                Console.WriteLine("Remote disconnect");
+                connected = false;
+            }
         }
 
         client.Close();
