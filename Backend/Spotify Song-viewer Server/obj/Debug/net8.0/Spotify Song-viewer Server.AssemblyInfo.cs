@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Spotify Song-viewer Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b417f83abef405c4b6d730eaf6537ee7db59d06d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8a0391ba36d2a264732d52c421071dd947aa7065")]
 [assembly: System.Reflection.AssemblyProductAttribute("Spotify Song-viewer Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Spotify Song-viewer Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

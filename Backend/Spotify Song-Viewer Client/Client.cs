@@ -30,8 +30,6 @@ class TestClient
             songId = songId
         };
 
-        Console.WriteLine(joinMessage);
-
         writer.WriteLine(JsonSerializer.Serialize(joinMessage));
 
         _ = Task.Run(async () =>

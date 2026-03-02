@@ -56,14 +56,8 @@ class Server
                     Guid userId = doc.RootElement.GetProperty("userId").GetGuid()!;
                     Guid songId = doc.RootElement.GetProperty("songId").GetGuid()!;
 
-                    string userApi = await GetUser(userId);
-                    string songApi = await GetSong(songId);
-
-                    Console.WriteLine("USER: "+userApi);
-                    Console.WriteLine("SONG: "+songApi);
-
-                    User user = new User(userId, "username", "");
-                    Song song = new Song(songId, "songName", "Unknown", "Unknown", 0, "Unknown", "");
+                    User user = await GetUser(userId);
+                    Song song = await GetSong(songId);
 
                     lock (clientsLock)
                     {
@@ -107,16 +101,43 @@ class Server
         }
     }
 
-    private static Task<string?> GetUser(Guid userId)
+    private static async Task<User?> GetUser(Guid userId)
     {
         string url = $"http://localhost:5000/users/{userId}";
-        return GetFromApiAsync(url);
+
+        string? json = await GetFromApiAsync(url);
+        if (json == null)
+            return null;
+
+        using JsonDocument doc = JsonDocument.Parse(json);
+        JsonElement root = doc.RootElement;
+
+        Guid id = root.GetProperty("id").GetGuid();
+        string? username = root.GetProperty("username").GetString();
+        string? email = root.GetProperty("email").GetString();
+
+        return new User(id, username, email);
     }
 
-    private static Task<string?> GetSong(Guid songId)
+    private static async Task<Song?> GetSong(Guid songId)
     {
         string url = $"http://localhost:5000/songs/{songId}";
-        return GetFromApiAsync(url);
+        string? json = await GetFromApiAsync(url);
+        if (json == null)
+            return null;
+
+        using JsonDocument doc = JsonDocument.Parse(json);
+        JsonElement root = doc.RootElement;
+
+        Guid id = root.GetProperty("id").GetGuid();
+        string? title = root.GetProperty("title").GetString();
+        string? artist = root.GetProperty("artist").GetString();
+        string? album = root.GetProperty("album").GetString();
+        int duration = root.GetProperty("duration").GetInt16();
+        string? genre = root.GetProperty("genre").GetString();
+        string? imageUrl = root.GetProperty("imageUrl").GetString();
+
+        return new Song(id, title, artist, album, duration, genre, imageUrl);
     }
 
     private static async Task<string?> GetFromApiAsync(string url)
@@ -141,7 +162,7 @@ class Server
         lock (clientsLock)
         {
             snapshot = clients.Values
-                .Select(c => new { username = c.User, song = c.Song })
+                .Select(c => new { user = c.User, song = c.Song })
                 .Cast<object>()
                 .ToList();
         }
