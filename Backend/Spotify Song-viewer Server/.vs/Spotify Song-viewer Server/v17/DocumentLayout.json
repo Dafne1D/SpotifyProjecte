@@ -41,8 +41,7 @@
               "RelativeToolTip": "Models\\ClientInfo.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-26T15:19:19.271Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-26T15:19:19.271Z"
             },
             {
               "$type": "Document",
@@ -54,8 +53,7 @@
               "RelativeToolTip": "..\\Spotify Song-Viewer Client\\Client.cs",
               "ViewState": "AgIAAB0AAAAAAAAAAAAowCoAAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-28T23:11:59.331Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-28T23:11:59.331Z"
             },
             {
               "$type": "Document",
@@ -65,7 +63,7 @@
               "RelativeDocumentMoniker": "Server.cs",
               "ToolTip": "C:\\Users\\Uriens\\Desktop\\2DAM\\PROJECTES\\SpotifyProjecte\\Backend\\Spotify Song-viewer Server\\Server.cs",
               "RelativeToolTip": "Server.cs",
-              "ViewState": "AgIAADkAAAAAAAAAAAAYwEYAAABQAAAAAAAAAA==",
+              "ViewState": "AgIAAF0AAAAAAAAAAAAYwFsAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-27T17:18:45.91Z",
               "EditorCaption": ""
@@ -80,8 +78,7 @@
               "RelativeToolTip": "Models\\Song.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-30T15:48:40.974Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-30T15:48:40.974Z"
             },
             {
               "$type": "Document",
@@ -93,8 +90,7 @@
               "RelativeToolTip": "Models\\User.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-30T15:40:15.956Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-30T15:40:15.956Z"
             }
           ]
         }

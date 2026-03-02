@@ -85,11 +85,16 @@ class Server
                     if (type == "UpdateSong")
                     {
                         Guid newSongId = doc.RootElement.GetProperty("songId").GetGuid()!;
-                        Song song = new Song(newSongId, "newSong", "Unknown", "Unknown", 0, "Unknown", "");
+                        Song newSong = await GetSong(newSongId);
+                        if ( newSong == null )
+                        {
+                            SendError(writer, "Error on New Song ID");
+                            continue;
+                        }
 
                         lock (clientsLock)
                         {
-                            clients[client].Song = song;
+                            clients[client].Song = newSong;
                         }
 
                         BroadcastUserList();
