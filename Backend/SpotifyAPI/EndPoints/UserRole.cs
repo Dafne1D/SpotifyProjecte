@@ -7,10 +7,10 @@ namespace SpotifyAPI.EndPoints;
 
 public static class UserRoleEndpoints
 {
-    public static void MapUserRoleEndpoints(this WebApplication app, SpotifyDBConnection dbConn)
+    public static void MapUserRoleEndpoints(this WebApplication app)
     {
         // POST /userRoles 
-        app.MapPost("/userRoles", (UserRoleRequest req) =>
+        app.MapPost("/userRoles", (SpotifyDBConnection dbConn, UserRoleRequest req) =>
         {
             UserRole userRol = new UserRole
             {
@@ -24,28 +24,28 @@ public static class UserRoleEndpoints
         });
 
         // GET /userRoles
-        app.MapGet("/userRoles", () =>
+        app.MapGet("/userRoles", (SpotifyDBConnection dbConn) =>
         {
             List<UserRole> userRol = UserRoleADO.GetAll(dbConn);
             return Results.Ok(userRol);
         });
 
         // GET /userRoles/roles/{roleId}
-        app.MapGet("/userRoles/roles/{roleId}", (Guid roleId) =>
+        app.MapGet("/userRoles/roles/{roleId}", (SpotifyDBConnection dbConn, Guid roleId) =>
         {
             List<UserRole> userRol = UserRoleADO.GetByRole(dbConn, roleId);
             return Results.Ok(userRol);
         });
 
         // GET /userRoles/users/{userId}
-        app.MapGet("/usersRoles/users/{userId}", (Guid userId) =>
+        app.MapGet("/usersRoles/users/{userId}", (SpotifyDBConnection dbConn, Guid userId) =>
         {
             List<UserRole> userRol = UserRoleADO.GetByUser(dbConn, userId);
             return Results.Ok(userRol);
         });
 
         // DELETE /userRoles
-        app.MapDelete("/userRoles", (Guid userId, Guid roleId) =>
+        app.MapDelete("/userRoles", (SpotifyDBConnection dbConn, Guid userId, Guid roleId) =>
         {
             bool deleted = UserRoleADO.Delete(dbConn, userId, roleId);
 

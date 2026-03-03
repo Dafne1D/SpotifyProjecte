@@ -7,10 +7,10 @@ namespace SpotifyAPI.EndPoints;
 
 public static class PermissionEndpoints
 {
-    public static void MapPermissionEndpoints(this WebApplication app, SpotifyDBConnection dbConn)
+    public static void MapPermissionEndpoints(this WebApplication app)
     {
         // POST /permissions
-        app.MapPost("/permissions", (PermissionRequest req) =>
+        app.MapPost("/permissions", (SpotifyDBConnection dbConn, PermissionRequest req) =>
         {
             Permission permission = new Permission
             {
@@ -25,7 +25,7 @@ public static class PermissionEndpoints
         });
 
         // GET /permissions
-        app.MapGet("/permissions", () =>
+        app.MapGet("/permissions", (SpotifyDBConnection dbConn) =>
         {
             List<Permission> permissions = PermissionADO.GetAll(dbConn);
             List<PermissionResponse> permissionResponses = new List<PermissionResponse>();
@@ -37,7 +37,7 @@ public static class PermissionEndpoints
         });
 
         // GET /permissions by id
-        app.MapGet("/permissions/{id}", (Guid id) =>
+        app.MapGet("/permissions/{id}", (SpotifyDBConnection dbConn, Guid id) =>
         {
             Permission? permission = PermissionADO.GetById(dbConn, id);
 
@@ -47,7 +47,7 @@ public static class PermissionEndpoints
         });
 
         // PUT /permissions
-        app.MapPut("/permissions/{id}", (Guid id, PermissionRequest req) =>
+        app.MapPut("/permissions/{id}", (SpotifyDBConnection dbConn, Guid id, PermissionRequest req) =>
         {
             Permission? existing = PermissionADO.GetById(dbConn, id);
 
@@ -69,6 +69,6 @@ public static class PermissionEndpoints
         });
 
         // DELETE /permissions
-        app.MapDelete("/permissions/{id}", (Guid id) => PermissionADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
+        app.MapDelete("/permissions/{id}", (SpotifyDBConnection dbConn, Guid id) => PermissionADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
     }
 }

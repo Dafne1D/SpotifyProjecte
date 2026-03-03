@@ -9,10 +9,10 @@ namespace SpotifyAPI.EndPoints;
 public static class PlaylistEndpoints
 {
 
-    public static void MapPlaylistEndpoints(this WebApplication app, SpotifyDBConnection dbConn)
+    public static void MapPlaylistEndpoints(this WebApplication app)
     {
         // POST /playlists
-        app.MapPost("/playlists", (PlaylistRequest req) =>
+        app.MapPost("/playlists", (SpotifyDBConnection dbConn, PlaylistRequest req) =>
         {
             Playlist playlist = new Playlist
             {
@@ -27,14 +27,14 @@ public static class PlaylistEndpoints
         });
 
         // GET /playlists
-        app.MapGet("/playlists", () =>
+        app.MapGet("/playlists", (SpotifyDBConnection dbConn) =>
         {
             List<Playlist> playlists = PlaylistADO.GetAll(dbConn);
             return Results.Ok(playlists);
         });
 
         // GET /playlists by id
-        app.MapGet("/playlists/{id}", (Guid id) =>
+        app.MapGet("/playlists/{id}", (SpotifyDBConnection dbConn, Guid id) =>
         {
             Playlist? playlist = PlaylistADO.GetById(dbConn, id);
 
@@ -44,7 +44,7 @@ public static class PlaylistEndpoints
         });
 
         // PUT /playlists by id
-        app.MapPut("/playlists/{id}", (Guid id, PlaylistRequest req) =>
+        app.MapPut("/playlists/{id}", (SpotifyDBConnection dbConn, Guid id, PlaylistRequest req) =>
         {
             Playlist? existing = PlaylistADO.GetById(dbConn, id);
 
@@ -68,10 +68,10 @@ public static class PlaylistEndpoints
         });
 
         // DELETE /playlists/{id}
-        app.MapDelete("/playlists/{id}", (Guid id) => PlaylistADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
+        app.MapDelete("/playlists/{id}", (SpotifyDBConnection dbConn, Guid id) => PlaylistADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
 
         // POST /playlists/{playlistId}/song/{songId}
-        app.MapPost("/playlists/{playlistId}/song/{songId}", (Guid playlistId, Guid songId) =>
+        app.MapPost("/playlists/{playlistId}/song/{songId}", (SpotifyDBConnection dbConn, Guid playlistId, Guid songId) =>
         {
             PlaylistSong playlistsong = new PlaylistSong
             {
@@ -84,7 +84,7 @@ public static class PlaylistEndpoints
         });
 
         // GET /playlists/{playlistId}/songs
-        app.MapGet("/playlists/{playlistId}/songs", (Guid playlistId) =>
+        app.MapGet("/playlists/{playlistId}/songs", (SpotifyDBConnection dbConn, Guid playlistId) =>
         {
             List<Song> songs = PlaylistADO.GetSongs(dbConn, playlistId);
             List<SongResponse> songResponses = new List<SongResponse>();
@@ -96,7 +96,7 @@ public static class PlaylistEndpoints
         });
 
         // DELETE /playlists/{playlistId}/song/{songId}
-        app.MapDelete("/playlists/{playlistId}/song/{songId}", (Guid playlistId, Guid songId) => PlaylistSongADO.Delete(dbConn, playlistId, songId) ? Results.NoContent() : Results.NotFound());
+        app.MapDelete("/playlists/{playlistId}/song/{songId}", (SpotifyDBConnection dbConn, Guid playlistId, Guid songId) => PlaylistSongADO.Delete(dbConn, playlistId, songId) ? Results.NoContent() : Results.NotFound());
     }
 }
 

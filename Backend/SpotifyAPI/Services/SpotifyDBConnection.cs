@@ -10,6 +10,12 @@ namespace SpotifyAPI.Services
         {
             _connectionString = connectionString;
         }
+
+        public SqlConnection GetConnection()
+        {
+            return sqlConnection!;
+        }
+
         public bool Open()
         {
             sqlConnection = new SqlConnection(_connectionString);
@@ -26,7 +32,7 @@ namespace SpotifyAPI.Services
         }
         public void Close()
         {
-            sqlConnection!.Close();
+            sqlConnection?.Close();
         }
     }
 }

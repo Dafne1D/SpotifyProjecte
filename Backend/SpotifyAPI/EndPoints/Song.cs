@@ -12,10 +12,10 @@ namespace SpotifyAPI.EndPoints;
 
 public static class SongEndpoints
 {
-    public static void MapSongEndpoints(this WebApplication app, SpotifyDBConnection dbConn)
+    public static void MapSongEndpoints(this WebApplication app)
     {
         // POST /songs
-        app.MapPost("/songs", (Guid requesterId, SongRequest req) =>
+        app.MapPost("/songs", (SpotifyDBConnection dbConn, Guid requesterId, SongRequest req) =>
         {
             var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
             if (!perms.Contains(Permissions.ManageSongs))
@@ -38,7 +38,7 @@ public static class SongEndpoints
         });
 
         // GET /songs
-        app.MapGet("/songs", (Guid requesterId) =>
+        app.MapGet("/songs", (SpotifyDBConnection dbConn, Guid requesterId) =>
         {
             var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
             if (!perms.Contains(Permissions.ViewSongs))
@@ -54,7 +54,7 @@ public static class SongEndpoints
         });
 
         // GET /songs Song by id
-        app.MapGet("/songs/{id}", (Guid requesterId, Guid id) =>
+        app.MapGet("/songs/{id}", (SpotifyDBConnection dbConn, Guid requesterId, Guid id) =>
         {
             var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
             if (!perms.Contains(Permissions.ViewSongs))
@@ -68,7 +68,7 @@ public static class SongEndpoints
         });
 
         // PUT /songs by id
-        app.MapPut("/songs/{id}", (Guid requesterId, Guid id, SongRequest req) =>
+        app.MapPut("/songs/{id}", (SpotifyDBConnection dbConn, Guid requesterId, Guid id, SongRequest req) =>
         {
             var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
             if (!perms.Contains(Permissions.ManageSongs))
@@ -98,7 +98,7 @@ public static class SongEndpoints
         });
 
         // DELETE /songs by id
-        app.MapDelete("/songs/{id}", (Guid requesterId, Guid id) =>
+        app.MapDelete("/songs/{id}", (SpotifyDBConnection dbConn, Guid requesterId, Guid id) =>
         {
             var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
             if (!perms.Contains(Permissions.ManageSongs))
@@ -106,11 +106,11 @@ public static class SongEndpoints
 
             return SongADO.Delete(dbConn, id)
                 ? Results.NoContent()
-                : Results.NotFound(); 
+                : Results.NotFound();
         });
 
         // POST Upload File by id
-        app.MapPost("/songs/{id}/files", (Guid requesterId, Guid id, [FromForm] IFormFileCollection files) =>
+        app.MapPost("/songs/{id}/files", (SpotifyDBConnection dbConn, Guid requesterId, Guid id, [FromForm] IFormFileCollection files) =>
         {
             var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
             if (!perms.Contains(Permissions.ManageSongs))
@@ -132,7 +132,7 @@ public static class SongEndpoints
         .DisableAntiforgery();
 
         // DELETE File from Song
-        app.MapDelete("/songs/{id}/files/{fileId}", (Guid requesterId, Guid id, Guid fileId) =>
+        app.MapDelete("/songs/{id}/files/{fileId}", (SpotifyDBConnection dbConn, Guid requesterId, Guid id, Guid fileId) =>
         {
             var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
             if (!perms.Contains(Permissions.ManageSongs))
@@ -154,12 +154,12 @@ public static class SongEndpoints
 
         // GET file from song
 
-        app.MapGet("/songs/{songId}/files/{fileId}", (Guid songId, Guid fileId) =>
+        app.MapGet("/songs/{songId}/files/{fileId}", (SpotifyDBConnection dbConn, Guid songId, Guid fileId) =>
         {
             Song? song = SongADO.GetById(dbConn, songId);
             if (song is null)
                 return Results.NotFound(new { message = $"Song with Id {songId} not found." });
- 
+
             SongFile? songFile = SongFileADO.GetById(dbConn, fileId);
             if (songFile is null || songFile.SongId != songId)
                 return Results.NotFound(new { message = $"Song file with Id {fileId} not found." });
@@ -181,9 +181,9 @@ public static class SongEndpoints
 
 
         //GET all files
-        app.MapGet("/songs/files", ([FromQuery] Guid requesterId) =>
+        app.MapGet("/songs/files", (SpotifyDBConnection dbConn, [FromQuery] Guid requesterId) =>
         {
-        var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
+            var perms = AuthADO.GetUserPermissionCodes(dbConn, requesterId);
             if (!perms.Contains(Permissions.ViewSongs))
                 return Results.StatusCode(403);
 

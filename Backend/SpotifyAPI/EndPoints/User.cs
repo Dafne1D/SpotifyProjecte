@@ -15,19 +15,19 @@ namespace SpotifyAPI.EndPoints;
 
 public static class UserEndpoints
 {
-    public static void MapUserEndpoints(this WebApplication app, SpotifyDBConnection dbConn)
-    {   
+    public static void MapUserEndpoints(this WebApplication app)
+    {
 
         // GET /jwt
 
         app.MapGet("/jwt", (JswTokenService jwtService) =>
-        {        
+        {
             return Results.Ok(jwtService.GenerateToken(
                 userId: "user identification",
                 email: "anna@exemple.com",
                 issuer: "demo",
                 role: "admin",
-                audience: "public",    
+                audience: "public",
                 lifetime: TimeSpan.FromHours(2)));
         }).WithTags("Users");
 
@@ -66,9 +66,9 @@ public static class UserEndpoints
             {
                 return Results.BadRequest("Token invalid or manipulated");
             }
-        }).WithTags("Debug"); 
+        }).WithTags("Debug");
 
-        app.MapGet("/admin-data-manual", ( ClaimsPrincipal user) =>
+        app.MapGet("/admin-data-manual", (ClaimsPrincipal user) =>
         {
             if (!user.Identity?.IsAuthenticated ?? true)
                 return Results.Unauthorized();
@@ -83,7 +83,7 @@ public static class UserEndpoints
         });
 
         // POST /users
-        app.MapPost("/users", (UserRequest req) =>
+        app.MapPost("/users", (SpotifyDBConnection dbConn, UserRequest req) =>
         {
             Guid id;
             Result result = UserValidator.Validate(req);
@@ -125,14 +125,14 @@ public static class UserEndpoints
         });
 
         // GET /users
-        app.MapGet("/users", () =>
+        app.MapGet("/users", (SpotifyDBConnection dbConn) =>
         {
             List<User> users = UserADO.GetAll(dbConn);
             return Results.Ok(users);
         });
 
         // GET /users User by id
-        app.MapGet("/users/{id}", (Guid id) =>
+        app.MapGet("/users/{id}", (SpotifyDBConnection dbConn, Guid id) =>
         {
             User? user = UserADO.GetById(dbConn, id);
 
@@ -142,7 +142,7 @@ public static class UserEndpoints
         });
 
         // PUT /users by id
-        app.MapPut("/users/{id}", (Guid id, UserRequest req) =>
+        app.MapPut("/users/{id}", (SpotifyDBConnection dbConn, Guid id, UserRequest req) =>
         {
             User? existing = UserADO.GetById(dbConn, id);
 
@@ -190,12 +190,12 @@ public static class UserEndpoints
 
 
         // DELETE /users/{id}
-        app.MapDelete("/users/{id}", (Guid id) => UserADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
+        app.MapDelete("/users/{id}", (SpotifyDBConnection dbConn, Guid id) => UserADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
 
         // --------- ROLES ---------
 
         // POST /users/{userId}/role/{roleId}
-        app.MapPost("/users/{userId}/role/{roleId}", (Guid userId, Guid roleId) =>
+        app.MapPost("/users/{userId}/role/{roleId}", (SpotifyDBConnection dbConn, Guid userId, Guid roleId) =>
         {
             UserRole userRole = new UserRole
             {
@@ -208,16 +208,16 @@ public static class UserEndpoints
         });
 
         // DELETE /users/{userId}/role/{roleId}
-        app.MapDelete("/users/{userId}/role/{roleId}", (Guid userId, Guid roleId) => UserRoleADO.Delete(dbConn, userId, roleId) ? Results.NoContent() : Results.NotFound());
+        app.MapDelete("/users/{userId}/role/{roleId}", (SpotifyDBConnection dbConn, Guid userId, Guid roleId) => UserRoleADO.Delete(dbConn, userId, roleId) ? Results.NoContent() : Results.NotFound());
 
         // --------- PLAYLISTS ---------
-        app.MapGet("/users/{userId}/playlists", (Guid userId) =>
+        app.MapGet("/users/{userId}/playlists", (SpotifyDBConnection dbConn, Guid userId) =>
         {
             List<Playlist> playlists = UserADO.GetPlaylists(dbConn, userId);
             // S'ha de afegir DTO
             return Results.Ok(playlists);
         });
-        
+
     }
     public record TokenRequest(string Token);
 }

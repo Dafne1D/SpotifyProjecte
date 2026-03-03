@@ -52,6 +52,11 @@ builder.Services.AddCors(options =>
 });
 
 string connectionString = builder.Configuration.GetConnectionString("SpotifyDBConnection") ?? "";
+
+builder.Services.AddScoped(sp =>
+    new SpotifyDBConnection(connectionString!)
+);
+
 SpotifyDBConnection dbConn = new SpotifyDBConnection(connectionString);
 
 WebApplication SpotifyApp = builder.Build();
@@ -63,13 +68,13 @@ SpotifyApp.UseAuthorization();
 SpotifyApp.MapMethods("{*path}", new[] { "OPTIONS" }, () => Results.Ok())
    .RequireCors("AllowReactApp");
 
-SpotifyApp.MapUserEndpoints(dbConn);
-SpotifyApp.MapRoleEndpoints(dbConn);
-SpotifyApp.MapSongEndpoints(dbConn);
-SpotifyApp.MapPlaylistEndpoints(dbConn);
-SpotifyApp.MapPermissionEndpoints(dbConn);
-SpotifyApp.MapRolePermissionEndpoints(dbConn);
-SpotifyApp.MapUserRoleEndpoints(dbConn);
+SpotifyApp.MapUserEndpoints();
+SpotifyApp.MapRoleEndpoints();
+SpotifyApp.MapUserRoleEndpoints();
+SpotifyApp.MapPermissionEndpoints();
+SpotifyApp.MapRolePermissionEndpoints();
+SpotifyApp.MapSongEndpoints();
+SpotifyApp.MapPlaylistEndpoints();
 
 
 SpotifyApp.MapGet("/", () =>

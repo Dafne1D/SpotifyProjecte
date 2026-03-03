@@ -7,10 +7,10 @@ namespace SpotifyAPI.EndPoints;
 
 public static class RolePermissionEndpoints
 {
-    public static void MapRolePermissionEndpoints(this WebApplication app, SpotifyDBConnection dbConn)
+    public static void MapRolePermissionEndpoints(this WebApplication app)
     {
         // POST /rolePermissions  (Asignar permiso a rol)
-        app.MapPost("/rolePermissions", (RolePermissionRequest req) =>
+        app.MapPost("/rolePermissions", (SpotifyDBConnection dbConn, RolePermissionRequest req) =>
         {
             RolePermission rolPer = new RolePermission
             {
@@ -24,7 +24,7 @@ public static class RolePermissionEndpoints
         });
 
         // DELETE /rolePermissions
-        app.MapDelete("/rolePermissions", (Guid roleId, Guid permissionId) =>
+        app.MapDelete("/rolePermissions", (SpotifyDBConnection dbConn, Guid roleId, Guid permissionId) =>
         {
             bool deleted = RolePermissionADO.Delete(dbConn, roleId, permissionId);
 
