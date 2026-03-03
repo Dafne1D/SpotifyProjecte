@@ -82,9 +82,17 @@ public static class UserEndpoints
             return Results.Ok("Només admins (manual)");
         });
 
-        // POST /users
-        app.MapPost("/users", (UserRequest req) =>
+        app.MapPost("/users", (UserRequest req, ClaimsPrincipal userVerification) =>
         {
+            if (!userVerification.Identity?.IsAuthenticated ?? true)
+                return Results.Unauthorized();
+
+            bool isAdmin = userVerification.Claims.Any(c =>
+                c.Type == ClaimTypes.Role && c.Value == "admin");
+
+            if (!isAdmin)
+                return Results.Forbid();
+
             Guid id;
             Result result = UserValidator.Validate(req);
             if (!result.IsOk)
