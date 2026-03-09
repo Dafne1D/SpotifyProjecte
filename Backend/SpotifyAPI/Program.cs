@@ -68,6 +68,7 @@ SpotifyApp.UseAuthorization();
 SpotifyApp.MapMethods("{*path}", new[] { "OPTIONS" }, () => Results.Ok())
    .RequireCors("AllowReactApp");
 
+SpotifyApp.MapPremiumEndpoints();
 SpotifyApp.MapUserEndpoints();
 SpotifyApp.MapRoleEndpoints();
 SpotifyApp.MapUserRoleEndpoints();
