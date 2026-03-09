@@ -4,6 +4,7 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using AppSpotifyWPF.Classes;
 using AppSpotifyWPF.Services;
+using AppSpotifyWPF.Screens;
 
 namespace AppSpotifyWPF.Screens.Songs
 {
@@ -75,12 +76,7 @@ namespace AppSpotifyWPF.Screens.Songs
 
         private void BackToHome_Click(object sender, RoutedEventArgs e)
         {
-            var parentWindow = Window.GetWindow(this);
-            if (parentWindow is HomeScreen home)
-            {
-                home.MainFrame.Visibility = Visibility.Collapsed;
-                home.HomeContent.Visibility = Visibility.Visible;
-            }
+            NavigationService.Navigate(new HomePage());
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)

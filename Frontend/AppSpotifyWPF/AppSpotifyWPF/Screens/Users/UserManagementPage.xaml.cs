@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using AppSpotifyWPF.Screens;
 
 namespace AppSpotifyWPF.Screens.Users
 {
@@ -100,7 +101,7 @@ namespace AppSpotifyWPF.Screens.Users
 
         private void BackToHome_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new HomePage());
         }
 
         private void UserCard_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
