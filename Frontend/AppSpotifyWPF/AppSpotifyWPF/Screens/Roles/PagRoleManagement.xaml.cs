@@ -1,37 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using AppSpotifyWPF.Services;
 
 namespace AppSpotifyWPF
 {
     public partial class PagRoleManagement : Page
     {
+        private readonly ApiService _api = new ApiService();
+
         public PagRoleManagement()
         {
             InitializeComponent();
         }
 
-        private void OnLoadClicked(object sender, RoutedEventArgs e)
+        private async void OnLoadClicked(object sender, RoutedEventArgs e)
         {
             RolesContainer.Children.Clear();
-            // Mock data - replace with your PermissionADO.GetAll call
-            var roles = new List<string> { "admin", "editor", "viewer", "test" };
+
+            var roles = await _api.GetAsync<List<RoleResponse>>("/roles");
 
             foreach (var role in roles)
             {
-                RolesContainer.Children.Add(CreateRoleUI(role));
+                RolesContainer.Children.Add(CreateRoleUI(role.Name));
             }
         }
 
         private UIElement CreateRoleUI(string name)
         {
-            StackPanel stack = new StackPanel { Width = 120, Margin = new Thickness(10) };
+            StackPanel stack = new StackPanel
+            {
+                Width = 120,
+                Margin = new Thickness(10)
+            };
 
-            // Create the Circle (Ellipse in WPF)
             Grid circleGrid = new Grid { Width = 80, Height = 80 };
+
             Ellipse circle = new Ellipse
             {
                 Fill = new SolidColorBrush(Color.FromRgb(224, 224, 224)),
@@ -61,22 +67,17 @@ namespace AppSpotifyWPF
             stack.Children.Add(circleGrid);
             stack.Children.Add(label);
 
-            // Click detection
-            stack.MouseDown += (s, e) => {
-                // Clear other selections
-                foreach (StackPanel child in RolesContainer.Children)
-                    ((Ellipse)((Grid)child.Children[0]).Children[0]).Fill = new SolidColorBrush(Color.FromRgb(224, 224, 224));
-
-                circle.Fill = Brushes.LightBlue;
-            };
-
             return stack;
         }
 
-        private void OnBackClicked(object sender, RoutedEventArgs e) => NavigationService?.GoBack();
-        private void OnCreateClicked(object sender, RoutedEventArgs e) { /* Navigate to Create Page */ }
-        private void OnViewClicked(object sender, RoutedEventArgs e) { /* Logic */ }
-        private void OnUpdateClicked(object sender, RoutedEventArgs e) { /* Logic */ }
-        private void OnDeleteClicked(object sender, RoutedEventArgs e) { /* Logic */ }
+        private void OnBackClicked(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.GoBack();
+        }
+
+        private void OnCreateClicked(object sender, RoutedEventArgs e) { }
+        private void OnViewClicked(object sender, RoutedEventArgs e) { }
+        private void OnUpdateClicked(object sender, RoutedEventArgs e) { }
+        private void OnDeleteClicked(object sender, RoutedEventArgs e) { }
     }
 }

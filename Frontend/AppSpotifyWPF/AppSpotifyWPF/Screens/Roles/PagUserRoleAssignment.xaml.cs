@@ -1,18 +1,62 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
+using AppSpotifyWPF.Services;
 
 namespace AppSpotifyWPF.Screens
 {
     public partial class PagUserRoleAssignment : Page
     {
-        public PagUserRoleAssignment() { InitializeComponent(); }
+        private readonly ApiService _api = new ApiService();
 
-        private void OnAssignClicked(object sender, RoutedEventArgs e)
+        public PagUserRoleAssignment()
         {
-            // Logic to call app.MapPost("/userRoles", ...) 
+            InitializeComponent();
+            LoadData();
+        }
+
+        private async void LoadData()
+        {
+            var users = await _api.GetAsync<List<UserResponse>>("/users");
+            var roles = await _api.GetAsync<List<RoleResponse>>("/roles");
+
+            UserCombo.ItemsSource = users;
+            UserCombo.DisplayMemberPath = "Username";
+
+            RoleCombo.ItemsSource = roles;
+            RoleCombo.DisplayMemberPath = "Name";
+        }
+
+        private async void OnAssignClicked(object sender, RoutedEventArgs e)
+        {
+            if (UserCombo.SelectedItem == null || RoleCombo.SelectedItem == null)
+            {
+                MessageBox.Show("Select user and role");
+                return;
+            }
+
+            var user = (UserResponse)UserCombo.SelectedItem;
+            var role = (RoleResponse)RoleCombo.SelectedItem;
+
+            var request = new
+            {
+                UserId = user.Id,
+                RoleId = role.Id
+            };
+
+            await _api.PostAsync<object>("/userRoles", request);
+
             MessageBox.Show("Role Assigned Successfully!");
         }
 
-        private void OnBackClicked(object sender, RoutedEventArgs e) => NavigationService.GoBack();
+        private void OnBackClicked(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.GoBack();
+        }
+
+        private void OnCreateClicked(object sender, RoutedEventArgs e) { }
+        private void OnViewClicked(object sender, RoutedEventArgs e) { }
+        private void OnEditClicked(object sender, RoutedEventArgs e) { }
+        private void OnDeleteClicked(object sender, RoutedEventArgs e) { }
     }
 }
