@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using AppSpotifyWPF.Screens.Songs;
 
 namespace AppSpotifyWPF.Screens
 {
@@ -38,12 +39,12 @@ namespace AppSpotifyWPF.Screens
 
         private void songManagementButton_Click(object sender, RoutedEventArgs e)
         {
-            changePage(new PagReadUser());
+            changePage(new PagReadSong());
         }
 
         private void playlistManagementButton_Click(object sender, RoutedEventArgs e)
         {
-            changePage(new PagCreateUser());
+            changePage(new PagCreateSong());
         }
     }
 }
