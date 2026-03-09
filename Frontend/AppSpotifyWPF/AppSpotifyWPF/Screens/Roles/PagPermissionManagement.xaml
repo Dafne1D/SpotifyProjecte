@@ -1,0 +1,30 @@
+﻿<Page x:Class="AppSpotifyWPF.Screens.PagPermissionManagement"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Permission Management" Background="White">
+
+    <ScrollViewer>
+        <StackPanel Margin="30">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <Button Content="&lt; Back to Home" Click="OnBackClicked" HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent"/>
+                    <Label Content="Permission Management" FontSize="32" FontWeight="Bold"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Button Content="+" Background="Green" Foreground="White" Width="40" Height="40" Margin="5"/>
+                    <Button Content="🗑" Background="Red" Foreground="White" Width="40" Height="40" Margin="5"/>
+                </StackPanel>
+            </Grid>
+
+            <Button Content="Load Permissions" Margin="0,20" Background="LightGreen" Width="150" Click="OnLoadClicked"/>
+
+            <WrapPanel x:Name="PermissionsContainer" HorizontalAlignment="Center" Margin="0,20"/>
+        </StackPanel>
+    </ScrollViewer>
+</Page>
