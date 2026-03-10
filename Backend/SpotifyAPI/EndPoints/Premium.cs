@@ -3,6 +3,7 @@ using SpotifyAPI.Model;
 using System.Net.Http;
 using SpotifyAPI.Services;
 using System.Text;
+using SpotifyAPI.Infrastructure.Persistence.Entities;
 
 namespace SpotifyAPI.EndPoints;
 
@@ -13,16 +14,16 @@ public static class PremiumEndpoints
         // POST /premium/{userId}
         app.MapPost("/premium/{userId}", async (SpotifyDBConnection dbConn, Guid userId) =>
         {
-            User? user = UserADO.GetById(dbConn, userId);
+            UserEntity? userEntity = UserADO.GetById(dbConn, userId);
 
-            if (user == null)
+            if (userEntity == null)
             {
                 return Results.NotFound();
             }
 
             HttpClient client = new HttpClient();
 
-            string json = "{\"name\":\"" + user.Username + "\",\"email\":\"" + user.Email + "\"}";
+            string json = "{\"name\":\"" + userEntity.Username + "\",\"email\":\"" + userEntity.Email + "\"}";
 
             await client.PostAsync(
                 "http://localhost:8069/spotify/buy_premium",
