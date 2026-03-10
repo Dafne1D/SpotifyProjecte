@@ -17,6 +17,28 @@ public static class UserEndpoints
 {
     public static void MapUserEndpoints(this WebApplication app)
     {
+        app.MapPost("/login", (SpotifyDBConnection dbConn, LoginRequest request, JswTokenService jwtService) =>
+        {
+            if (request == null) return Results.BadRequest(new { message = "Credentials must be sended" });
+            if (string.IsNullOrEmpty(request.Login)) return Results.BadRequest(new { message = "Login must be sended" });
+            if (string.IsNullOrEmpty(request.Password)) return Results.BadRequest(new { message = "Password must be sended" });
+
+            UserJWTResponse? user = JWTADO.GetByLogin(dbConn, request.Login);
+
+            if (user == null)
+                return Results.Unauthorized();
+
+            string token = jwtService.GenerateToken(
+                userId: user.Id.ToString(),
+                email: user.Email,
+                issuer: "demo",
+                roles: user.Roles,
+                audience: "public",
+                lifetime: TimeSpan.FromHours(2)
+            );
+
+            return Results.Ok(new { token, user });
+        });
 
         // GET /jwt
 
@@ -26,7 +48,7 @@ public static class UserEndpoints
                 userId: "user identification",
                 email: "anna@exemple.com",
                 issuer: "demo",
-                role: "admin",
+                roles: ["admin"],
                 audience: "public",
                 lifetime: TimeSpan.FromHours(2)));
         }).WithTags("Users");
@@ -227,5 +249,6 @@ public static class UserEndpoints
         });
 
     }
+    public record LoginRequest(string Login, string Password);
     public record TokenRequest(string Token);
 }
