@@ -1,7 +1,7 @@
 using SpotifyAPI.Infrastructure.Persistence.Entities;
 using SpotifyAPI.Domain.Entities;
 
-namespace dbdemo.Infrastructure.Mappers;
+namespace SpotifyAPI.Infrastructure.Mappers;
 
 public static class UserMapper
 {

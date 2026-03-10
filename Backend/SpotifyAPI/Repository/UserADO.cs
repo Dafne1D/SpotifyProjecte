@@ -1,12 +1,14 @@
 using Microsoft.Data.SqlClient;
 using SpotifyAPI.Services;
-using SpotifyAPI.Model;
+using SpotifyAPI.Infrastructure.Mappers;
+using SpotifyAPI.Infrastructure.Persistence.Entities;
+using SpotifyAPI.Domain.Entities;
 
 namespace SpotifyAPI.Repository;
 
 static class UserADO
 {
-    public static void Insert(SpotifyDBConnection dbConn, User user)
+    public static void Insert(SpotifyDBConnection dbConn, UserEntity userEntity)
     {
 
         dbConn.Open();
@@ -15,11 +17,11 @@ static class UserADO
                       VALUES (@Id, @Username, @Email, @Password, @Salt)";
 
         using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
-        cmd.Parameters.AddWithValue("@Id", user.Id);
-        cmd.Parameters.AddWithValue("@Username", user.Username);
-        cmd.Parameters.AddWithValue("@Email", user.Email);
-        cmd.Parameters.AddWithValue("@Password", user.Password);
-        cmd.Parameters.AddWithValue("@Salt", user.Salt);
+        cmd.Parameters.AddWithValue("@Id", userEntity.Id);
+        cmd.Parameters.AddWithValue("@Username", userEntity.Username);
+        cmd.Parameters.AddWithValue("@Email", userEntity.Email);
+        cmd.Parameters.AddWithValue("@Password", userEntity.Password);
+        cmd.Parameters.AddWithValue("@Salt", userEntity.Salt);
 
         int rows = cmd.ExecuteNonQuery();
         Console.WriteLine($"{rows} fila inserida.");
@@ -27,19 +29,19 @@ static class UserADO
         dbConn.Close();
     }
 
-    public static List<User> GetAll(SpotifyDBConnection dbConn)
+    public static List<UserEntity> GetAll(SpotifyDBConnection dbConn)
     {
-        List<User> users = new();
+        List<UserEntity> users = new List<UserEntity>();
 
         dbConn.Open();
-        string sql = "SELECT Id, Username, Email FROM Users";
+        string sql = "SELECT * FROM Users";
 
         using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
         using SqlDataReader reader = cmd.ExecuteReader();
 
         while (reader.Read())
         {
-            users.Add(new User
+            users.Add(new UserEntity
             {
                 Id = reader.GetGuid(0),
                 Username = reader.GetString(1),
@@ -51,7 +53,7 @@ static class UserADO
         return users;
     }
 
-    public static User? GetById(SpotifyDBConnection dbConn, Guid id)
+    public static UserEntity? GetById(SpotifyDBConnection dbConn, Guid id)
     {
         dbConn.Open();
         string sql = "SELECT Id, Username, Email FROM Users WHERE Id = @Id";
@@ -60,11 +62,11 @@ static class UserADO
         cmd.Parameters.AddWithValue("@Id", id);
 
         using SqlDataReader reader = cmd.ExecuteReader();
-        User? user = null;
+        UserEntity? userEntity = null;
 
         if (reader.Read())
         {
-            user = new User
+            userEntity = new UserEntity
             {
                 Id = reader.GetGuid(0),
                 Username = reader.GetString(1),
@@ -73,10 +75,10 @@ static class UserADO
         }
 
         dbConn.Close();
-        return user;
+        return userEntity;
     }
 
-    public static void Update(SpotifyDBConnection dbConn, User user)
+    public static void Update(SpotifyDBConnection dbConn, UserEntity userEntity)
     {
 
         dbConn.Open();
@@ -89,11 +91,11 @@ static class UserADO
                     WHERE Id = @Id";
 
         using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
-        cmd.Parameters.AddWithValue("@Id", user.Id);
-        cmd.Parameters.AddWithValue("@Username", user.Username);
-        cmd.Parameters.AddWithValue("@Email", user.Email);
-        cmd.Parameters.AddWithValue("@Password", user.Password);
-        cmd.Parameters.AddWithValue("@Salt", user.Salt);
+        cmd.Parameters.AddWithValue("@Id", userEntity.Id);
+        cmd.Parameters.AddWithValue("@Username", userEntity.Username);
+        cmd.Parameters.AddWithValue("@Email", userEntity.Email);
+        cmd.Parameters.AddWithValue("@Password", userEntity.Password);
+        cmd.Parameters.AddWithValue("@Salt", userEntity.Salt);
 
 
         int rows = cmd.ExecuteNonQuery();
@@ -150,32 +152,32 @@ static class UserADO
         return count > 0;
     }
 
-    public static List<Playlist> GetPlaylists(SpotifyDBConnection dbConn, Guid id)
-    {
-        List<Playlist> playlists = new();
+    // public static List<Playlist> GetPlaylists(SpotifyDBConnection dbConn, Guid id)
+    // {
+    //     List<Playlist> playlists = new();
 
-        dbConn.Open();
-        string sql = @"SELECT Id, UserId, Name, Description, ImageUrl FROM Playlists
-                        WHERE UserId = @UserId";
+    //     dbConn.Open();
+    //     string sql = @"SELECT Id, UserId, Name, Description, ImageUrl FROM Playlists
+    //                     WHERE UserId = @UserId";
 
-        using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
-        cmd.Parameters.AddWithValue("@UserId", id);
+    //     using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+    //     cmd.Parameters.AddWithValue("@UserId", id);
 
-        using SqlDataReader reader = cmd.ExecuteReader();
+    //     using SqlDataReader reader = cmd.ExecuteReader();
 
-        while (reader.Read())
-        {
-            playlists.Add(new Playlist
-            {
-                Id = reader.GetGuid(0),
-                UserId = reader.GetGuid(1),
-                Name = reader.GetString(2),
-                Description = reader.IsDBNull(3) ? null : reader.GetString(3),
-                ImageUrl = reader.GetString(4)
-            });
-        }
+    //     while (reader.Read())
+    //     {
+    //         playlists.Add(new Playlist
+    //         {
+    //             Id = reader.GetGuid(0),
+    //             UserId = reader.GetGuid(1),
+    //             Name = reader.GetString(2),
+    //             Description = reader.IsDBNull(3) ? null : reader.GetString(3),
+    //             ImageUrl = reader.GetString(4)
+    //         });
+    //     }
 
-        dbConn.Close();
-        return playlists;
-    }
+    //     dbConn.Close();
+    //     return playlists;
+    // }
 }

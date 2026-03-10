@@ -1,6 +1,6 @@
 using SpotifyAPI.Repository;
 using SpotifyAPI.Services;
-using SpotifyAPI.Model;
+using SpotifyAPI.Domain.Entities;
 using SpotifyAPI.DTO;
 using SpotifyAPI.Common;
 using SpotifyAPI.Validators;
@@ -10,6 +10,8 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using SpotifyAPI.Infrastructure.Mappers;
+using SpotifyAPI.Infrastructure.Persistence.Entities;
 
 namespace SpotifyAPI.EndPoints;
 
@@ -84,8 +86,8 @@ public static class UserEndpoints
 
         app.MapPost("/users", (SpotifyDBConnection dbConn, UserRequest req, ClaimsPrincipal userVerification) =>
         {
-            if (!userVerification.Identity?.IsAuthenticated ?? true)
-                return Results.Unauthorized();
+            // if (!userVerification.Identity?.IsAuthenticated ?? true)
+            //     return Results.Unauthorized();
 
             bool isAdmin = userVerification.Claims.Any(c =>
                 c.Type == ClaimTypes.Role && c.Value == "admin");
@@ -118,7 +120,7 @@ public static class UserEndpoints
             string salt = Hash.GenerateSalt();
             string hash = Hash.ComputeHash(req.Password, salt);
 
-            User user = new User
+            UserEntity userEntity = new UserEntity
             {
                 Id = id,
                 Username = req.Username,
@@ -127,32 +129,41 @@ public static class UserEndpoints
                 Salt = salt
             };
 
-            UserADO.Insert(dbConn, user);
-            return Results.Created($"/users/{user.Id}", UserResponse.FromUser(user));
+            UserADO.Insert(dbConn, userEntity);
+            User user = new User(req.Username, req.Email, hash, salt);
+            UserEntity userEntity2 = UserMapper.ToEntity(user, id);
+            return Results.Created($"/users/{userEntity2.Id}", UserResponse.FromUser(user, id));
 
         });
 
         // GET /users
         app.MapGet("/users", (SpotifyDBConnection dbConn) =>
         {
-            List<User> users = UserADO.GetAll(dbConn);
-            return Results.Ok(users);
+            List<UserEntity> users = UserADO.GetAll(dbConn);
+            List<UserResponse> userResponse = new List<UserResponse>();
+            foreach (UserEntity userEntity in users)
+            {
+                User user = UserMapper.ToDomain(userEntity);
+                userResponse.Add(UserResponse.FromUser(user, userEntity.Id));
+            }
+            return Results.Ok(userResponse);
         });
 
         // GET /users User by id
         app.MapGet("/users/{id}", (SpotifyDBConnection dbConn, Guid id) =>
         {
-            User? user = UserADO.GetById(dbConn, id);
+            UserEntity? userEntity = UserADO.GetById(dbConn, id);
 
-            return user is not null
-                ? Results.Ok(user)
+            User user = UserMapper.ToDomain(userEntity);
+            return userEntity is not null
+                ? Results.Ok(UserResponse.FromUser(user, userEntity.Id))
                 : Results.NotFound(new { message = $"User with Id {id} not found." });
         });
 
         // PUT /users by id
         app.MapPut("/users/{id}", (SpotifyDBConnection dbConn, Guid id, UserRequest req) =>
         {
-            User? existing = UserADO.GetById(dbConn, id);
+            UserEntity? existing = UserADO.GetById(dbConn, id);
 
             if (existing == null)
             {
@@ -182,7 +193,7 @@ public static class UserEndpoints
             string salt = Hash.GenerateSalt();
             string hash = Hash.ComputeHash(req.Password, salt);
 
-            User updated = new User
+            UserEntity updated = new UserEntity
             {
                 Id = id,
                 Username = req.Username,
@@ -192,7 +203,7 @@ public static class UserEndpoints
             };
 
             UserADO.Update(dbConn, updated);
-
+            User user = new User(req.Username, req.Email, hash, salt); 
             return Results.Ok(updated);
         });
 
@@ -203,28 +214,28 @@ public static class UserEndpoints
         // --------- ROLES ---------
 
         // POST /users/{userId}/role/{roleId}
-        app.MapPost("/users/{userId}/role/{roleId}", (SpotifyDBConnection dbConn, Guid userId, Guid roleId) =>
-        {
-            UserRole userRole = new UserRole
-            {
-                Id = Guid.NewGuid(),
-                UserId = userId,
-                RoleId = roleId
-            };
-            UserRoleADO.Insert(dbConn, userRole);
-            return Results.Created($"/users/{userRole.Id}", userRole);
-        });
+        // app.MapPost("/users/{userId}/role/{roleId}", (SpotifyDBConnection dbConn, Guid userId, Guid roleId) =>
+        // {
+        //     UserRole userRole = new UserRole
+        //     {
+        //         Id = Guid.NewGuid(),
+        //         UserId = userId,
+        //         RoleId = roleId
+        //     };
+        //     UserRoleADO.Insert(dbConn, userRole);
+        //     return Results.Created($"/users/{userRole.Id}", userRole);
+        // });
 
-        // DELETE /users/{userId}/role/{roleId}
-        app.MapDelete("/users/{userId}/role/{roleId}", (SpotifyDBConnection dbConn, Guid userId, Guid roleId) => UserRoleADO.Delete(dbConn, userId, roleId) ? Results.NoContent() : Results.NotFound());
+        // // DELETE /users/{userId}/role/{roleId}
+        // app.MapDelete("/users/{userId}/role/{roleId}", (SpotifyDBConnection dbConn, Guid userId, Guid roleId) => UserRoleADO.Delete(dbConn, userId, roleId) ? Results.NoContent() : Results.NotFound());
 
-        // --------- PLAYLISTS ---------
-        app.MapGet("/users/{userId}/playlists", (SpotifyDBConnection dbConn, Guid userId) =>
-        {
-            List<Playlist> playlists = UserADO.GetPlaylists(dbConn, userId);
-            // S'ha de afegir DTO
-            return Results.Ok(playlists);
-        });
+        // // --------- PLAYLISTS ---------
+        // app.MapGet("/users/{userId}/playlists", (SpotifyDBConnection dbConn, Guid userId) =>
+        // {
+        //     List<Playlist> playlists = UserADO.GetPlaylists(dbConn, userId);
+        //     // S'ha de afegir DTO
+        //     return Results.Ok(playlists);
+        // });
 
     }
     public record TokenRequest(string Token);
