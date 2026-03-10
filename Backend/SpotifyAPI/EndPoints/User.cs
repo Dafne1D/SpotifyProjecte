@@ -117,7 +117,6 @@ public static class UserEndpoints
             if (!isAdmin)
                 return Results.Forbid();
 
-            Guid id;
             Result result = UserValidator.Validate(req);
             if (!result.IsOk)
             {
@@ -127,6 +126,8 @@ public static class UserEndpoints
                     message = result.ErrorMessage
                 });
             }
+
+            Guid id = Guid.NewGuid();
 
             Result duplicateCheck = UserADOValidator.Validate(req, dbConn);
             if (!duplicateCheck.IsOk)
@@ -138,24 +139,13 @@ public static class UserEndpoints
                 });
             }
 
-            id = Guid.NewGuid();
             string salt = Hash.GenerateSalt();
             string hash = Hash.ComputeHash(req.Password, salt);
 
-            UserEntity userEntity = new UserEntity
-            {
-                Id = id,
-                Username = req.Username,
-                Email = req.Email,
-                Password = hash,
-                Salt = salt
-            };
-
-            UserADO.Insert(dbConn, userEntity);
             User user = new User(req.Username, req.Email, hash, salt);
-            UserEntity userEntity2 = UserMapper.ToEntity(user, id);
-            return Results.Created($"/users/{userEntity2.Id}", UserResponse.FromUser(user, id));
-
+            UserEntity userEntity = UserMapper.ToEntity(user, id);
+            UserADO.Insert(dbConn, userEntity);
+            return Results.Created($"/users/{userEntity.Id}", UserResponse.FromUser(user, id));
         });
 
         // GET /users
@@ -176,10 +166,12 @@ public static class UserEndpoints
         {
             UserEntity? userEntity = UserADO.GetById(dbConn, id);
 
+            if (userEntity == null)
+                return Results.NotFound(new { message = $"User with Id {id} not found." });
+
             User user = UserMapper.ToDomain(userEntity);
-            return userEntity is not null
-                ? Results.Ok(UserResponse.FromUser(user, userEntity.Id))
-                : Results.NotFound(new { message = $"User with Id {id} not found." });
+
+            return Results.Ok(UserResponse.FromUser(user, userEntity.Id));
         });
 
         // PUT /users by id
@@ -215,18 +207,10 @@ public static class UserEndpoints
             string salt = Hash.GenerateSalt();
             string hash = Hash.ComputeHash(req.Password, salt);
 
-            UserEntity updated = new UserEntity
-            {
-                Id = id,
-                Username = req.Username,
-                Email = req.Email,
-                Password = hash,
-                Salt = salt
-            };
-
-            UserADO.Update(dbConn, updated);
             User user = new User(req.Username, req.Email, hash, salt); 
-            return Results.Ok(updated);
+            UserEntity userEntity = UserMapper.ToEntity(user, id);
+            UserADO.Update(dbConn, userEntity);
+            return Results.Ok(UserResponse.FromUser(user, id));
         });
 
 
