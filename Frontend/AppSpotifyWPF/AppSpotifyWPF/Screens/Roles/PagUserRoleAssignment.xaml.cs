@@ -49,14 +49,9 @@ namespace AppSpotifyWPF.Screens
             MessageBox.Show("Role Assigned Successfully!");
         }
 
-        private void OnBackClicked(object sender, RoutedEventArgs e)
+        private void BackToHome_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService?.GoBack();
+            NavigationService.Navigate(new HomePage());
         }
-
-        private void OnCreateClicked(object sender, RoutedEventArgs e) { }
-        private void OnViewClicked(object sender, RoutedEventArgs e) { }
-        private void OnEditClicked(object sender, RoutedEventArgs e) { }
-        private void OnDeleteClicked(object sender, RoutedEventArgs e) { }
     }
 }
