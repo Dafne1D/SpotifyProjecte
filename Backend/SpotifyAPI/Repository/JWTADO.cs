@@ -1,6 +1,7 @@
 using Microsoft.Data.SqlClient;
 using SpotifyAPI.Services;
 using SpotifyAPI.DTO;
+using SpotifyAPI.Utils;
 
 namespace SpotifyAPI.Repository;
 
@@ -45,16 +46,25 @@ static class JWTADO
     public static bool CorrectPassword(SpotifyDBConnection dbConn, string email, string password)
     {
         dbConn.Open();
-        string sql = "SELECT COUNT(*) FROM Users WHERE Email = @Email AND Password = @Password";
+        string sql = "SELECT Password, Salt FROM Users WHERE Email = @Email";
 
         using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
         cmd.Parameters.AddWithValue("@Email", email);
-        cmd.Parameters.AddWithValue("@Password", password);
 
-        int count = (int)cmd.ExecuteScalar();
+        using SqlDataReader reader = cmd.ExecuteReader();
+        if (!reader.Read())
+        {
+            dbConn.Close();
+            return false;
+        }
+
+        string passwordHash = reader.GetString(0);
+        string salt = reader.GetString(1);
+
+        string computedPassword = Hash.ComputeHash(password, salt);
 
         dbConn.Close();
 
-        return count > 0;
+        return passwordHash == computedPassword;
     }
 }

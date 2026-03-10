@@ -28,16 +28,17 @@ public static class UserEndpoints
             if (user == null)
                 return Results.Unauthorized();
 
-            string token = jwtService.GenerateToken(
+            if (!JWTADO.CorrectPassword(dbConn, user.Email, request.Password))
+                return Results.Unauthorized();
+
+            return Results.Ok(jwtService.GenerateToken(
                 userId: user.Id.ToString(),
                 email: user.Email,
                 issuer: "demo",
                 roles: user.Roles,
                 audience: "public",
                 lifetime: TimeSpan.FromHours(2)
-            );
-
-            return Results.Ok(new { token, user });
+            ));
         });
 
         // GET /jwt
@@ -96,7 +97,7 @@ public static class UserEndpoints
                 return Results.Unauthorized();
 
             bool isAdmin = user.Claims.Any(c =>
-                c.Type == ClaimTypes.Role && c.Value == "admin");
+                c.Type == ClaimTypes.Role && c.Value == "Admin");
 
             if (!isAdmin)
                 return Results.Forbid();
