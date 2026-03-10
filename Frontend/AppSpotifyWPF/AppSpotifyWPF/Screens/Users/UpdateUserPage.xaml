@@ -47,7 +47,7 @@
                         <StackPanel Grid.Column="0">
 
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Nom:" FontSize="18" FontWeight="Bold"/>
+                                <TextBlock Text="Name:" FontSize="18" FontWeight="Bold"/>
                                 <TextBlock x:Name="lblName" FontSize="18" Margin="10 0 0 0"/>
                             </StackPanel>
 
@@ -79,7 +79,7 @@
                         <StackPanel Grid.Column="1">
 
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Correu:" FontSize="18" FontWeight="Bold"/>
+                                <TextBlock Text="Email:" FontSize="18" FontWeight="Bold"/>
                                 <TextBlock x:Name="lblEmail" FontSize="18" Margin="10 0 0 0"/>
                             </StackPanel>
 
@@ -130,7 +130,7 @@
                                                    Text="&#xE74E;"
                                                    FontSize="18"
                                                    Margin="0 0 8 0"/>
-                                <TextBlock Text="Guardar"
+                                <TextBlock Text="Save"
                                                    FontWeight="Bold"/>
                             </StackPanel>
                         </Button>

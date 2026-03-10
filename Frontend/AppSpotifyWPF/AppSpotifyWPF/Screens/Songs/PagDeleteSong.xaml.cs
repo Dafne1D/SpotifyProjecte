@@ -31,7 +31,7 @@ namespace AppSpotifyWPF.Screens.Songs {
             }
             catch (Exception ex)
             {
-                MessageBox.Show("❌ Error loading users:\n" + ex.Message);
+                MessageBox.Show("❌ Error loading songs:\n" + ex.Message);
             }
         }
 

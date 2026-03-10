@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using AppSpotifyWPF.Screens;
 using AppSpotifyWPF.Services;
 
 namespace AppSpotifyWPF
@@ -70,9 +71,9 @@ namespace AppSpotifyWPF
             return stack;
         }
 
-        private void OnBackClicked(object sender, RoutedEventArgs e)
+        private void BackToHome_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService?.GoBack();
+            NavigationService.Navigate(new HomePage());
         }
 
         private void OnCreateClicked(object sender, RoutedEventArgs e) { }
