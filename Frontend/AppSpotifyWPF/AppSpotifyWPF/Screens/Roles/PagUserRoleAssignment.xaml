@@ -12,77 +12,30 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="0">
+            <StackPanel Grid.Column="0"
+                        Margin="0 0 0 0">
 
-                <Button Background="Transparent"
-                        BorderBrush="Transparent"
-                        Click="OnBackClicked"
-                        HorizontalAlignment="Left">
-
+                <Button
+                    Margin="0 0 0 5"
+                    Background="Transparent"
+                    Foreground="Gray"
+                    BorderBrush="Transparent"
+                    BorderThickness="1"
+                    Click="BackToHome_Click"
+                    HorizontalAlignment="Left">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock FontFamily="Segoe MDL2 Assets"
-                                   Text="&#xE76B;"
-                                   FontSize="16"
-                                   Margin="0 0 10 0"/>
-                        <TextBlock Text="Back"
-                                   FontWeight="Bold"/>
+                               Text="&#xE76B;"
+                               FontSize="16"
+                               Margin="0 0 10 0"/>
+                        <TextBlock Text="Back to Home"
+                               FontWeight="Bold"/>
                     </StackPanel>
-
                 </Button>
 
-                <TextBlock Text="Assign Roles to Users"
+                <TextBlock Text="Assign Roles"
                            FontSize="28"
                            FontWeight="Bold"/>
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal"
-                        Grid.Column="1"
-                        HorizontalAlignment="Right">
-
-                <Button Margin="10 0"
-                        Padding="10"
-                        Background="LimeGreen"
-                        BorderBrush="DarkGreen"
-                        Click="OnCreateClicked">
-
-                    <TextBlock FontFamily="Segoe MDL2 Assets"
-                               Text="&#xE710;"
-                               FontSize="18"/>
-                </Button>
-
-                <Button Margin="10 0"
-                        Padding="10"
-                        Background="White"
-                        BorderBrush="#E0E0E0"
-                        Click="OnViewClicked">
-
-                    <TextBlock FontFamily="Segoe MDL2 Assets"
-                               Text="&#xE7B3;"
-                               FontSize="18"/>
-                </Button>
-
-                <Button Margin="10 0"
-                        Padding="10"
-                        Background="White"
-                        BorderBrush="#E0E0E0"
-                        Click="OnEditClicked">
-
-                    <TextBlock FontFamily="Segoe MDL2 Assets"
-                               Text="&#xE70F;"
-                               FontSize="18"/>
-                </Button>
-
-                <Button Margin="10 0"
-                        Padding="10"
-                        Background="Red"
-                        BorderBrush="DarkRed"
-                        Click="OnDeleteClicked">
-
-                    <TextBlock FontFamily="Segoe MDL2 Assets"
-                               Text="&#xE74D;"
-                               FontSize="18"/>
-                </Button>
-
             </StackPanel>
 
         </Grid>
@@ -107,8 +60,8 @@
 
                 <Button Content="Assign Role"
                         Width="150"
-                        Background="Blue"
-                        Foreground="White"
+                        Background="#1a9e44"
+                        Foreground="Black"
                         Click="OnAssignClicked"/>
 
             </StackPanel>

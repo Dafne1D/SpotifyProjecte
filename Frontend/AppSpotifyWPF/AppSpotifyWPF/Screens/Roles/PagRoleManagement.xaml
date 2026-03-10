@@ -15,20 +15,22 @@
 
                 <StackPanel Grid.Column="0">
 
-                    <Button Background="Transparent"
-                            BorderBrush="Transparent"
-                            Click="OnBackClicked"
-                            HorizontalAlignment="Left">
-
+                    <Button
+                         Margin="0 0 0 5"
+                         Background="Transparent"
+                         Foreground="Gray"
+                         BorderBrush="Transparent"
+                         BorderThickness="1"
+                         Click="BackToHome_Click"
+                         HorizontalAlignment="Left">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="Segoe MDL2 Assets"
-                                       Text="&#xE76B;"
-                                       FontSize="16"
-                                       Margin="0 0 10 0"/>
+                                Text="&#xE76B;"
+                                FontSize="16"
+                                Margin="0 0 10 0"/>
                             <TextBlock Text="Back to Home"
-                                       FontWeight="Bold"/>
+                            FontWeight="Bold"/>
                         </StackPanel>
-
                     </Button>
 
                     <TextBlock Text="Role Management"
@@ -100,9 +102,9 @@
                      HorizontalAlignment="Center"/>
 
             <Button Content="Load"
-                    Background="#4CAF50"
-                    Width="150"
-                    HorizontalAlignment="Center"
+                        Width="150"
+                        Background="#1a9e44"
+                        Foreground="Black"
                     Click="OnLoadClicked"/>
 
             <WrapPanel x:Name="RolesContainer"

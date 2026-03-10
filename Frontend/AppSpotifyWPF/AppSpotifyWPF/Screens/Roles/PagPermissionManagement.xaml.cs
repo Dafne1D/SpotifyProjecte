@@ -45,9 +45,9 @@ namespace AppSpotifyWPF.Screens
             }
         }
 
-        private void OnBackClicked(object sender, RoutedEventArgs e)
+        private void BackToHome_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService?.GoBack();
+            NavigationService.Navigate(new HomePage());
         }
 
         private void OnCreateClicked(object sender, RoutedEventArgs e) { }

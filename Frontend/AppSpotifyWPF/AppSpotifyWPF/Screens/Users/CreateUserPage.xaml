@@ -30,7 +30,7 @@
 
                 <!-- Title -->
                 <TextBlock x:Name="txtTitle"
-                           Text="Crear Usuari"
+                           Text="Create User"
                            FontSize="28"
                            FontWeight="Bold"
                            Foreground="Black"
@@ -50,7 +50,7 @@
                         <!-- LEFT COLUMN -->
                         <StackPanel Grid.Column="0">
 
-                            <TextBlock Text="Nom:" FontSize="18" FontWeight="Bold"/>
+                            <TextBlock Text="Name:" FontSize="18" FontWeight="Bold"/>
                             <TextBox x:Name="txtName"
                                      FontSize="18"
                                      Margin="0,5,80,20"
@@ -72,7 +72,7 @@
                         <!-- RIGHT COLUMN -->
                         <StackPanel Grid.Column="1">
 
-                            <TextBlock Text="Correu:" FontSize="18" FontWeight="Bold"/>
+                            <TextBlock Text="Email:" FontSize="18" FontWeight="Bold"/>
                             <TextBox x:Name="txtEmail"
                                      FontSize="18"
                                      Margin="0,5,60,20"
@@ -107,7 +107,7 @@
                                                    Text="&#xE74E;"
                                                    FontSize="18"
                                                    Margin="0 0 8 0"/>
-                            <TextBlock Text="Crear Usuari"
+                            <TextBlock Text="Create user"
                                                    FontWeight="Bold"/>
                         </StackPanel>
                     </Button>

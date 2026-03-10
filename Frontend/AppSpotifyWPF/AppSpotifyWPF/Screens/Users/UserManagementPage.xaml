@@ -15,13 +15,13 @@
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="40">
                 <Button
-            Margin="0 0 0 5"
-            Background="Transparent"
-            Foreground="Gray"
-            BorderBrush="Transparent"
-            BorderThickness="1"
-            Click="BackToHome_Click"
-            HorizontalAlignment="Left">
+                Margin="0 0 0 5"
+                Background="Transparent"
+                Foreground="Gray"
+                BorderBrush="Transparent"
+                BorderThickness="1"
+                Click="BackToHome_Click"
+                HorizontalAlignment="Left">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock FontFamily="Segoe MDL2 Assets"
                            Text="&#xE76B;"

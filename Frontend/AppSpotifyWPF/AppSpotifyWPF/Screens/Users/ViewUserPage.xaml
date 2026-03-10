@@ -23,18 +23,17 @@
                                    Text="&#xE76B;"
                                    FontSize="16"
                                    Margin="0 0 10 0"/>
-                        <TextBlock Text="Back to Users"
+                        <TextBlock Text="Back to Home"
                                    FontWeight="Bold"/>
                     </StackPanel>
                 </Button>
 
                 <!-- Title -->
                 <TextBlock x:Name="txtTitle"
-                           Text="Veure Usuari"
                            FontSize="28"
                            FontWeight="Bold"
                            Foreground="Black"
-                           Margin="0,0,0,20"/>
+                           Margin="0,0,0,20"><Run Language="es-es" Text="View User"/></TextBlock>
 
                 <!-- Main Card -->
                 <Border Background="White"
@@ -50,13 +49,13 @@
                         <!-- LEFT COLUMN -->
                         <StackPanel Grid.Column="0">
 
-                            <TextBlock Text="Nom:" FontSize="18" FontWeight="Bold"/>
+                            <TextBlock FontSize="18" FontWeight="Bold"><Run Text="N"/><Run Language="es-es" Text="a"/><Run Text="m"/><Run Language="es-es" Text="e"/><Run Text=":"/></TextBlock>
                             <TextBlock x:Name="lblName"
                                      FontSize="18"
                                      Margin="0,5,80,20"
                                      Height="35"/>
 
-                            <TextBlock Text="Role:" FontSize="18" FontWeight="Bold"/>
+                            <TextBlock FontSize="18" FontWeight="Bold"><Run Text="Role"/><Run Language="es-es" Text="s"/><Run Text=":"/></TextBlock>
                             <TextBlock x:Name="lblRole"
                                      FontSize="18"
                                      Margin="0,5,60,20"
@@ -66,13 +65,13 @@
                         <!-- RIGHT COLUMN -->
                         <StackPanel Grid.Column="1">
 
-                            <TextBlock Text="Correu:" FontSize="18" FontWeight="Bold"/>
+                            <TextBlock Text="Email:" FontSize="18" FontWeight="Bold"/>
                             <TextBlock x:Name="lblEmail"
                                      FontSize="18"
                                      Margin="0,5,60,20"
                                      Height="35"/>
 
-                            <TextBlock Text="Permisos:" FontSize="18" FontWeight="Bold"/>
+                            <TextBlock Text="Permissions:" FontSize="18" FontWeight="Bold"/>
                             <TextBlock x:Name="lblPermissions"
                                      FontSize="18"
                                      Margin="0,5,60,20"
