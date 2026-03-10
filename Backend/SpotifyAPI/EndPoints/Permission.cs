@@ -15,6 +15,7 @@ public static class PermissionEndpoints
             Permission permission = new Permission
             {
                 Id = Guid.NewGuid(),
+                Code = req.Code,
                 Name = req.Name,
                 Description = req.Description
             };
@@ -46,7 +47,7 @@ public static class PermissionEndpoints
                 : Results.NotFound(new { message = $"Permission with Id {id} not found." });
         });
 
-        // PUT /permissions
+        // PUT /permissions/{id}
         app.MapPut("/permissions/{id}", (SpotifyDBConnection dbConn, Guid id, PermissionRequest req) =>
         {
             Permission? existing = PermissionADO.GetById(dbConn, id);
@@ -68,7 +69,7 @@ public static class PermissionEndpoints
             return Results.Ok(PermissionResponse.FromPermission(updated));
         });
 
-        // DELETE /permissions
+        // DELETE /permissions/{id}
         app.MapDelete("/permissions/{id}", (SpotifyDBConnection dbConn, Guid id) => PermissionADO.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
     }
 }

@@ -11,11 +11,12 @@ static class PermissionADO
     {
         dbConn.Open();
 
-        string sql = @"INSERT INTO Permissions (Id, Name, Description)
-                    VALUES (@Id, @Name, @Description)";
+        string sql = @"INSERT INTO Permissions (Id, Code, Name, Description)
+                    VALUES (@Id, @Code, @Name, @Description)";
 
         using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
         cmd.Parameters.AddWithValue("@Id", permission.Id);
+        cmd.Parameters.AddWithValue("@Code", permission.Code);
         cmd.Parameters.AddWithValue("@Name", permission.Name);
         cmd.Parameters.AddWithValue("@Description", permission.Description);
 

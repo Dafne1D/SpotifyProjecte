@@ -34,7 +34,7 @@ static class UserADO
         List<UserEntity> users = new List<UserEntity>();
 
         dbConn.Open();
-        string sql = "SELECT * FROM Users";
+        string sql = "SELECT Id, Username, Email FROM Users";
 
         using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
         using SqlDataReader reader = cmd.ExecuteReader();
