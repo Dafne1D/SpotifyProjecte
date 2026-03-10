@@ -36,25 +36,12 @@ public static class UserEndpoints
             return Results.Ok(jwtService.GenerateToken(
                 userId: user.Id.ToString(),
                 email: user.Email,
-                issuer: "demo",
+                issuer: "spotify-api",
                 roles: user.Roles,
                 audience: "public",
                 lifetime: TimeSpan.FromHours(2)
             ));
         });
-
-        // GET /jwt
-
-        app.MapGet("/jwt", (JswTokenService jwtService) =>
-        {
-            return Results.Ok(jwtService.GenerateToken(
-                userId: "user identification",
-                email: "anna@exemple.com",
-                issuer: "demo",
-                roles: ["admin"],
-                audience: "public",
-                lifetime: TimeSpan.FromHours(2)));
-        }).WithTags("Users");
 
         // https://www.jwt.io/
 
@@ -208,7 +195,7 @@ public static class UserEndpoints
             string salt = Hash.GenerateSalt();
             string hash = Hash.ComputeHash(req.Password, salt);
 
-            User user = new User(req.Username, req.Email, hash, salt); 
+            User user = new User(req.Username, req.Email, hash, salt);
             UserEntity userEntity = UserMapper.ToEntity(user, id);
             UserADO.Update(dbConn, userEntity);
             return Results.Ok(UserResponse.FromUser(user, id));
