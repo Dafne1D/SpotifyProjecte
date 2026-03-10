@@ -1,7 +1,11 @@
+using SpotifyAPI.Infrastructure.Persistence.Entities;
+using SpotifyAPI.Infrastructure.Mappers;
+using SpotifyAPI.Domain.Entities;
 using SpotifyAPI.Services;
-using SpotifyAPI.Model;
 using SpotifyAPI.Repository;
 using SpotifyAPI.DTO;
+using SpotifyAPI.Validators;
+using SpotifyAPI.Common;
 
 namespace SpotifyAPI.EndPoints;
 
@@ -12,40 +16,47 @@ public static class UserRoleEndpoints
         // POST /userRoles 
         app.MapPost("/userRoles", (SpotifyDBConnection dbConn, UserRoleRequest req) =>
         {
-            UserRole userRol = new UserRole
+            Result result = UserRoleValidator.Validate(req);
+            if (!result.IsOk)
             {
-                Id = Guid.NewGuid(),
-                UserId = req.UserId,
-                RoleId = req.RoleId
-            };
+                return Results.BadRequest(new
+                {
+                    error = result.ErrorCode,
+                    message = result.ErrorMessage
+                });
+            }
 
-            UserRoleADO.Insert(dbConn, userRol);
-            return Results.Created($"/userRoles/{userRol.Id}", userRol);
+            Guid id = Guid.NewGuid();
+
+            UserRole userRole = new UserRole(req.UserId, req.RoleId);
+            UserRoleEntity userRoleEntity = UserRoleMapper.ToEntity(userRole, id);
+            UserRoleADO.Insert(dbConn, userRoleEntity);
+            return Results.Created($"/userRoles/{userRoleEntity.Id}", userRole);
         });
 
         // GET /userRoles
         app.MapGet("/userRoles", (SpotifyDBConnection dbConn) =>
         {
-            List<UserRole> userRol = UserRoleADO.GetAll(dbConn);
-            return Results.Ok(userRol);
+            List<UserRoleEntity> userRole = UserRoleADO.GetAll(dbConn);
+            return Results.Ok(userRole);
         });
 
         // GET /userRoles/roles/{roleId}
         app.MapGet("/userRoles/roles/{roleId}", (SpotifyDBConnection dbConn, Guid roleId) =>
         {
-            List<UserRole> userRol = UserRoleADO.GetByRole(dbConn, roleId);
-            return Results.Ok(userRol);
+            List<UserRoleEntity> userRole = UserRoleADO.GetByRole(dbConn, roleId);
+            return Results.Ok(userRole);
         });
 
         // GET /userRoles/users/{userId}
-        app.MapGet("/usersRoles/users/{userId}", (SpotifyDBConnection dbConn, Guid userId) =>
+        app.MapGet("/userRoles/users/{userId}", (SpotifyDBConnection dbConn, Guid userId) =>
         {
-            List<UserRole> userRol = UserRoleADO.GetByUser(dbConn, userId);
-            return Results.Ok(userRol);
+            List<UserRoleEntity> userRole = UserRoleADO.GetByUser(dbConn, userId);
+            return Results.Ok(userRole);
         });
 
         // DELETE /userRoles
-        app.MapDelete("/userRoles", (SpotifyDBConnection dbConn, Guid userId, Guid roleId) =>
+        app.MapDelete("/userRoles/{userId}/{roleId}", (SpotifyDBConnection dbConn, Guid userId, Guid roleId) =>
         {
             bool deleted = UserRoleADO.Delete(dbConn, userId, roleId);
 
