@@ -64,6 +64,13 @@
                         Foreground="Black"
                         Click="OnAssignClicked"/>
 
+                <Button Content="Remove Role"
+        Width="150"
+        Margin="0,10,0,0"
+        Background="Red"
+        Foreground="White"
+        Click="OnRemoveClicked"/>
+
             </StackPanel>
 
         </Border>

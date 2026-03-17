@@ -2,13 +2,40 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
-    <Compile Update="Screens\Roles\PagPermissionManagement.xaml.cs">
+    <Compile Update="Screens\Permissions\PagCreatePermission.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Screens\Roles\PagUserRoleAssignment.xaml.cs">
+    <Compile Update="Screens\Permissions\PagReadPermission.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Screens\Permissions\PagUpdatePermission.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Screens\Playlists\PagCreatePlaylist.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Screens\Playlists\PagReadPlaylist.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Screens\Playlists\PagUpdatePlaylist.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Screens\Playlists\PlaylistManagementPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Screens\Permissions\PagPermissionManagement.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Screens\UserRoles\PagUserRoleAssignment.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Screens\Roles\PagRoleManagement.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Screens\Songs\PagUpdateSong.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Screens\Songs\SongManagementPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Screens\Users\UserManagementPage.xaml.cs">

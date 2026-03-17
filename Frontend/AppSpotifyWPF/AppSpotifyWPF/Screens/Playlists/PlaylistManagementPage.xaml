@@ -1,0 +1,78 @@
+﻿<Page x:Class="AppSpotifyWPF.Screens.Playlists.PlaylistManagementPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Background="#F5F6FA"
+      Loaded="Page_Loaded">
+
+    <Grid>
+        <ScrollViewer>
+            <StackPanel Margin="40">
+
+                <!-- Back -->
+                <Button Background="Transparent"
+                        Foreground="Gray"
+                        BorderBrush="Transparent"
+                        Click="BackToHome_Click"
+                        HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE76B;" Margin="0 0 10 0"/>
+                        <TextBlock Text="Back to Home" FontWeight="Bold"/>
+                    </StackPanel>
+                </Button>
+
+                <!-- Title + Actions -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Playlist Management"
+                               FontSize="28"
+                               FontWeight="Bold"/>
+
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+
+                        <Button Margin="10 0" Padding="10" Background="LimeGreen"
+                                Click="newPlaylistButton_Click">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE710;"/>
+                        </Button>
+
+                        <Button Margin="10 0" Padding="10"
+                                Click="viewPlaylistButton_Click">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE7B3;"/>
+                        </Button>
+
+                        <Button Margin="10 0" Padding="10"
+                                Click="editPlaylistButton_Click">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE70F;"/>
+                        </Button>
+
+                        <Button Margin="10 0" Padding="10" Background="Red"
+                                Click="deletePlaylistButton_Click">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE74D;"/>
+                        </Button>
+
+                    </StackPanel>
+                </Grid>
+
+                <!-- Content -->
+                <Border Background="White" CornerRadius="10" Padding="20" Margin="0,20,0,0">
+                    <StackPanel>
+
+                        <TextBox x:Name="txtSearch" Width="300" Height="35"/>
+
+                        <Button Content="Load"
+                                Width="120"
+                                Margin="0,10"
+                                Click="LoadPlaylists_Click"/>
+
+                        <WrapPanel x:Name="PlaylistsWrap"/>
+
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

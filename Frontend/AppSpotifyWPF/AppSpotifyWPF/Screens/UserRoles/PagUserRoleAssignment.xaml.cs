@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using AppSpotifyWPF.Services;
+using AppSpotifyWPF.Classes;
 
 namespace AppSpotifyWPF.Screens
 {
@@ -47,6 +48,22 @@ namespace AppSpotifyWPF.Screens
             await _api.PostAsync<object>("/userRoles", request);
 
             MessageBox.Show("Role Assigned Successfully!");
+        }
+
+        private async void OnRemoveClicked(object sender, RoutedEventArgs e)
+        {
+            if (UserCombo.SelectedItem == null || RoleCombo.SelectedItem == null)
+            {
+                MessageBox.Show("Select user and role");
+                return;
+            }
+
+            var user = (UserResponse)UserCombo.SelectedItem;
+            var role = (RoleResponse)RoleCombo.SelectedItem;
+
+            await _api.DeleteAsync($"/userRoles/{user.Id}/{role.Id}");
+
+            MessageBox.Show("Role removed successfully!");
         }
 
         private void BackToHome_Click(object sender, RoutedEventArgs e)

@@ -2,11 +2,9 @@
 
 namespace AppSpotifyWPF.Classes
 {
-    public class Role
+    public class PlaylistResponse
     {
         public Guid Id { get; set; }
-        public string Code { get; set; } = "";
         public string Name { get; set; } = "";
-        public string Description { get; set; } = "";
     }
 }

@@ -58,6 +58,16 @@
                         <TextBlock Text="User/Role Links" FontSize="12" Foreground="Gray" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Button>
+                <Button Content="Force Admin"
+                    Click="ForceAdmin_Click"
+                    Background="Orange"
+                    Foreground="Black"
+                    Width="150"
+                    Height="32"
+                    Margin="0,0,0,10"
+                    HorizontalAlignment="Left"/>
+                
+                
 
             </UniformGrid>
         </StackPanel>

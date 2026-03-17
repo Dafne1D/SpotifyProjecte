@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using AppSpotifyWPF.Screens.Songs;
+using AppSpotifyWPF.Screens.Playlists;
 
 namespace AppSpotifyWPF.Screens
 {
@@ -23,6 +24,12 @@ namespace AppSpotifyWPF.Screens
             NavigationService.Navigate(newPage);
         }
 
+        private void ForceAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            Session.CurrentUserId = Guid.Parse("99999999-9999-9999-9999-999999999999");
+            MessageBox.Show("Admin mode enabled");
+        }
+
         private void userManagementButton_Click(object sender, RoutedEventArgs e)
         {
             changePage(new UserManagementPage());
@@ -30,16 +37,13 @@ namespace AppSpotifyWPF.Screens
 
         private void songManagementButton_Click(object sender, RoutedEventArgs e)
         {
-            changePage(new PagReadSong());
+            changePage(new SongManagementPage());
         }
 
         private void playlistManagementButton_Click(object sender, RoutedEventArgs e)
         {
-            // Note: Your original code navigated to PagCreateSong for Playlists
-            changePage(new PagCreateSong());
+            changePage(new PlaylistManagementPage());
         }
-
-        // NEW NAVIGATION HANDLERS
 
         private void roleManagementButton_Click(object sender, RoutedEventArgs e)
         {
